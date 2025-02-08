@@ -33,7 +33,7 @@ Welcome to my personal portfolio! This project is built with [Next.js](https://n
 
 ### 1️⃣ Clone the repository:
 ```bash
-git clone https://github.com/your-username/your-portfolio.git
+git clone https://github.com/BrandonT-ops/my-portfolio.git
 cd your-portfolio
 ```
 
@@ -67,10 +67,10 @@ For other deployment methods, check the [Next.js Deployment Guide](https://nextj
 
 ## 📩 Contact
 Want to connect? Reach out to me via:
-- 🌐 **Website:** [your-portfolio.com](https://your-portfolio.com)
-- 💼 **LinkedIn:** [linkedin.com/in/yourname](https://linkedin.com/in/yourname)
-- 🐙 **GitHub:** [github.com/your-username](https://github.com/your-username)
-- ✉️ **Email:** your-email@example.com
+- 🌐 **Website:** [your-portfolio.com](https://brandontapiba.vercel.app)
+- 💼 **LinkedIn:** [linkedin.com/in/yourname](https://linkedin.com/in/brandontapiba)
+- 🐙 **GitHub:** [github.com/your-username](https://github.com/BrandonT-ops)
+- ✉️ **Email:** brandontapiba@gmail.com
 
 ---
 
