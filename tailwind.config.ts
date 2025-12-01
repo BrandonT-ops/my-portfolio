@@ -9,32 +9,27 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Neo-Brutalism Color Palette
-        onyx: "#121619",
-        ruby: "#9e0031",
-        seagreen: "#09814a",
-        skyblue: "#05b2dc",
-        fawn: "#e5c687",
+        // Professional Color Palette
+        onyx: "#0a0a0a",
+        ruby: "#dc2626",
+        seagreen: "#059669",
+        skyblue: "#0284c7",
+        fawn: "#f59e0b",
         // Keep legacy variables for compatibility
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
       fontFamily: {
-        sans: ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'sans-serif'],
+        sans: ['ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Inter', 'Helvetica Neue', 'sans-serif'],
         mono: ['Monaco', 'Consolas', 'Liberation Mono', 'Courier New', 'monospace'],
       },
       boxShadow: {
-        'brutal-sm': '2px 2px 0px 0px #121619',
-        'brutal': '4px 4px 0px 0px #121619',
-        'brutal-lg': '8px 8px 0px 0px #121619',
-        'brutal-xl': '12px 12px 0px 0px #121619',
-        'brutal-ruby': '4px 4px 0px 0px #9e0031',
-        'brutal-seagreen': '4px 4px 0px 0px #09814a',
-        'brutal-skyblue': '4px 4px 0px 0px #05b2dc',
+        'brutal-sm': '2px 2px 0px 0px rgba(0, 0, 0, 0.1)',
+        'brutal': '3px 3px 0px 0px rgba(0, 0, 0, 0.15)',
+        'brutal-lg': '5px 5px 0px 0px rgba(0, 0, 0, 0.2)',
       },
       borderWidth: {
-        '3': '3px',
-        '5': '5px',
+        '3': '2px',
       },
       animation: {
         'slide-up': 'slideUp 0.5s ease-out',

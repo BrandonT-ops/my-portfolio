@@ -15,19 +15,19 @@ const Button: React.FC<ButtonProps> = ({
   className = '',
   ...props
 }) => {
-  const baseStyles = 'font-bold uppercase tracking-wide transition-all duration-200 border-3 border-onyx inline-block text-center cursor-pointer hover:-translate-y-1 active:translate-y-0';
+  const baseStyles = 'font-semibold transition-all duration-200 border-2 inline-block text-center cursor-pointer hover:opacity-90 rounded-md';
 
   const variants = {
-    primary: 'bg-ruby text-white shadow-brutal hover:shadow-brutal-lg',
-    secondary: 'bg-seagreen text-white shadow-brutal hover:shadow-brutal-lg',
-    accent: 'bg-fawn text-onyx shadow-brutal hover:shadow-brutal-lg',
-    outline: 'bg-transparent text-onyx border-onyx shadow-brutal hover:bg-onyx hover:text-white',
+    primary: 'bg-ruby text-white border-ruby hover:bg-ruby/90',
+    secondary: 'bg-seagreen text-white border-seagreen hover:bg-seagreen/90',
+    accent: 'bg-fawn text-white border-fawn hover:bg-fawn/90',
+    outline: 'bg-transparent text-onyx border-onyx hover:bg-onyx hover:text-white',
   };
 
   const sizes = {
-    sm: 'px-4 py-2 text-sm',
-    md: 'px-6 py-3 text-base',
-    lg: 'px-8 py-4 text-lg',
+    sm: 'px-5 py-2 text-sm',
+    md: 'px-6 py-2.5 text-base',
+    lg: 'px-8 py-3 text-base',
   };
 
   const combinedClassName = `${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`;

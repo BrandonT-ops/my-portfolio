@@ -13,14 +13,14 @@ const Card: React.FC<CardProps> = ({
   className = '',
   hoverable = false,
 }) => {
-  const baseStyles = 'p-6 border-3 border-onyx bg-white transition-all duration-200';
+  const baseStyles = 'p-6 border border-gray-200 bg-white transition-all duration-200 rounded-lg';
 
   const variants = {
-    default: 'shadow-brutal hover:shadow-brutal-lg',
-    ruby: 'shadow-brutal-ruby hover:shadow-brutal-lg bg-ruby/5',
-    seagreen: 'shadow-brutal-seagreen hover:shadow-brutal-lg bg-seagreen/5',
-    skyblue: 'shadow-brutal-skyblue hover:shadow-brutal-lg bg-skyblue/5',
-    fawn: 'shadow-brutal hover:shadow-brutal-lg bg-fawn/20',
+    default: 'hover:shadow-lg',
+    ruby: 'border-ruby/20 hover:shadow-lg hover:border-ruby/30',
+    seagreen: 'border-seagreen/20 hover:shadow-lg hover:border-seagreen/30',
+    skyblue: 'border-skyblue/20 hover:shadow-lg hover:border-skyblue/30',
+    fawn: 'border-fawn/20 hover:shadow-lg hover:border-fawn/30',
   };
 
   const hoverStyles = hoverable ? 'hover:-translate-y-1 cursor-pointer' : '';
