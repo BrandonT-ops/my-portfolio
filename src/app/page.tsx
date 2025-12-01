@@ -1,15 +1,23 @@
-import AnimatedText from "@/components/TextAnimations/AnimatedText";
-import GSAPAnimatedText from "@/components/TextAnimations/GSAPAnimatedText";
-
+import Hero from '@/components/sections/Hero';
+import About from '@/components/sections/About';
+import Skills from '@/components/sections/Skills';
+import Projects from '@/components/sections/Projects';
+import Photography from '@/components/sections/Photography';
+import Hobbies from '@/components/sections/Hobbies';
+import Services from '@/components/sections/Services';
+import Contact from '@/components/sections/Contact';
 
 export default function Home() {
   return (
-    <main className="flex justify-center items-center h-screen">
-      <div className="flex flex-col">
-      <AnimatedText text="Welcome to my portfolio !" />
-      <GSAPAnimatedText text="Welcome to my portfolio !" />
-      </div>
-    
+    <main>
+      <Hero />
+      <About />
+      <Skills />
+      <Projects />
+      <Photography />
+      <Hobbies />
+      <Services />
+      <Contact />
     </main>
   );
 }
