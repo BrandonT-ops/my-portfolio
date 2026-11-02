@@ -56,7 +56,7 @@ export default function Hero() {
     <section ref={root} className="scene-dark flex min-h-[100svh] flex-col pt-16">
       <Atmosphere />
 
-      <div className="mx-auto flex w-full max-w-wide flex-1 flex-col justify-between px-5 pb-28 pt-10 sm:px-10 sm:pb-32 sm:pt-16">
+      <div className={`mx-auto flex w-full max-w-wide flex-1 flex-col justify-between px-5 pt-10 sm:px-10 sm:pt-16 ${site.showBuddy ? "pb-28 sm:pb-32" : "pb-10 sm:pb-14"}`}>
         <div className="hero-meta flex flex-wrap items-center justify-between gap-4 font-mono text-xs uppercase tracking-[0.14em] text-paper/60">
           <span data-hero-hide className="hero-fade inline-flex items-center gap-2 text-paper">
             {site.available && (

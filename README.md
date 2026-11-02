@@ -20,6 +20,7 @@ Almost everything lives in two data files. You rarely need to touch components.
 | What | File |
 | --- | --- |
 | Name, email, tagline, social links, **photography link**, résumé link | `src/data/site.ts` |
+| **Your photo** (About section) and the companion character on/off | `src/data/site.ts` (`portrait`, `showBuddy`) |
 | About text, journey timeline, skills, services | `src/data/site.ts` (`about`) |
 | Projects and case studies | `src/data/projects.ts` |
 | Colours | `src/app/globals.css` (`:root` variables) |
@@ -30,6 +31,12 @@ Almost everything lives in two data files. You rarely need to touch components.
 Set `photographyUrl` in `src/data/site.ts` to the page where you post your photos
 (Instagram, Behance, Flickr…). The photography section and the contact links pick it up
 automatically. While it's empty, the section shows "Gallery link coming soon".
+
+### Your photo
+
+Put a portrait photo in `public/` (e.g. `public/brandon.jpg`, ideally a 4:5 crop) and set
+`portrait: "/brandon.jpg"` in `src/data/site.ts`. Until then the About section shows a
+placeholder frame with your initials.
 
 ### Résumé
 
@@ -110,7 +117,8 @@ Animations use [GSAP](https://gsap.com) (ScrollTrigger + SplitText) with
 - **Contact**: rising horizon glow, magnetic button
 - **Everywhere**: curtain page transitions, cursor ring, scroll progress bar,
   soft glow backdrops (`Atmosphere.tsx`)
-- **Companion** (`Buddy.tsx` + drawing in `BuddyFigure.tsx`): a cartoon mini-you in the
+- **Companion** (`Buddy.tsx` + drawing in `BuddyFigure.tsx`, **currently off**: set
+  `showBuddy: true` in `src/data/site.ts` to bring it back): a cartoon mini-you in the
   bottom-left corner. It waves on the hero, types and sweats on projects, explains on About,
   takes photos on Photography and dances on Contact, with a speech bubble for each. It falls
   asleep when the page is still. Between 22:00 and 06:00 (visitor's time) it wears a nightcap

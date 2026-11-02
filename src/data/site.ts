@@ -21,6 +21,16 @@ export const site = {
   /** Set false to hide the "available for work" dot in the hero. */
   available: true,
 
+  /**
+   * Your photo, shown in the About section. Put the file in /public
+   * (e.g. public/brandon.jpg) and set "/brandon.jpg". A portrait (4:5) crop works best.
+   * Leave "" to show a placeholder frame.
+   */
+  portrait: "",
+
+  /** The little companion character in the corner (components/motion/Buddy.tsx). Off for now. */
+  showBuddy: false,
+
   socials: [
     { label: "GitHub", href: "https://github.com/BrandonT-ops" },
     { label: "LinkedIn", href: "https://www.linkedin.com/in/brandontapiba" },

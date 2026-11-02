@@ -64,7 +64,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <Nav />
         <main id="main" className="flex-1">{children}</main>
         <Footer />
-        <Buddy />
+        {site.showBuddy && <Buddy />}
         <Cursor />
         <MotionProvider />
         <script

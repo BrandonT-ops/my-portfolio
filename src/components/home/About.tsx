@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { gsap, useGSAP, MOTION_OK } from "@/lib/motion";
+import Portrait from "@/components/ui/Portrait";
 import { about } from "@/data/site";
 
 const STATEMENT =
@@ -60,15 +61,21 @@ export default function About() {
           ))}
         </p>
 
-        <div className="mt-28 grid gap-20 sm:mt-40 md:grid-cols-12">
-          <div className="space-y-6 text-lg leading-relaxed text-muted md:col-span-6 lg:col-span-5" data-reveal-stagger>
-            {about.paragraphs.map((t) => (
-              <p key={t}>{t}</p>
-            ))}
+        <div className="mt-28 grid gap-16 sm:mt-40 md:grid-cols-12 md:gap-20">
+          <div className="md:col-span-5">
+            <div className="md:sticky md:top-28">
+              <Portrait />
+            </div>
           </div>
 
-          <div className="md:col-span-6 lg:col-span-6 lg:col-start-7">
-            <p className="label mb-6" data-reveal>
+          <div className="md:col-span-7 lg:col-span-6 lg:col-start-7">
+            <div className="space-y-6 text-lg leading-relaxed text-muted" data-reveal-stagger>
+              {about.paragraphs.map((t) => (
+                <p key={t}>{t}</p>
+              ))}
+            </div>
+
+            <p className="label mb-6 mt-20" data-reveal>
               Journey
             </p>
             <ol className="about-timeline border-t border-ink/15">
