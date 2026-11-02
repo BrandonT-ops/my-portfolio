@@ -1,6 +1,6 @@
 # Brandon Tapiba — Portfolio
 
-Personal portfolio built with **Next.js 15**, **Tailwind CSS** and **TypeScript**.
+Personal portfolio built with **Next.js 16**, **Tailwind CSS** and **TypeScript**.
 Editorial layout with a light neo-brutalist touch: warm paper background, Onyx ink,
 Ruby Red as the single accent, and hard offset shadows on interactive elements.
 
