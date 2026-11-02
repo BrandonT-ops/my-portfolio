@@ -5,6 +5,9 @@ import "@fontsource-variable/jetbrains-mono";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import MotionProvider from "@/components/motion/MotionProvider";
+import Preloader, { introScript } from "@/components/motion/Preloader";
+import Cursor from "@/components/motion/Cursor";
 import { site } from "@/data/site";
 
 const description = `${site.name} — ${site.role} building web products end to end with Angular, React/Next.js and Django. Founder of The Factory.`;
@@ -30,7 +33,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#faf7f0",
+  themeColor: "#121619",
 };
 
 const personJsonLd = {
@@ -45,8 +48,12 @@ const personJsonLd = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
-      <body className="flex min-h-screen flex-col">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: introScript }} />
+      </head>
+      <body className="flex min-h-screen flex-col overflow-x-clip">
+        <Preloader />
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:bg-ink focus:px-4 focus:py-2 focus:text-paper"
@@ -56,6 +63,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <Nav />
         <main id="main" className="flex-1">{children}</main>
         <Footer />
+        <Cursor />
+        <MotionProvider />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}

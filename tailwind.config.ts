@@ -33,6 +33,7 @@ export default {
       },
       maxWidth: {
         page: "72rem",
+        wide: "100rem",
       },
     },
   },

@@ -89,11 +89,35 @@ src/
 ├── components/
 │   ├── Nav.tsx, Footer.tsx
 │   ├── home/                 # home-page sections
-│   └── ui/                   # Section, ButtonLink, Cover
+│   ├── motion/               # preloader, cursor, marquee, backdrops, scroll engine
+│   └── ui/                   # ButtonLink, Cover
 └── data/
     ├── site.ts               # personal details & about content
     └── projects.ts           # projects & case studies
 ```
+
+## Motion
+
+Animations use [GSAP](https://gsap.com) (ScrollTrigger + SplitText) with
+[Lenis](https://lenis.darkroom.engineering) smooth scrolling. Everything lives in
+`src/components/motion/` and `src/lib/motion.ts`.
+
+- **Intro**: counter + name, first visit per tab only (`Preloader.tsx`)
+- **Hero**: letters rise in, then drift apart as you scroll
+- **Selected work**: pinned horizontal scroll on desktop, vertical list on phones
+- **About**: statement fills in word by word with scroll
+- **Photography**: dark panel expands to full screen
+- **Contact**: rising horizon glow, magnetic button
+- **Everywhere**: curtain page transitions, cursor ring, scroll progress bar,
+  GitHub-style glow backdrops (`Atmosphere.tsx`)
+
+Any element can opt into a scroll reveal with a data attribute:
+`data-split` (line-by-line heading), `data-reveal`, `data-reveal-stagger`,
+`data-parallax="0.15"`, `data-zoom`. Add `data-magnetic` to pull an element towards
+the pointer and `data-cursor="View"` to label the cursor.
+
+Visitors with **reduced motion** turned on get a static, fully readable page: no intro,
+no smooth scroll, and the work section becomes a grid.
 
 ## SEO & accessibility
 
