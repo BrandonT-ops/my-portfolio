@@ -43,8 +43,6 @@ export default function Atmosphere({
         <div className="aurora" aria-hidden>
           <span />
           <span />
-          <span />
-          <span />
         </div>
       )}
       {grid && <div className="grid-lines" aria-hidden />}

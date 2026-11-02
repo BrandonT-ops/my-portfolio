@@ -109,7 +109,12 @@ Animations use [GSAP](https://gsap.com) (ScrollTrigger + SplitText) with
 - **Photography**: dark panel expands to full screen
 - **Contact**: rising horizon glow, magnetic button
 - **Everywhere**: curtain page transitions, cursor ring, scroll progress bar,
-  GitHub-style glow backdrops (`Atmosphere.tsx`)
+  soft glow backdrops (`Atmosphere.tsx`)
+- **Companion** (`Buddy.tsx` + drawing in `BuddyFigure.tsx`): a cartoon mini-you in the
+  bottom-left corner. It waves on the hero, types and sweats on projects, explains on About,
+  takes photos on Photography and dances on Contact, with a speech bubble for each. It falls
+  asleep when the page is still. Between 22:00 and 06:00 (visitor's time) it wears a nightcap
+  and tells people to go to bed. Edit its lines in the `SAY` object in `Buddy.tsx`.
 
 Any element can opt into a scroll reveal with a data attribute:
 `data-split` (line-by-line heading), `data-reveal`, `data-reveal-stagger`,

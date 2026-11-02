@@ -3,7 +3,7 @@ import { site } from "@/data/site";
 export default function Footer() {
   return (
     <footer className="bg-ink text-paper">
-      <div className="mx-auto flex max-w-wide flex-col gap-3 border-t border-paper/10 px-5 py-8 font-mono text-xs text-paper/55 sm:flex-row sm:items-center sm:justify-between sm:px-10">
+      <div className="mx-auto flex max-w-wide flex-col gap-3 border-t border-paper/10 py-8 pl-20 pr-5 font-mono text-xs text-paper/55 sm:flex-row sm:items-center sm:justify-between sm:pl-32 sm:pr-10">
         <p>
           © {new Date().getFullYear()} {site.name} · {site.location}
         </p>

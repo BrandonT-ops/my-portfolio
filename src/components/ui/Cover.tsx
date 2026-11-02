@@ -1,11 +1,12 @@
 import Image from "next/image";
 import type { Project } from "@/data/projects";
 
+/* Quiet placeholders: one soft glow per card, alternating Ruby and warm Fawn. */
 const GLOWS = [
-  ["var(--accent)", "var(--highlight)"],
-  ["var(--highlight)", "var(--positive)"],
-  ["var(--positive)", "var(--accent)"],
-  ["var(--accent)", "76 29 149"],
+  { color: "var(--accent)", at: "20% 85%" },
+  { color: "var(--highlight)", at: "85% 15%" },
+  { color: "var(--accent)", at: "80% 85%" },
+  { color: "var(--highlight)", at: "15% 20%" },
 ];
 
 /**
@@ -36,15 +37,15 @@ export default function Cover({
     );
   }
 
-  const [a, b] = GLOWS[index % GLOWS.length];
+  const glow = GLOWS[index % GLOWS.length];
 
   return (
     <div aria-hidden className="absolute inset-0 isolate overflow-hidden bg-ink text-paper">
       <div
         className="absolute inset-0"
         style={{
-          background: `radial-gradient(60% 70% at 25% 80%, rgb(${a} / 0.75), transparent 70%), radial-gradient(50% 60% at 85% 15%, rgb(${b} / 0.55), transparent 70%)`,
-          filter: "blur(10px)",
+          background: `radial-gradient(55% 65% at ${glow.at}, rgb(${glow.color} / 0.32), transparent 70%)`,
+          filter: "blur(12px)",
         }}
       />
       <div

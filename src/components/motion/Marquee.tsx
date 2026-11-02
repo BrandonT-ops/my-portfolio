@@ -36,7 +36,7 @@ export default function Marquee({ items, className = "" }: { items: readonly str
       {items.map((item) => (
         <li key={item} className="flex items-center whitespace-nowrap">
           <span className="px-6 sm:px-10">{item}</span>
-          <span className="text-[0.5em] opacity-70" aria-hidden>
+          <span className="text-[0.5em] text-accent" aria-hidden>
             ✦
           </span>
         </li>

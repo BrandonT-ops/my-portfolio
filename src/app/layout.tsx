@@ -8,6 +8,7 @@ import Footer from "@/components/Footer";
 import MotionProvider from "@/components/motion/MotionProvider";
 import Preloader, { introScript } from "@/components/motion/Preloader";
 import Cursor from "@/components/motion/Cursor";
+import Buddy from "@/components/motion/Buddy";
 import { site } from "@/data/site";
 
 const description = `${site.name} — ${site.role} building web products end to end with Angular, React/Next.js and Django. Founder of The Factory.`;
@@ -63,6 +64,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <Nav />
         <main id="main" className="flex-1">{children}</main>
         <Footer />
+        <Buddy />
         <Cursor />
         <MotionProvider />
         <script
