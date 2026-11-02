@@ -1,283 +1,140 @@
-# Brandon Tapiba's Portfolio
+# Brandon Tapiba — Portfolio
 
-> A modern, high-end personal portfolio showcasing digital engineering, creative work, and professional projects with a bold **Neo-Brutalism** design aesthetic.
+Personal portfolio built with **Next.js 15**, **Tailwind CSS** and **TypeScript**.
+Editorial layout with a light neo-brutalist touch: warm paper background, Onyx ink,
+Ruby Red as the single accent, and hard offset shadows on interactive elements.
 
-## 🎨 Design Philosophy
+## Quick start
 
-This portfolio embraces **Neo-Brutalism** design principles:
-- **Bold borders** and **hard shadows**
-- **Strong visual hierarchy** with big typography
-- **Simple color blocks** and minimal rounded corners
-- **High contrast** between technical and creative sections
-- **Accessible** and **responsive** across all devices
-
-### Color Palette
-
-```
-Onyx:       #121619 (Primary Dark)
-Ruby Red:   #9e0031 (Accent 1)
-Sea Green:  #09814a (Accent 2)
-Sky Surge:  #05b2dc (Accent 3)
-Soft Fawn:  #e5c687 (Accent 4)
-```
-
-## ✨ Features
-
-- **Hero Section** – Bold introduction with animated typography
-- **About Me** – Professional background with journey timeline
-- **Skills** – Categorized technical, tools, and soft skills
-- **Projects** – Featured work with filtering by category
-- **Photography Gallery** – Image showcase with category filters and lightbox
-- **Hobbies** – Personal interests and creative pursuits
-- **Services** – Professional offerings and expertise
-- **Contact Form** – Get in touch section with contact info
-- **Responsive Design** – Mobile-first, optimized for all screen sizes
-- **SEO Optimized** – Comprehensive metadata and Open Graph tags
-- **Smooth Animations** – Powered by Framer Motion
-
-## 🛠️ Tech Stack
-
-- **Framework:** Next.js 15 (App Router)
-- **Language:** TypeScript
-- **Styling:** TailwindCSS with custom brutalism design tokens
-- **Animations:** Framer Motion
-- **Icons/Emojis:** Native Unicode emojis
-- **Deployment:** Vercel (recommended)
-
-## 📂 Project Structure
-
-```
-my-portfolio/
-├── src/
-│   ├── app/                      # Next.js app directory
-│   │   ├── layout.tsx           # Root layout with Navbar/Footer
-│   │   ├── page.tsx             # Home page with all sections
-│   │   └── globals.css          # Global styles & Tailwind
-│   ├── components/
-│   │   ├── layout/              # Layout components
-│   │   │   ├── Navbar.tsx       # Navigation bar
-│   │   │   └── Footer.tsx       # Footer
-│   │   ├── sections/            # Page sections
-│   │   │   ├── Hero.tsx         # Hero section
-│   │   │   ├── About.tsx        # About me section
-│   │   │   ├── Skills.tsx       # Skills section
-│   │   │   ├── Projects.tsx     # Projects showcase
-│   │   │   ├── Photography.tsx  # Photo gallery
-│   │   │   ├── Hobbies.tsx      # Hobbies section
-│   │   │   ├── Services.tsx     # Services offered
-│   │   │   └── Contact.tsx      # Contact form
-│   │   └── ui/                  # Reusable UI components
-│   │       ├── Button.tsx       # Brutalist button
-│   │       ├── Card.tsx         # Brutalist card
-│   │       └── Lightbox.tsx     # Image lightbox
-│   └── data/                    # Data files
-│       ├── projects.ts          # Projects data
-│       └── gallery.ts           # Gallery images data
-├── public/                      # Static assets
-│   └── images/                  # Images (projects, gallery, etc.)
-├── tailwind.config.ts           # Tailwind configuration
-├── next.config.ts               # Next.js configuration
-└── package.json                 # Dependencies
-```
-
-## 🚀 Getting Started
-
-### Prerequisites
-
-- Node.js 18+ and npm/yarn
-
-### Installation
-
-1. **Clone the repository:**
-```bash
-git clone https://github.com/BrandonT-ops/my-portfolio.git
-cd my-portfolio
-```
-
-2. **Install dependencies:**
 ```bash
 npm install
+npm run dev      # http://localhost:3000
+npm run build    # production build
+npm start        # serve the production build
 ```
 
-3. **Run the development server:**
-```bash
-npm run dev
-```
+## Where to edit things
 
-4. **Open your browser:**
-Visit [http://localhost:3000](http://localhost:3000)
+Almost everything lives in two data files. You rarely need to touch components.
 
-### Build for Production
+| What | File |
+| --- | --- |
+| Name, email, tagline, social links, **photography link**, résumé link | `src/data/site.ts` |
+| About text, journey timeline, skills, services | `src/data/site.ts` (`about`) |
+| Projects and case studies | `src/data/projects.ts` |
+| Colours | `src/app/globals.css` (`:root` variables) |
+| Fonts | `src/app/layout.tsx` + `tailwind.config.ts` |
 
-```bash
-npm run build
-npm start
-```
+### Photography link
 
-## 🎯 Customization Guide
+Set `photographyUrl` in `src/data/site.ts` to the page where you post your photos
+(Instagram, Behance, Flickr…). The photography section and the contact links pick it up
+automatically. While it's empty, the section shows "Gallery link coming soon".
 
-### 1. Update Personal Information
+### Résumé
 
-**Hero Section** (`src/components/sections/Hero.tsx`):
-- Update name, title, and description
-- Modify CTAs and stats
+Put your PDF in `public/` (e.g. `public/brandon-tapiba-cv.pdf`) and set
+`resumeUrl: "/brandon-tapiba-cv.pdf"`. A "Résumé" link appears in the hero.
 
-**About Section** (`src/components/sections/About.tsx`):
-- Update bio text
-- Modify timeline events
+### Adding a project
 
-**Contact Section** (`src/components/sections/Contact.tsx`):
-- Update email, location, and social links
+Add an entry to `projects` in `src/data/projects.ts`:
 
-### 2. Add/Update Projects
-
-Edit `src/data/projects.ts`:
-
-```typescript
+```ts
 {
-  id: 'project-id',
-  title: 'Project Name',
-  description: 'Brief description',
-  role: 'Your Role',
-  techStack: ['Tech1', 'Tech2'],
-  problemSolved: 'What problem did you solve?',
-  impact: 'What was the impact?',
-  image: '/images/projects/project-name.jpg',
-  githubUrl: 'https://github.com/...',
-  liveUrl: 'https://...',
-  featured: true,
-  category: 'fullstack', // 'web' | 'mobile' | 'fullstack' | 'uiux'
+  slug: "my-project",              // URL: /work/my-project
+  title: "My Project",
+  summary: "One sentence for lists.",
+  role: "Full-stack developer",
+  stack: ["Next.js", "PostgreSQL"],
+  featured: true,                  // big card on the home page; false = "Also built" list
+  cover: "/work/my-project.jpg",   // optional, put the image in public/work/
+  links: [{ label: "Live site", href: "https://..." }],
+  context: "The problem, in a sentence or two.",
+  approach: ["Step one.", "Step two."],
+  outcome: "Real, measurable result.", // optional, hidden until filled in
 }
 ```
 
-### 3. Add/Update Gallery Images
+Each project automatically gets a case-study page and a sitemap entry.
+Without a `cover`, a typographic placeholder is shown, so screenshots can be added later.
 
-Edit `src/data/gallery.ts`:
+> The project texts are a first draft written from short briefs. Review them and add real
+> outcomes; nothing is shown for `outcome` until you write it.
 
-```typescript
-{
-  id: 'image-id',
-  title: 'Image Title',
-  description: 'Image description',
-  category: 'portraits', // 'portraits' | 'nature' | 'street' | 'events' | 'abstract' | 'tech'
-  url: '/images/gallery/image-name.jpg',
-}
+### Colours
+
+The palette is defined once as CSS variables in `src/app/globals.css`:
+
+```css
+--paper:     250 247 240;  /* background */
+--ink:       18 22 25;     /* Onyx — text, borders, shadows */
+--muted:     84 90 96;     /* secondary text */
+--accent:    158 0 49;     /* Ruby Red — the single accent */
+--highlight: 229 198 135;  /* Soft Fawn — highlights, placeholders */
+--positive:  9 129 74;     /* Sea Green — "available" dot */
 ```
 
-### 4. Update Color Palette
+## Project structure
 
-Edit `tailwind.config.ts`:
-
-```typescript
-colors: {
-  onyx: "#121619",
-  ruby: "#9e0031",
-  // ... add your colors
-}
+```
+src/
+├── app/
+│   ├── layout.tsx            # fonts, metadata, JSON-LD, nav + footer
+│   ├── page.tsx              # home: Hero → Work → About → Photography → Contact
+│   ├── work/[slug]/page.tsx  # case-study pages (statically generated)
+│   ├── opengraph-image.tsx   # social preview image
+│   ├── sitemap.ts, robots.ts
+│   └── globals.css           # palette + base styles
+├── components/
+│   ├── Nav.tsx, Footer.tsx
+│   ├── home/                 # home-page sections
+│   └── ui/                   # Section, ButtonLink, Cover
+└── data/
+    ├── site.ts               # personal details & about content
+    └── projects.ts           # projects & case studies
 ```
 
-### 5. Modify Skills
+## SEO & accessibility
 
-Edit the `skillCategories` array in `src/components/sections/Skills.tsx`
+- Per-page titles and descriptions, canonical URLs, Open Graph image
+- `sitemap.xml` and `robots.txt` generated from the project list
+- `Person` structured data (JSON-LD)
+- Fully static output, self-hosted fonts (no external font requests)
+- Skip link, visible focus styles, AA text contrast, respects `prefers-reduced-motion`
 
-### 6. Update Services
+## Deployment
 
-Edit the `services` array in `src/components/sections/Services.tsx`
+### Vercel (recommended)
+1. Go to [vercel.com/new](https://vercel.com/new) and import `BrandonT-ops/my-portfolio`.
+2. Keep the detected Next.js defaults and deploy.
+3. Every branch you push gets its own preview URL; `main` becomes the production site.
 
-### 7. Customize Hobbies
+### Netlify
+Import the repo at [app.netlify.com](https://app.netlify.com). Netlify detects Next.js and
+installs its runtime automatically. Build command `npm run build`.
 
-Edit the `hobbies` array in `src/components/sections/Hobbies.tsx`
-
-## 📦 Deployment
-
-### Deploy to Vercel (Recommended)
-
-1. Push your code to GitHub
-2. Visit [vercel.com](https://vercel.com)
-3. Import your repository
-4. Deploy!
-
-### Deploy to Other Platforms
-
-**Netlify:**
+### Hostinger (Node.js hosting) or any VPS
 ```bash
+npm ci
 npm run build
-# Deploy the `.next` folder
+npm start -- -p 3000      # run behind Nginx/Apache as a reverse proxy, managed by pm2
 ```
 
-**Docker:**
+### Docker
 ```dockerfile
-FROM node:18-alpine
+FROM node:20-alpine
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci
 COPY . .
 RUN npm run build
+EXPOSE 3000
 CMD ["npm", "start"]
 ```
-
-**VPS with Docker:**
-1. Build the Docker image
-2. Run with `docker-compose up -d`
-3. Set up Nginx reverse proxy
-
-## 🔧 Environment Variables
-
-Create a `.env.local` file (optional):
-
-```env
-NEXT_PUBLIC_SITE_URL=https://yourdomain.com
-NEXT_PUBLIC_CONTACT_EMAIL=your@email.com
+```bash
+docker build -t portfolio . && docker run -d -p 3000:3000 portfolio
 ```
 
-## 📊 Performance & SEO
-
-- **Lighthouse Score Target:** 95+
-- **SEO:** Comprehensive meta tags, Open Graph, Twitter Cards
-- **Performance:** Image optimization, lazy loading, code splitting
-- **Accessibility:** WCAG 2.1 AA compliant
-- **Mobile-First:** Fully responsive design
-
-## 🎨 Adding New Sections
-
-1. Create a new component in `src/components/sections/`
-2. Import and add to `src/app/page.tsx`
-3. Update navigation in `src/components/layout/Navbar.tsx`
-
-Example:
-```typescript
-// src/components/sections/NewSection.tsx
-export default function NewSection() {
-  return (
-    <section id="new-section" className="py-20 px-4">
-      {/* Your content */}
-    </section>
-  );
-}
-
-// src/app/page.tsx
-import NewSection from '@/components/sections/NewSection';
-// Add <NewSection /> to the main component
-```
-
-## 🤝 Contributing
-
-This is a personal portfolio, but if you find bugs or have suggestions:
-1. Open an issue
-2. Submit a pull request
-
-## 📄 License
-
-This project is open source and available under the MIT License.
-
-## 📧 Contact
-
-**Brandon Tapiba**
-- Website: [brandontapiba.vercel.app](https://brandontapiba.vercel.app)
-- GitHub: [@BrandonT-ops](https://github.com/BrandonT-ops)
-- LinkedIn: [Brandon Tapiba](https://linkedin.com/in/brandontapiba)
-- Email: brandon.tapiba@example.com
-
----
-
-Built with Next.js 15, TypeScript, TailwindCSS, and Framer Motion. Designed with Neo-Brutalism aesthetics.
+After deploying on your own domain, update `url` in `src/data/site.ts` so the canonical
+links, sitemap and social previews point to it.

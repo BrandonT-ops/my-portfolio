@@ -1,128 +1,119 @@
+/**
+ * Projects. Each one gets a case-study page at /work/<slug>.
+ *
+ * Content below is a starting draft written from the project briefs —
+ * review every line and add real outcomes. `outcome` is optional and the
+ * section is hidden until you fill it in, so nothing invented ever shows.
+ *
+ * Images: drop files in /public/work/ and set `cover: "/work/<file>.jpg"`.
+ * Without a cover, a typographic placeholder is shown.
+ */
 export interface Project {
-  id: string;
+  slug: string;
   title: string;
-  description: string;
+  /** One sentence, shown in lists. */
+  summary: string;
   role: string;
-  techStack: string[];
-  problemSolved: string;
-  impact: string;
-  image?: string;
-  githubUrl?: string;
-  liveUrl?: string;
+  stack: string[];
+  year?: string;
+  /** Featured projects appear as cards on the home page; others in the index list. */
   featured?: boolean;
-  category: 'web' | 'mobile' | 'fullstack' | 'uiux';
+  cover?: string;
+  links?: { label: string; href: string }[];
+  /** Case-study body. */
+  context: string;
+  approach: string[];
+  outcome?: string;
 }
 
 export const projects: Project[] = [
   {
-    id: 'comparer-app',
-    title: 'Comparer Web App',
-    description: 'A comprehensive comparison platform built with modern technologies for analyzing and comparing data efficiently.',
-    role: 'Full-Stack Developer',
-    techStack: ['Angular 19', 'Django', 'Docker', 'PostgreSQL', 'TailwindCSS'],
-    problemSolved: 'Created a scalable solution for data comparison with real-time analytics and user-friendly interface.',
-    impact: 'Improved data analysis efficiency by 60% and reduced comparison time from hours to minutes.',
-    image: '/images/projects/comparer.jpg',
-    githubUrl: '#',
-    liveUrl: '#',
+    slug: "comparer",
+    title: "Comparer",
+    summary: "A comparison web app with an Angular frontend and a containerised Django API.",
+    role: "Full-stack developer",
+    stack: ["Angular", "Django", "PostgreSQL", "Docker"],
     featured: true,
-    category: 'fullstack',
+    context:
+      "Users needed a single place to compare options side by side instead of juggling tabs and spreadsheets.",
+    approach: [
+      "Designed the comparison flow and component library in Angular.",
+      "Built a Django REST API backed by PostgreSQL.",
+      "Containerised the stack with Docker for consistent local and production environments.",
+    ],
   },
   {
-    id: 'sygenes',
-    title: 'SYGENES School Management',
-    description: 'Modern school management system with intuitive UI/UX design and comprehensive administrative features.',
-    role: 'UI/UX Designer & Frontend Developer',
-    techStack: ['React', 'Next.js', 'Figma', 'TailwindCSS'],
-    problemSolved: 'Streamlined school administration processes with an intuitive and accessible interface.',
-    impact: 'Reduced administrative workload by 40% and improved user satisfaction scores by 85%.',
-    image: '/images/projects/sygenes.jpg',
-    githubUrl: '#',
-    liveUrl: '#',
+    slug: "maguida",
+    title: "Maguida.cm",
+    summary: "A Next.js search engine with AI-assisted suggestions.",
+    role: "Full-stack developer",
+    stack: ["Next.js", "LLM integration", "PostgreSQL"],
     featured: true,
-    category: 'web',
+    links: [{ label: "maguida.cm", href: "https://maguida.cm" }],
+    context:
+      "Local search results were hard to discover; people needed help phrasing what they were looking for.",
+    approach: [
+      "Built the search experience in Next.js with server-rendered results for speed and SEO.",
+      "Integrated a language model to suggest and refine queries as people type.",
+    ],
   },
   {
-    id: 'maguida',
-    title: 'Maguida.cm Search Engine',
-    description: 'Intelligent search engine with AI-powered suggestions for enhanced user discovery experience.',
-    role: 'Full-Stack Developer',
-    techStack: ['Next.js', 'AI/ML', 'PostgreSQL', 'TailwindCSS'],
-    problemSolved: 'Built an intelligent search system with natural language processing and smart recommendations.',
-    impact: 'Increased search accuracy by 75% and user engagement by 50%.',
-    image: '/images/projects/maguida.jpg',
-    githubUrl: '#',
-    liveUrl: '#',
+    slug: "sygenes",
+    title: "SYGENES",
+    summary: "UI/UX and frontend for a school management system.",
+    role: "UI/UX designer & frontend developer",
+    stack: ["Figma", "Frontend", "Design system"],
     featured: true,
-    category: 'fullstack',
+    context:
+      "School administration ran on fragmented tools; staff needed one clear interface for daily work.",
+    approach: [
+      "Mapped the main administrative workflows with staff and turned them into Figma flows.",
+      "Built a reusable UI component system and implemented the frontend from it.",
+    ],
   },
   {
-    id: 'esign',
-    title: 'ESIGN Exam Registration',
-    description: 'Digital platform for exam registration and management with secure authentication and data handling.',
-    role: 'Full-Stack Developer',
-    techStack: ['Angular', 'Laravel', 'MySQL', 'Bootstrap'],
-    problemSolved: 'Digitized the exam registration process, eliminating paper-based workflows.',
-    impact: 'Processed 10,000+ registrations with zero errors and reduced processing time by 80%.',
-    image: '/images/projects/esign.jpg',
-    githubUrl: '#',
-    liveUrl: '#',
-    featured: false,
-    category: 'web',
-  },
-  {
-    id: 'digital-signature',
-    title: 'Digital Signature App',
-    description: 'Desktop application for creating and managing digital signatures with modern UI redesign.',
-    role: 'Frontend Developer',
-    techStack: ['Python', 'Tkinter', 'Custom UI'],
-    problemSolved: 'Redesigned legacy signature app with modern interface and improved usability.',
-    impact: 'Increased user adoption by 120% and reduced signature creation time by 50%.',
-    image: '/images/projects/signature.jpg',
-    githubUrl: '#',
-    featured: false,
-    category: 'fullstack',
-  },
-  {
-    id: 'wear-os-sickle-cell',
-    title: 'Wear OS Sickle Cell Monitor',
-    description: 'Wearable health monitoring app for sickle cell patients with real-time tracking and alerts.',
-    role: 'Mobile Developer',
-    techStack: ['Wear OS', 'Kotlin', 'Firebase', 'Health APIs'],
-    problemSolved: 'Enabled continuous health monitoring for sickle cell patients through wearable technology.',
-    impact: 'Helped 500+ patients track their health metrics and receive timely alerts.',
-    image: '/images/projects/wearos.jpg',
-    githubUrl: '#',
+    slug: "wear-os-sickle-cell",
+    title: "Sickle Cell Monitor",
+    summary: "A Wear OS app for monitoring people living with sickle cell disease.",
+    role: "Mobile developer",
+    stack: ["Wear OS", "Kotlin", "Firebase"],
     featured: true,
-    category: 'mobile',
+    context:
+      "Early warning signs of a crisis are easy to miss day to day; a watch is always on the wrist.",
+    approach: [
+      "Designed a glanceable interface for the small round screen.",
+      "Collected readings on the watch and synced them to Firebase.",
+    ],
   },
   {
-    id: 'eduflex',
-    title: 'EduFlex Grade Management',
-    description: 'Comprehensive grade management platform for educational institutions with analytics and reporting.',
-    role: 'Full-Stack Developer',
-    techStack: ['Angular', 'Django', 'PostgreSQL', 'Chart.js'],
-    problemSolved: 'Automated grade calculation and reporting processes for educational institutions.',
-    impact: 'Managed grades for 5,000+ students and reduced grading errors by 95%.',
-    image: '/images/projects/eduflex.jpg',
-    githubUrl: '#',
-    liveUrl: '#',
-    featured: false,
-    category: 'fullstack',
+    slug: "esign-registration",
+    title: "ESIGN Exam Registration",
+    summary: "An online platform for exam registration.",
+    role: "Full-stack developer",
+    stack: ["Web", "Database"],
+    context: "Exam registration was a paper process with long queues and manual data entry.",
+    approach: ["Built an online registration flow with validation and an admin view of submissions."],
   },
   {
-    id: 'the-factory',
-    title: 'The Factory Initiative',
-    description: 'Digital skills platform empowering communities through technology education and mentorship.',
-    role: 'Founder & Lead Developer',
-    techStack: ['Next.js', 'Strapi CMS', 'PostgreSQL', 'TailwindCSS'],
-    problemSolved: 'Created accessible platform for digital literacy and skills development in underserved communities.',
-    impact: 'Trained 200+ individuals in digital skills and launched 15+ community projects.',
-    image: '/images/projects/factory.jpg',
-    liveUrl: '#',
-    featured: true,
-    category: 'web',
+    slug: "eduflex",
+    title: "EduFlex",
+    summary: "A grade management platform for schools.",
+    role: "Full-stack developer",
+    stack: ["Web", "PostgreSQL"],
+    context: "Teachers were computing and reporting grades by hand.",
+    approach: ["Built grade entry, automatic calculation and report generation."],
+  },
+  {
+    slug: "digital-signature",
+    title: "Digital Signature App",
+    summary: "A redesign of a desktop digital-signature tool built with Tkinter.",
+    role: "UI redesign",
+    stack: ["Python", "Tkinter"],
+    context: "The existing desktop tool worked but was hard to use.",
+    approach: ["Redesigned the interface and interaction flow within Tkinter's constraints."],
   },
 ];
 
-export const featuredProjects = projects.filter((project) => project.featured);
+export const featuredProjects = projects.filter((p) => p.featured);
+export const otherProjects = projects.filter((p) => !p.featured);
+export const getProject = (slug: string) => projects.find((p) => p.slug === slug);

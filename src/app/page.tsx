@@ -1,23 +1,17 @@
-import Hero from '@/components/sections/Hero';
-import About from '@/components/sections/About';
-import Skills from '@/components/sections/Skills';
-import Projects from '@/components/sections/Projects';
-import Photography from '@/components/sections/Photography';
-import Hobbies from '@/components/sections/Hobbies';
-import Services from '@/components/sections/Services';
-import Contact from '@/components/sections/Contact';
+import Hero from "@/components/home/Hero";
+import Work from "@/components/home/Work";
+import About from "@/components/home/About";
+import Photography from "@/components/home/Photography";
+import Contact from "@/components/home/Contact";
 
 export default function Home() {
   return (
-    <main>
+    <>
       <Hero />
+      <Work />
       <About />
-      <Skills />
-      <Projects />
       <Photography />
-      <Hobbies />
-      <Services />
       <Contact />
-    </main>
+    </>
   );
 }
