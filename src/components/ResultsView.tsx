@@ -12,7 +12,7 @@ import { search, tokens, type ResultType, type SearchItem } from "@/lib/search";
 
 type Tab = "all" | "projects" | "images" | "about";
 const TABS: Tab[] = ["all", "projects", "images", "about"];
-const ICON: Record<ResultType, string> = { project: "◆", page: "▤", experience: "●", skill: "#", education: "▲" };
+const ICON: Record<ResultType, string> = { project: "◆", page: "▤", experience: "●", skill: "#", education: "▲", photo: "▣" };
 
 /** Wrap the parts of a text that match the search words in <mark>. */
 function Highlight({ text, words }: { text: string; words: string[] }) {
@@ -63,7 +63,13 @@ export default function ResultsView({
 
   const { results, ms } = useMemo(() => search(items, q), [items, q]);
   const shown = results.filter((r) =>
-    tab === "all" ? true : tab === "projects" || tab === "images" ? r.type === "project" : r.type !== "project",
+    tab === "all"
+      ? r.type !== "photo" || q !== ""
+      : tab === "projects"
+        ? r.type === "project"
+        : tab === "images"
+          ? r.type === "project" || r.type === "photo"
+          : r.type !== "project" && r.type !== "photo",
   );
 
   const go = (next: Tab) => {
@@ -103,6 +109,7 @@ export default function ResultsView({
         <p className="text-sm text-muted" aria-live="polite">
           {t.stats.replace("{n}", String(shown.length)).replace("{s}", seconds)}
         </p>
+        {!q && <p className="mt-3 rounded-2xl bg-panel px-4 py-3 text-sm text-line">{t.browseHint}</p>}
 
         {shown.length === 0 ? (
           <div className="py-12">
@@ -127,7 +134,13 @@ export default function ResultsView({
                 <Link href={r.href} className="group block" aria-label={`${t.openImage}: ${r.title}`}>
                   <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-panel ring-1 ring-line/10 transition group-hover:shadow-lift">
                     {r.cover ? (
-                      <Image src={r.cover} alt={r.title} fill sizes="(min-width: 1024px) 25vw, 50vw" className="object-cover object-top" />
+                      <Image
+                        src={r.cover}
+                        alt={r.title}
+                        fill
+                        sizes="(min-width: 1024px) 25vw, 50vw"
+                        className={`object-cover ${r.type === "photo" ? "" : "object-top"}`}
+                      />
                     ) : (
                       r.system && (
                         <div className="absolute inset-[4%]">
@@ -137,7 +150,7 @@ export default function ResultsView({
                     )}
                   </div>
                   <p className="mt-2 truncate text-sm font-medium group-hover:text-accent">{r.title}</p>
-                  <p className="truncate text-xs text-muted">{r.chips.slice(0, 2).join(" · ")}</p>
+                  <p className="truncate text-xs text-muted">{r.type === "photo" ? r.snippet : r.chips.slice(0, 2).join(" · ")}</p>
                 </Link>
               </li>
             ))}

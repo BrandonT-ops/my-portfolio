@@ -21,11 +21,11 @@ browsers that prefer French, otherwise to English.
 
 | Address | What it is |
 | --- | --- |
-| `/en` | Home: wordmark, search box, "I'm feeling curious" (opens a random project) |
+| `/en` | Home: wordmark, search box with example searches, four shortcut tiles, six starter projects |
 | `/en/search?q=...&t=...` | Results. Tabs: All, Projects, Images, About. `/en/work` redirects here |
 | `/en/work/<slug>` | One product-style page per project |
 | `/en/about` | Profile: bio, experience, education, certifications, toolbox |
-| `/en/photography` | Photo grid |
+| `/en/photography` | Photo grid (pictures from Brandon's Memento wall, also searchable) |
 
 ## How the search works
 

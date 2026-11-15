@@ -1,6 +1,6 @@
 import type { Category } from "@/data/projects";
 
-export type ResultType = "project" | "page" | "experience" | "skill" | "education";
+export type ResultType = "project" | "page" | "experience" | "skill" | "education" | "photo";
 
 /** One thing the search can find. Built on the server (see lib/search-index.ts), searched in the browser. */
 export interface SearchItem {
@@ -18,6 +18,9 @@ export interface SearchItem {
   /** Projects only: screenshot path, or the blueprint to draw when there is none. */
   cover?: string;
   system?: string[][];
+  /** Photos only: pixel size, for the image grid. */
+  width?: number;
+  height?: number;
   category?: Category;
 }
 

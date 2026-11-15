@@ -43,12 +43,26 @@ export default function Header({
       <div className="mx-auto flex max-w-page flex-wrap items-center gap-x-6 gap-y-3 px-4 py-3 sm:px-6 lg:flex-nowrap">
         <Wordmark lang={lang} />
         <div className="order-3 w-full lg:order-none lg:max-w-xl lg:flex-1">
-          <SearchBox key={q} lang={lang} suggestions={suggestions} placeholder={t.placeholder} clearLabel={t.clear} listLabel={t.suggestions} initial={q} />
+          <SearchBox key={q} lang={lang} suggestions={suggestions} placeholder={t.placeholder} clearLabel={t.clear} listLabel={t.suggestions} initial={q} examples={q ? [] : t.examples} popularLabel={t.popular} />
         </div>
         <div className="ml-auto">
           <CornerNav lang={lang} nav={nav} />
         </div>
       </div>
+      <nav aria-label="Sections" className="mx-auto flex max-w-page gap-5 overflow-x-auto px-4 pb-3 text-sm sm:hidden">
+        <Link href={`/${lang}/search?t=projects`} className="whitespace-nowrap text-muted hover:text-accent">
+          {t.tabs.projects}
+        </Link>
+        <Link href={`/${lang}/about`} className="whitespace-nowrap text-muted hover:text-accent">
+          {nav.about}
+        </Link>
+        <Link href={`/${lang}/photography`} className="whitespace-nowrap text-muted hover:text-accent">
+          {nav.photo}
+        </Link>
+        <a href="#contact" className="whitespace-nowrap text-muted hover:text-accent">
+          {nav.contact}
+        </a>
+      </nav>
     </header>
   );
 }

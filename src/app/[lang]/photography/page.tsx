@@ -35,6 +35,7 @@ export default async function Photography({ params }: Props) {
           <p className="tag">{d.nav.photo}</p>
           <h1 className="mt-5 text-[clamp(2.5rem,6.5vw,5rem)] leading-[1.02]">{ph.title}</h1>
           <p className="mt-6 text-xl leading-relaxed text-muted">{ph.lead}</p>
+          {photos.length > 0 && <p className="mt-3 text-sm text-muted">{photos.length} {d.nav.photo.toLowerCase()}</p>}
           {photos.length === 0 && <p className="mt-3 leading-relaxed text-muted">{ph.body}</p>}
           {site.photographyUrl && (
             <a href={site.photographyUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary mt-8">
@@ -54,10 +55,25 @@ export default async function Photography({ params }: Props) {
         <ul className="mt-10 columns-2 gap-4 md:columns-3 lg:columns-4 [&>li]:mb-4 [&>li]:break-inside-avoid">
           {photos.length > 0
             ? photos.map((p, i) => (
-                <li key={p.src} data-reveal style={{ "--d": `${(i % 4) * 60}ms` } as React.CSSProperties}>
-                  <figure className="overflow-hidden rounded-2xl bg-panel">
-                    <Image src={p.src} alt={p.alt} width={800} height={1000} sizes="(min-width: 1024px) 25vw, 50vw" className="h-auto w-full" />
-                    <figcaption className="px-3 py-2 text-sm text-muted">{p.alt}</figcaption>
+                <li key={p.src} id={`photo-${i + 1}`} className="scroll-mt-28" data-reveal style={{ "--d": `${(i % 4) * 60}ms` } as React.CSSProperties}>
+                  <figure className="group overflow-hidden rounded-2xl bg-panel">
+                    <div className="overflow-hidden">
+                      <Image
+                        src={p.src}
+                        alt={[p.caption, p.place].filter(Boolean).join(" — ") || `${d.search.types.photo} ${i + 1}`}
+                        width={p.width}
+                        height={p.height}
+                        sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
+                        priority={i < 4}
+                        className="h-auto w-full transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                      />
+                    </div>
+                    {(p.caption || p.place) && (
+                      <figcaption className="px-4 py-3">
+                        {p.caption && <p className="font-medium leading-snug">{p.caption}</p>}
+                        {p.place && <p className="mt-0.5 text-sm text-muted">{p.place}</p>}
+                      </figcaption>
+                    )}
                   </figure>
                 </li>
               ))

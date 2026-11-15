@@ -148,7 +148,20 @@ export interface Dict {
     stats: string;
     none: string;
     noneHint: string;
-    types: { project: string; page: string; experience: string; skill: string; education: string };
+    types: { project: string; page: string; experience: string; skill: string; education: string; photo: string };
+    /** Home page guidance for first-time visitors. */
+    help: string;
+    /** Example searches cycled in the empty search box. */
+    examples: string[];
+    /** Uses {n} for the number of projects. */
+    browseAll: string;
+    tiles: { projects: string; projectsHint: string; about: string; aboutHint: string; photos: string; photosHint: string; contact: string; contactHint: string };
+    startHere: string;
+    startHereSub: string;
+    popular: string;
+    /** Shown on the results page when nothing has been typed yet. */
+    browseHint: string;
+    untitled: string;
     /** Uses {n} for the number of projects. */
     usedIn: string;
     related: string;

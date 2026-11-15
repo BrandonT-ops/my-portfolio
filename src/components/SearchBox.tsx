@@ -11,7 +11,7 @@ export interface Suggestion {
   type: ResultType;
 }
 
-const ICON: Record<ResultType, string> = { project: "◆", page: "▤", experience: "●", skill: "#", education: "▲" };
+const ICON: Record<ResultType, string> = { project: "◆", page: "▤", experience: "●", skill: "#", education: "▲", photo: "▣" };
 
 /**
  * The search box. Typing shows suggestions; Enter searches, or opens the
@@ -26,6 +26,8 @@ export default function SearchBox({
   initial = "",
   large = false,
   autoFocus = false,
+  examples = [],
+  popularLabel = "",
 }: {
   lang: Lang;
   suggestions: Suggestion[];
@@ -35,6 +37,9 @@ export default function SearchBox({
   initial?: string;
   large?: boolean;
   autoFocus?: boolean;
+  /** Example searches: cycled in the empty box, and offered when it is focused. */
+  examples?: string[];
+  popularLabel?: string;
 }) {
   const router = useRouter();
   const id = useId();
@@ -42,15 +47,25 @@ export default function SearchBox({
   const [q, setQ] = useState(initial);
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(-1);
+  const [example, setExample] = useState(0);
 
-  const matches = useMemo(() => {
+  // Cycle the example shown in the empty box, so visitors see what they can type.
+  useEffect(() => {
+    if (examples.length < 2 || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const t = window.setInterval(() => setExample((e) => (e + 1) % examples.length), 2600);
+    return () => window.clearInterval(t);
+  }, [examples.length]);
+
+  const hint = examples.length ? `${placeholder.replace(/…$/, "")} — “${examples[example]}”` : placeholder;
+
+  const matches = useMemo<Suggestion[]>(() => {
     const n = normalize(q.trim());
-    if (!n) return [];
+    if (!n) return examples.map((e) => ({ title: e, href: `/${lang}/search?q=${encodeURIComponent(e)}`, type: "skill" as const }));
     return suggestions
       .filter((s) => normalize(s.title).includes(n))
       .sort((a, b) => Number(normalize(b.title).startsWith(n)) - Number(normalize(a.title).startsWith(n)))
       .slice(0, 6);
-  }, [q, suggestions]);
+  }, [q, suggestions, examples, lang]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -101,7 +116,7 @@ export default function SearchBox({
           autoFocus={autoFocus}
           autoComplete="off"
           enterKeyHint="search"
-          placeholder={placeholder}
+          placeholder={hint}
           aria-label={placeholder}
           role="combobox"
           aria-expanded={show}
@@ -155,6 +170,11 @@ export default function SearchBox({
           className="pop-in absolute inset-x-0 top-full z-50 overflow-hidden rounded-b-3xl border border-t-0 border-line/15 bg-sheet pb-3 shadow-lift"
         >
           <li role="presentation" className="mx-5 mb-2 border-t border-line/10" />
+          {!q.trim() && popularLabel && (
+            <li role="presentation" className="label px-6 pb-1">
+              {popularLabel}
+            </li>
+          )}
           {matches.map((s, i) => (
             <li
               key={s.href + s.title}
@@ -170,7 +190,7 @@ export default function SearchBox({
               className={`flex cursor-pointer items-center gap-3 px-6 py-2 text-[15px] ${i === active ? "bg-panel" : ""}`}
             >
               <span aria-hidden className="w-4 text-center text-xs text-accent">
-                {ICON[s.type]}
+                {q.trim() ? ICON[s.type] : "↗"}
               </span>
               <span className="truncate">{s.title}</span>
             </li>

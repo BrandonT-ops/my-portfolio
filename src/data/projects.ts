@@ -62,7 +62,13 @@ export const projects: ProjectMeta[] = [
       "PostgreSQL",
       "Vercel"
     ],
-    category: "web"
+    category: "web",
+    links: [
+      {
+        label: "memento-wall.vercel.app",
+        href: "https://memento-wall.vercel.app"
+      }
+    ]
   },
   {
     slug: "tomo",

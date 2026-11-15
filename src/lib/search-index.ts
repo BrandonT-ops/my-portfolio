@@ -1,6 +1,7 @@
 import { clientName, getDict, getProjectText } from "@/content";
 import type { Lang } from "@/content/types";
 import { projects } from "@/data/projects";
+import { site } from "@/data/site";
 import { getSystem } from "@/data/systems";
 import type { SearchItem } from "@/lib/search";
 import { usage } from "@/lib/usage";
@@ -48,7 +49,7 @@ export function buildIndex(lang: Lang): SearchItem[] {
     title: d.photo.title,
     href: `/${lang}/photography`,
     crumbs: "photography",
-    snippet: `${d.photo.lead} ${d.photo.body}`,
+    snippet: d.photo.lead,
     text: `${d.nav.photo} photo photos photography photographie ${d.photo.label}`,
     chips: d.photo.subjects.slice(0, 4),
   });
@@ -98,11 +99,27 @@ export function buildIndex(lang: Lang): SearchItem[] {
     }
   }
 
+  site.photos.forEach((ph, i) =>
+    items.push({
+      id: `photo-${i}`,
+      type: "photo",
+      title: ph.caption || ph.place || d.search.untitled,
+      href: `/${lang}/photography#photo-${i + 1}`,
+      crumbs: "photography",
+      snippet: ph.place,
+      text: `${d.nav.photo} photo photos photography photographie image`,
+      chips: ph.place ? [ph.place.split(", ").slice(-1)[0]] : [],
+      cover: ph.src,
+      width: ph.width,
+      height: ph.height,
+    }),
+  );
+
   return items;
 }
 
 /** The light list the search box uses for suggestions. */
 export const buildSuggestions = (lang: Lang) =>
   buildIndex(lang)
-    .filter((it) => it.type !== "education")
+    .filter((it) => it.type !== "education" && it.type !== "photo")
     .map(({ title, href, type }) => ({ title, href, type }));
