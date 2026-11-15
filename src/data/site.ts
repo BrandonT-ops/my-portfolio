@@ -1,77 +1,57 @@
 /**
- * Site-wide content. Edit this file to update your details everywhere.
+ * Language-neutral facts about Brandon. Everything that needs translating
+ * (role, bio, experience, labels) lives in src/content/en.ts and fr.ts.
  */
 export const site = {
   name: "Brandon Tapiba",
-  role: "Digital Engineer",
   url: "https://brandontapiba.vercel.app",
-  location: "Cameroon",
   email: "brandontapiba@gmail.com",
+  coordinates: "3.87°N 11.52°E",
 
-  /** One-line positioning shown under the name in the hero. */
-  tagline:
-    "I design and build web products end to end — from interface to infrastructure — and teach others to do the same.",
-
-  /** Your photography page (Instagram, Behance, Flickr, etc.). Leave "" to show "coming soon". */
-  photographyUrl: "",
-
-  /** Path or URL to your CV, e.g. "/brandon-tapiba-cv.pdf" placed in /public. Leave "" to hide the button. */
-  resumeUrl: "",
-
-  /** Set false to hide the "available for work" dot in the hero. */
+  /** Set false to hide the "available" marker. */
   available: true,
 
-  /**
-   * Your photo, shown in the About section. Put the file in /public
-   * (e.g. public/brandon.jpg) and set "/brandon.jpg". A portrait (4:5) crop works best.
-   * Leave "" to show a placeholder frame.
-   */
-  portrait: "",
+  /** Portrait photo in /public. A vertical (4:5) crop works best. */
+  portrait: "/brandon.jpg",
 
-  /** The little companion character in the corner (components/motion/Buddy.tsx). Off for now. */
-  showBuddy: false,
+  /** Path or URL to a CV, e.g. "/brandon-tapiba-cv.pdf" placed in /public. Leave "" to hide the link. */
+  resumeUrl: "",
+
+  /** An external gallery (Instagram, Behance…). Leave "" to hide the link. */
+  photographyUrl: "",
+
+  /**
+   * Where the Photos page reads from: Brandon's Memento wall. Every public
+   * picture he posts there appears on the portfolio automatically.
+   * `publicKey` is Memento's publishable key (the same one its own web page
+   * uses); it only allows reading what is already public.
+   */
+  memento: {
+    url: "https://fgvjghetclremhsweddc.supabase.co",
+    publicKey: "sb_publishable_dqmPuSN-eJufXza4wsFjBw_GgfZiaU3",
+    memberId: "8aa73cf7-1295-4a23-ae6c-b23cd7795a6c",
+    bucket: "moments",
+  },
+
+  /**
+   * Snapshot of the Memento pictures, shown only if Memento cannot be reached.
+   */
+  photos: [
+    { src: "/photos/sun-bloom-douala.jpg", caption: "The sun seemed to bloom", place: "Bonanjo, Douala, Cameroon", width: 1205, height: 1600 },
+    { src: "/photos/mountain-top-nkolbisson.jpg", caption: "The mountain top", place: "Nkolbisson, Yaoundé, Cameroon", width: 1205, height: 1600 },
+    { src: "/photos/bonanjo-after-rain.jpg", caption: "Bonanjo after the rain", place: "Douala, Cameroon", width: 1205, height: 1600 },
+    { src: "/photos/streets-of-douala.jpg", caption: "The streets of Douala", place: "Bonanjo, Douala, Cameroon", width: 1204, height: 1600 },
+    { src: "/photos/gloomy-nights.jpg", caption: "Gloomy nights", place: "Sangmelima, Cameroon", width: 640, height: 640 },
+    { src: "/photos/plains-of-batchingou.jpg", caption: "The planes of Batchingou", place: "Batchingou, Bafoussam, Cameroon", width: 1600, height: 1205 },
+    { src: "/photos/mountain-sides.jpg", caption: "By the mountain sides", place: "Austria", width: 605, height: 1280 },
+    { src: "/photos/glimpse-of-the-air.jpg", caption: "A glimpse of the air", place: "Douala, Cameroon", width: 1205, height: 1600 },
+    { src: "/photos/aire-de-repos.jpg", caption: "Aire de repos", place: "Boumyebel, Cameroon", width: 1205, height: 1600 },
+    { src: "/photos/somewhere-in-rwanda.jpg", caption: "Somewhere in Rwanda", place: "Kigali, Rwanda", width: 1600, height: 900 },
+    { src: "/photos/trees-white-sky.jpg", caption: "", place: "", width: 1600, height: 1201 },
+  ] as { src: string; caption: string; place: string; width: number; height: number }[],
 
   socials: [
     { label: "GitHub", href: "https://github.com/BrandonT-ops" },
-    { label: "LinkedIn", href: "https://www.linkedin.com/in/brandontapiba" },
-  ],
-} as const;
-
-export const about = {
-  paragraphs: [
-    "I'm a Digital Systems Engineer working across frontend, backend and product design. I like owning the whole path: understanding the problem, shaping the interface, and shipping the system behind it.",
-    "Outside client work I founded The Factory, a digital-skills initiative, and I'm part of the Aspire Tech Pilot and Aspire Leadership programs. Technology is most interesting to me where it meets community and craft.",
-  ],
-
-  /** "Journey" timeline — edit years and text to match your real history. */
-  timeline: [
-    { year: "Now", text: "Aspire Tech Pilot & Aspire Leadership Program" },
-    { year: "—", text: "Founder, The Factory — digital-skills initiative" },
-    { year: "—", text: "Full-stack work: Angular, React/Next.js, Django, Laravel" },
-    { year: "—", text: "Digital Systems Engineering" },
-  ],
-
-  skills: [
-    {
-      group: "Build",
-      items: ["Angular 19", "React / Next.js", "Django", "Symfony / Laravel", "Tailwind CSS", "Wear OS", "LLM integrations"],
-    },
-    {
-      group: "Ship",
-      items: ["Docker", "PostgreSQL / MariaDB", "VPS & Hostinger", "Firebase", "GitHub"],
-    },
-    {
-      group: "Shape",
-      items: ["Figma", "UI component systems", "Product thinking", "Research & architecture"],
-    },
-  ],
-
-  services: [
-    "Frontend engineering",
-    "Full-stack development",
-    "UI/UX prototyping",
-    "API development",
-    "Technical consulting",
-    "Education technology",
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/tapiba-brandon" },
   ],
 } as const;

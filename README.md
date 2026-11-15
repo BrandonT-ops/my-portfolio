@@ -1,177 +1,103 @@
-# Brandon Tapiba — Portfolio
+# Brandon Tapiba — Portfolio (search-engine edition)
 
-Personal portfolio built with **Next.js 16**, **Tailwind CSS** and **TypeScript**.
-Editorial layout with a light neo-brutalist touch: warm paper background, Onyx ink,
-Ruby Red as the single accent, and hard offset shadows on interactive elements.
+A portfolio that works like a **search engine about Brandon**: a clean home page with one
+search box, results pages with tabs and a side panel, and project pages laid out like
+product pages. Built with **Next.js 16**, **Tailwind CSS** and **TypeScript**, in
+**English and French**. It has its own wordmark and colours.
 
 ## Quick start
 
 ```bash
 npm install
-npm run dev      # http://localhost:3000
-npm run build    # production build
-npm start        # serve the production build
+npm run dev      # http://localhost:3000  (redirects to /en or /fr)
+npm run build
+npm run lint
 ```
+
+## Pages
+
+Every page exists in both languages (`/en/...` and `/fr/...`). `/` redirects to French for
+browsers that prefer French, otherwise to English.
+
+| Address | What it is |
+| --- | --- |
+| `/en` | Home: wordmark, one search box with example searches, two buttons, four plain links |
+| `/en/search?q=...&t=...` | Results. Tabs: All, Projects, Images, About. `/en/work` redirects here |
+| `/en/work/<slug>` | One product-style page per project |
+| `/en/about` | Profile: bio, experience, education, certifications, toolbox |
+| `/en/photography` | Photo grid, read live from Brandon's Memento wall (also searchable) |
+| `/en/contact` | Email with copy button, links, optional message form |
+
+## Contact page
+
+`/en/contact` shows the email address with a copy button, plus LinkedIn and GitHub. It can
+also show a message form that emails Brandon:
+
+1. Create an API key at [resend.com](https://resend.com) (API Keys).
+2. In Vercel: Project → Settings → Environment Variables, add `RESEND_API_KEY` with that key.
+3. Redeploy. The form appears on the Contact page.
+
+Without the key the form stays hidden, so nothing on the site is ever broken. Messages are
+sent by `src/app/api/contact/route.ts`. With Resend's default test sender, messages can only
+be delivered to the Resend account owner's own address, so the Resend account should be
+registered with the email in `src/data/site.ts`. Never commit the key to the repository.
+
+## How the search works
+
+- `src/lib/search-index.ts` builds, at deploy time, a list of everything findable: projects,
+  pages, jobs, education and skills, in each language.
+- `src/lib/search.ts` ranks that list in the visitor's browser. Every word of the query must
+  appear in an item; matches in the title count most, then tags, then body text. Accents are
+  ignored, so "experience" finds "Expérience".
+- Nothing is sent to a server, so results are instant, and the time shown under the tabs is
+  the real time the search took.
+- The search box suggests matches as you type. Press `/` anywhere to jump to it.
 
 ## Where to edit things
 
-Almost everything lives in two data files. You rarely need to touch components.
-
 | What | File |
 | --- | --- |
-| Name, email, tagline, social links, **photography link**, résumé link | `src/data/site.ts` |
-| **Your photo** (About section) and the companion character on/off | `src/data/site.ts` (`portrait`, `showBuddy`) |
-| About text, journey timeline, skills, services | `src/data/site.ts` (`about`) |
-| Projects and case studies | `src/data/projects.ts` |
+| Email, links, portrait, résumé link, photos | `src/data/site.ts` |
+| Project facts (name, client, year, stack, links, screenshot) | `src/data/projects.ts` |
+| Project words | `src/content/projects.en.ts` and `projects.fr.ts` |
+| Everything else you can read on the site | `src/content/en.ts` and `fr.ts` |
+| System diagrams | `src/data/systems.ts` |
 | Colours | `src/app/globals.css` (`:root` variables) |
-| Fonts | `src/app/layout.tsx` + `tailwind.config.ts` |
 
-### Photography link
+**Rule of thumb:** whenever you change a sentence in an `en` file, change the same entry in the
+`fr` file. Both share one TypeScript type, so the build fails if an entry is missing.
 
-Set `photographyUrl` in `src/data/site.ts` to the page where you post your photos
-(Instagram, Behance, Flickr…). The photography section and the contact links pick it up
-automatically. While it's empty, the section shows "Gallery link coming soon".
+New projects appear in the search automatically. To add one: add its facts to `projects.ts`,
+its words under the same slug in both `projects.*.ts` files, and optionally a diagram in
+`systems.ts`. Only publish numbers you can stand behind; empty sections are not shown.
 
-### Your photo
+### Photos come from Memento
 
-Put a portrait photo in `public/` (e.g. `public/brandon.jpg`, ideally a 4:5 crop) and set
-`portrait: "/brandon.jpg"` in `src/data/site.ts`. Until then the About section shows a
-placeholder frame with your initials.
-
-### Résumé
-
-Put your PDF in `public/` (e.g. `public/brandon-tapiba-cv.pdf`) and set
-`resumeUrl: "/brandon-tapiba-cv.pdf"`. A "Résumé" link appears in the hero.
-
-### Adding a project
-
-Add an entry to `projects` in `src/data/projects.ts`:
-
-```ts
-{
-  slug: "my-project",              // URL: /work/my-project
-  title: "My Project",
-  summary: "One sentence for lists.",
-  role: "Full-stack developer",
-  stack: ["Next.js", "PostgreSQL"],
-  featured: true,                  // big card on the home page; false = "Also built" list
-  cover: "/work/my-project.jpg",   // optional, put the image in public/work/
-  links: [{ label: "Live site", href: "https://..." }],
-  context: "The problem, in a sentence or two.",
-  approach: ["Step one.", "Step two."],
-  outcome: "Real, measurable result.", // optional, hidden until filled in
-}
-```
-
-Each project automatically gets a case-study page and a sitemap entry.
-Without a `cover`, a typographic placeholder is shown, so screenshots can be added later.
-
-> The project texts are a first draft written from short briefs. Review them and add real
-> outcomes; nothing is shown for `outcome` until you write it.
+`src/lib/memento.ts` reads Brandon's public pictures from his Memento wall. A new public
+picture there appears on the portfolio within about 30 minutes, with no redeploy. Only
+pictures he posted himself and made public are included. If Memento cannot be reached, the
+snapshot in `public/photos/` (listed in `src/data/site.ts`) is shown instead.
 
 ### Colours
 
-The palette is defined once as CSS variables in `src/app/globals.css`:
-
 ```css
---paper:     250 247 240;  /* background */
---ink:       18 22 25;     /* Onyx — text, borders, shadows */
---muted:     84 90 96;     /* secondary text */
---accent:    158 0 49;     /* Ruby Red — the single accent */
---highlight: 229 198 135;  /* Soft Fawn — highlights, placeholders */
---positive:  9 129 74;     /* Sea Green — "available" dot */
+--sheet:  255 255 255;  /* page background */
+--panel:  245 246 248;  /* soft grey surface for cards */
+--line:   27 27 31;     /* text */
+--muted:  92 96 108;    /* secondary text */
+--accent: 11 104 176;   /* blue: links, buttons, focus */
+--signal: 255 107 74;   /* orange: the wordmark's full stop, small highlights */
 ```
-
-## Project structure
-
-```
-src/
-├── app/
-│   ├── layout.tsx            # fonts, metadata, JSON-LD, nav + footer
-│   ├── page.tsx              # home: Hero → Work → About → Photography → Contact
-│   ├── work/[slug]/page.tsx  # case-study pages (statically generated)
-│   ├── opengraph-image.tsx   # social preview image
-│   ├── sitemap.ts, robots.ts
-│   └── globals.css           # palette + base styles
-├── components/
-│   ├── Nav.tsx, Footer.tsx
-│   ├── home/                 # home-page sections
-│   ├── motion/               # preloader, cursor, marquee, backdrops, scroll engine
-│   └── ui/                   # ButtonLink, Cover
-└── data/
-    ├── site.ts               # personal details & about content
-    └── projects.ts           # projects & case studies
-```
-
-## Motion
-
-Animations use [GSAP](https://gsap.com) (ScrollTrigger + SplitText) with
-[Lenis](https://lenis.darkroom.engineering) smooth scrolling. Everything lives in
-`src/components/motion/` and `src/lib/motion.ts`.
-
-- **Intro**: counter + name, first visit per tab only (`Preloader.tsx`)
-- **Hero**: letters rise in, then drift apart as you scroll
-- **Selected work**: pinned horizontal scroll on desktop, vertical list on phones
-- **About**: statement fills in word by word with scroll
-- **Photography**: dark panel expands to full screen
-- **Contact**: rising horizon glow, magnetic button
-- **Everywhere**: curtain page transitions, cursor ring, scroll progress bar,
-  soft glow backdrops (`Atmosphere.tsx`)
-- **Companion** (`Buddy.tsx` + drawing in `BuddyFigure.tsx`, **currently off**: set
-  `showBuddy: true` in `src/data/site.ts` to bring it back): a cartoon mini-you in the
-  bottom-left corner. It waves on the hero, types and sweats on projects, explains on About,
-  takes photos on Photography and dances on Contact, with a speech bubble for each. It falls
-  asleep when the page is still. Between 22:00 and 06:00 (visitor's time) it wears a nightcap
-  and tells people to go to bed. Edit its lines in the `SAY` object in `Buddy.tsx`.
-
-Any element can opt into a scroll reveal with a data attribute:
-`data-split` (line-by-line heading), `data-reveal`, `data-reveal-stagger`,
-`data-parallax="0.15"`, `data-zoom`. Add `data-magnetic` to pull an element towards
-the pointer and `data-cursor="View"` to label the cursor.
-
-Visitors with **reduced motion** turned on get a static, fully readable page: no intro,
-no smooth scroll, and the work section becomes a grid.
 
 ## SEO & accessibility
 
-- Per-page titles and descriptions, canonical URLs, Open Graph image
-- `sitemap.xml` and `robots.txt` generated from the project list
-- `Person` structured data (JSON-LD)
-- Fully static output, self-hosted fonts (no external font requests)
-- Skip link, visible focus styles, AA text contrast, respects `prefers-reduced-motion`
+- Per-page titles and descriptions in both languages, canonical URLs and `hreflang` alternates
+- `sitemap.xml`, `robots.txt`, Open Graph image, `Person` structured data
+- Static pages, self-hosted fonts, no animation library
+- Skip link, visible focus styles, keyboard-operable search and tabs, respects
+  `prefers-reduced-motion`
 
 ## Deployment
 
-### Vercel (recommended)
-1. Go to [vercel.com/new](https://vercel.com/new) and import `BrandonT-ops/my-portfolio`.
-2. Keep the detected Next.js defaults and deploy.
-3. Every branch you push gets its own preview URL; `main` becomes the production site.
-
-### Netlify
-Import the repo at [app.netlify.com](https://app.netlify.com). Netlify detects Next.js and
-installs its runtime automatically. Build command `npm run build`.
-
-### Hostinger (Node.js hosting) or any VPS
-```bash
-npm ci
-npm run build
-npm start -- -p 3000      # run behind Nginx/Apache as a reverse proxy, managed by pm2
-```
-
-### Docker
-```dockerfile
-FROM node:20-alpine
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci
-COPY . .
-RUN npm run build
-EXPOSE 3000
-CMD ["npm", "start"]
-```
-```bash
-docker build -t portfolio . && docker run -d -p 3000:3000 portfolio
-```
-
-After deploying on your own domain, update `url` in `src/data/site.ts` so the canonical
-links, sitemap and social previews point to it.
+Import the repository at [vercel.com/new](https://vercel.com/new) and keep the Next.js defaults.
+After moving to your own domain, update `url` in `src/data/site.ts`.
