@@ -23,10 +23,10 @@ export default async function Home({ params }: Props) {
   const other = lang === "en" ? "fr" : "en";
 
   const links = [
-    { href: `/${lang}/search?t=projects`, label: t.tabs.projects, dot: "bg-ox" },
-    { href: `/${lang}/about`, label: d.nav.about, dot: "bg-sky" },
-    { href: `/${lang}/photography`, label: d.nav.photo, dot: "bg-gold" },
-    { href: `/${lang}/contact`, label: d.nav.contact, dot: "bg-leaf" },
+    { href: `/${lang}/search?t=projects`, label: t.tabs.projects },
+    { href: `/${lang}/about`, label: d.nav.about },
+    { href: `/${lang}/photography`, label: d.nav.photo },
+    { href: `/${lang}/contact`, label: d.nav.contact },
   ];
 
   return (
@@ -64,11 +64,10 @@ export default async function Home({ params }: Props) {
 
         <p className="mt-8 text-center text-sm text-muted">{t.help}</p>
 
-        <ul className="mt-5 flex flex-wrap justify-center gap-x-7 gap-y-3 text-sm">
+        <ul className="mt-4 flex flex-wrap justify-center gap-x-7 gap-y-3 text-sm">
           {links.map((l) => (
             <li key={l.label}>
-              <Link href={l.href} className="inline-flex items-center gap-2 text-line hover:text-accent hover:underline">
-                <span className={`h-2 w-2 rounded-full ${l.dot}`} aria-hidden />
+              <Link href={l.href} className="text-accent hover:underline">
                 {l.label}
               </Link>
             </li>

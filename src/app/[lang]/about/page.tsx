@@ -53,7 +53,7 @@ export default async function About({ params }: Props) {
             </div>
           </div>
           <div className="lg:col-span-5" data-reveal>
-            <div className="relative mx-auto aspect-[4/5] max-w-sm overflow-hidden rounded-[2.5rem] bg-panel shadow-soft lg:max-w-none">
+            <div className="relative mx-auto aspect-[4/5] max-w-sm overflow-hidden rounded-2xl bg-panel shadow-soft lg:max-w-none">
               <Image src={site.portrait} alt={site.name} fill priority sizes="(min-width: 1024px) 36vw, 24rem" className="object-cover object-[50%_28%]" />
             </div>
           </div>
@@ -87,7 +87,7 @@ export default async function About({ params }: Props) {
             {a.experience.map((job) => (
               <li key={job.org} className="card-outline grid gap-6 lg:grid-cols-12 lg:gap-x-10" data-reveal>
                 <div className="lg:col-span-5">
-                  <p className="tag !bg-accent/10 !text-accent">{job.period}</p>
+                  <p className="tag">{job.period}</p>
                   <h3 className="mt-4 text-2xl leading-tight sm:text-3xl">{job.role}</h3>
                   <p className="mt-2 text-lg">{job.org}</p>
                   <p className="mt-1 text-sm text-muted">{job.place}</p>
@@ -95,7 +95,7 @@ export default async function About({ params }: Props) {
                 <ul className="space-y-3 leading-relaxed text-muted lg:col-span-7">
                   {job.points.map((pt) => (
                     <li key={pt} className="flex gap-3">
-                      <span aria-hidden className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-gold" />
+                      <span aria-hidden className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-line/40" />
                       <span>{pt}</span>
                     </li>
                   ))}
@@ -164,12 +164,12 @@ export default async function About({ params }: Props) {
         </section>
 
         {/* Services */}
-        <section className="mt-6 rounded-3xl border-l-[6px] border-leaf bg-panel p-8 sm:p-12" data-reveal>
+        <section className="mt-6 rounded-2xl bg-panel p-8 sm:p-12" data-reveal>
           <h2 className="text-3xl sm:text-4xl">{a.servicesTitle}</h2>
           <ul className="mt-8 grid gap-x-10 gap-y-4 text-lg sm:grid-cols-2 lg:grid-cols-3">
             {a.services.map((sv) => (
               <li key={sv} className="flex items-center gap-3">
-                <span aria-hidden className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-leaf text-sm text-white">
+                <span aria-hidden className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-line/25 text-xs text-line">
                   ✓
                 </span>
                 {sv}

@@ -57,7 +57,7 @@ export default async function ProjectPage({ params }: Props) {
           <li key={i}>
             <div className="flex flex-wrap gap-2">
               {layer.map((n) => (
-                <span key={n} className="rounded-xl border border-line/80 bg-sheet px-3 py-2 font-mono text-xs shadow-[3px_3px_0_0_rgb(var(--accent)/0.22)]">
+                <span key={n} className="rounded-2xl border border-line/80 bg-sheet px-3 py-2 font-mono text-xs shadow-[3px_3px_0_0_rgb(var(--accent)/0.22)]">
                   {n}
                 </span>
               ))}
@@ -115,11 +115,11 @@ export default async function ProjectPage({ params }: Props) {
           {/* Visual: screenshot in a browser frame, or the system diagram */}
           <div data-reveal>
             {project.cover ? (
-              <figure className="overflow-hidden rounded-3xl border border-line/10 bg-panel shadow-soft">
+              <figure className="overflow-hidden rounded-2xl border border-line/10 bg-panel shadow-soft">
                 <div className="flex items-center gap-2 px-5 py-3.5" aria-hidden>
-                  <span className="h-3 w-3 rounded-full bg-ox" />
-                  <span className="h-3 w-3 rounded-full bg-gold" />
-                  <span className="h-3 w-3 rounded-full bg-leaf" />
+                  <span className="h-3 w-3 rounded-full bg-line/15" />
+                  <span className="h-3 w-3 rounded-full bg-line/15" />
+                  <span className="h-3 w-3 rounded-full bg-line/15" />
                   <span className="ml-3 flex-1 truncate rounded-full bg-sheet px-4 py-1 text-xs text-muted">
                     {project.links?.[0]?.href.replace(/^https?:\/\/(www\.)?/, "") ?? project.title}
                   </span>
@@ -185,10 +185,10 @@ export default async function ProjectPage({ params }: Props) {
                   data-reveal
                   style={{ "--d": `${(i % 2) * 80}ms` } as React.CSSProperties}
                 >
-                  <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full font-display text-lg font-semibold text-white ${["bg-ox", "bg-sky", "bg-leaf", "bg-gold"][i % 4]}`}>
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-line/20 text-sm font-semibold text-line">
                     {i + 1}
                   </span>
-                  <p className="pt-1.5 text-lg leading-relaxed">{step}</p>
+                  <p className="pt-1 text-lg leading-relaxed">{step}</p>
                 </li>
               ))}
             </ol>
@@ -196,8 +196,8 @@ export default async function ProjectPage({ params }: Props) {
 
           {/* Outcome */}
           {t.outcome && (
-            <section className="mt-6 rounded-3xl border-l-[6px] border-ox bg-panel p-8 sm:p-12" data-reveal>
-              <h2 className="label !text-ox">{s.outcome}</h2>
+            <section className="mt-6 rounded-2xl bg-panel p-8 sm:p-12" data-reveal>
+              <h2 className="label">{s.outcome}</h2>
               <p className="mt-4 font-display text-[clamp(1.5rem,3vw,2.25rem)] font-medium leading-snug">{t.outcome}</p>
             </section>
           )}
@@ -247,10 +247,7 @@ export default async function ProjectPage({ params }: Props) {
               <ul className="mt-8 grid gap-4 md:grid-cols-3">
                 {t.lessons.map((l, i) => (
                   <li key={l} className="card" data-reveal style={{ "--d": `${i * 80}ms` } as React.CSSProperties}>
-                    <span aria-hidden className="text-2xl text-signal">
-                      ↺
-                    </span>
-                    <p className="mt-3 leading-relaxed">{l}</p>
+                    <p className="leading-relaxed">{l}</p>
                   </li>
                 ))}
               </ul>
@@ -261,7 +258,7 @@ export default async function ProjectPage({ params }: Props) {
           <nav aria-label={s.next} className="mt-20 sm:mt-28">
             <Link
               href={`/${lang}/work/${next.slug}`}
-              className="group flex flex-wrap items-end justify-between gap-6 rounded-3xl bg-panel p-8 transition hover:shadow-lift sm:p-12"
+              className="group flex flex-wrap items-end justify-between gap-6 rounded-2xl bg-panel p-8 transition hover:shadow-lift sm:p-12"
               data-reveal
             >
               <span>

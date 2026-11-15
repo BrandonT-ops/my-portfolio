@@ -13,14 +13,6 @@ import { search, tokens, type ResultType, type SearchItem } from "@/lib/search";
 type Tab = "all" | "projects" | "images" | "about";
 const TABS: Tab[] = ["all", "projects", "images", "about"];
 const ICON: Record<ResultType, string> = { project: "◆", page: "▤", experience: "●", skill: "#", education: "▲", photo: "▣" };
-const TONE: Record<ResultType, string> = {
-  project: "bg-ox/10 text-ox",
-  page: "bg-sky/10 text-sky",
-  experience: "bg-leaf/10 text-leaf",
-  skill: "bg-gold/15 text-gold",
-  education: "bg-sky/10 text-sky",
-  photo: "bg-leaf/10 text-leaf",
-};
 
 /** Wrap the parts of a text that match the search words in <mark>. */
 function Highlight({ text, words }: { text: string; words: string[] }) {
@@ -170,7 +162,7 @@ export default function ResultsView({
                 <li key={r.id}>
                   <article>
                     <div className="flex items-center gap-3">
-                      <span aria-hidden className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-xs ${TONE[r.type]}`}>
+                      <span aria-hidden className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-panel text-xs text-muted">
                         {ICON[r.type]}
                       </span>
                       <div className="min-w-0 leading-tight">
@@ -219,7 +211,7 @@ export default function ResultsView({
                 <li key={s}>
                   <Link
                     href={`/${lang}/search?q=${encodeURIComponent(s)}`}
-                    className="flex items-center gap-3 rounded-full bg-panel px-5 py-3 text-[15px] font-medium transition hover:shadow-soft"
+                    className="flex items-center gap-3 rounded-md bg-panel px-5 py-3 text-[15px] font-medium transition hover:shadow-press"
                   >
                     <svg aria-hidden viewBox="0 0 24 24" className="h-4 w-4 text-muted" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
                       <circle cx="11" cy="11" r="7" />

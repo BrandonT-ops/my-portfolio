@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 /*
- * Search-engine look: white page, near-black text, blue links, and four
- * colours (oxblood, blue, green, gold) used sparingly for character. Space-separated RGB so Tailwind
+ * Search-engine look: white page, near-black text, blue links, and one
+ * orange accent taken from the wordmark's full stop. Space-separated RGB so Tailwind
  * opacity modifiers work.
  */
 :root {
@@ -13,13 +13,9 @@
   --line: 27 27 31;      /* text */
   --muted: 92 96 108;    /* secondary text (AA on white) */
   --accent: 11 104 176;  /* blue: links, buttons, focus */
-  --signal: 128 0 32;    /* oxblood: full stops and small highlights */
-
-  /* The four wordmark colours, also used for small accents */
-  --ox: 128 0 32;        /* oxblood */
-  --sky: 11 132 184;     /* blue */
-  --leaf: 9 129 74;      /* green */
-  --gold: 197 143 16;    /* gold */
+  --signal: 255 107 74;  /* orange: the wordmark's full stop and small highlights */
+  --ox: 128 0 32;        /* oxblood: error messages */
+  --leaf: 9 129 74;      /* green: success messages, "online" dot */
 }
 
 @layer base {
@@ -48,13 +44,13 @@
   .link { @apply text-accent underline-offset-4 hover:underline; }
 
   /* Rounded surfaces */
-  .card { @apply rounded-3xl bg-panel p-6 sm:p-8; }
-  .card-outline { @apply rounded-3xl border border-line/10 bg-sheet p-6 sm:p-8; }
+  .card { @apply rounded-2xl bg-panel p-6 sm:p-8; }
+  .card-outline { @apply rounded-2xl border border-line/10 bg-sheet p-6 sm:p-8; }
 
   /* Pills and buttons */
   .chip { @apply inline-flex items-center gap-1.5 rounded-full border border-line/15 bg-sheet px-3.5 py-1.5 text-sm text-line transition-colors hover:bg-panel; }
   .tag { @apply inline-flex items-center rounded-full bg-panel px-3 py-1 text-xs font-medium text-muted; }
-  .btn { @apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full border border-transparent bg-panel px-5 py-2.5 text-sm font-medium text-line transition hover:border-line/15 hover:shadow-press; }
+  .btn { @apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md border border-transparent bg-panel px-5 py-2.5 text-sm font-medium text-line transition hover:border-line/15 hover:shadow-press; }
   .btn-primary { @apply bg-accent text-white hover:border-transparent hover:shadow-soft; }
 }
 

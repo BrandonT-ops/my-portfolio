@@ -22,11 +22,7 @@ export default function OpengraphImage() {
         }}
       >
         <div style={{ display: "flex", fontSize: 190, fontWeight: 700, letterSpacing: -9, lineHeight: 1 }}>
-          {[["b", "#800020"], ["r", "#0b84b8"], ["a", "#c58f10"], ["n", "#09814a"], ["d", "#800020"], ["o", "#0b84b8"], ["n", "#c58f10"]].map(([ch, c], i) => (
-            <span key={i} style={{ color: c }}>
-              {ch}
-            </span>
-          ))}
+          brandon<span style={{ color: "#ff6b4a" }}>.</span>
         </div>
         <div
           style={{

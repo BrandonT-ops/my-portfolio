@@ -86,10 +86,7 @@ snapshot in `public/photos/` (listed in `src/data/site.ts`) is shown instead.
 --line:   27 27 31;     /* text */
 --muted:  92 96 108;    /* secondary text */
 --accent: 11 104 176;   /* blue: links, buttons, focus */
---ox:     128 0 32;     /* oxblood  ┐                              */
---sky:    11 132 184;   /* blue     │ the four wordmark colours,   */
---leaf:   9 129 74;     /* green    │ also used for small accents  */
---gold:   197 143 16;   /* gold     ┘                              */
+--signal: 255 107 74;   /* orange: the wordmark's full stop, small highlights */
 ```
 
 ## SEO & accessibility

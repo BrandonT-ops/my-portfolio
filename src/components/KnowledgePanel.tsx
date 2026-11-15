@@ -7,7 +7,7 @@ import { site } from "@/data/site";
 export default function KnowledgePanel({ lang, d }: { lang: Lang; d: Dict }) {
   const a = d.about;
   return (
-    <aside aria-label={site.name} className="overflow-hidden rounded-3xl border border-line/10 bg-sheet shadow-soft">
+    <aside aria-label={site.name} className="overflow-hidden rounded-2xl border border-line/10 bg-sheet shadow-soft">
       <div className="relative aspect-[5/4] bg-panel">
         <Image src={site.portrait} alt={site.name} fill sizes="(min-width: 1024px) 24rem, 100vw" className="object-cover object-[50%_22%]" />
       </div>
