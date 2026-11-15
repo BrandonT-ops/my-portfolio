@@ -11,7 +11,7 @@ import Cursor from "@/components/motion/Cursor";
 import Buddy from "@/components/motion/Buddy";
 import { site } from "@/data/site";
 
-const description = `${site.name} — ${site.role} building web products end to end with Angular, React/Next.js and Django. Founder of The Factory.`;
+const description = `${site.name} — ${site.role} in Yaoundé building web, mobile and embedded products with Angular, Next.js, Django and Flutter.`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -45,6 +45,10 @@ const personJsonLd = {
   url: site.url,
   email: `mailto:${site.email}`,
   sameAs: site.socials.map((s) => s.href),
+  address: { "@type": "PostalAddress", addressLocality: "Yaoundé", addressCountry: "CM" },
+  alumniOf: { "@type": "CollegeOrUniversity", name: "Inter-State University Congo–Cameroon" },
+  knowsLanguage: ["en", "fr"],
+  knowsAbout: ["Web development", "Angular", "Next.js", "Django", "Flutter", "Embedded systems", "UI/UX design"],
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

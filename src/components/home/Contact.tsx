@@ -38,7 +38,7 @@ export default function Contact() {
       <Atmosphere glows={false} horizon />
       <div className="mx-auto flex min-h-[100svh] max-w-wide flex-col justify-between px-5 pb-16 pt-32 sm:px-10 sm:pt-44">
         <p id="contact-label" className="label" data-reveal>
-          <span className="text-accent">04</span> — Contact
+          <span className="text-accent">05</span> — Contact
         </p>
 
         <div className="my-16">

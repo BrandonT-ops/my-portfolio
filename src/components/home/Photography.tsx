@@ -44,7 +44,7 @@ export default function Photography() {
         <div className="mx-auto flex min-h-[100svh] max-w-wide flex-col justify-between px-5 py-28 sm:px-10 sm:py-36">
           <div className="flex items-start justify-between gap-6">
             <p id="photography-label" className="label" data-reveal>
-              <span className="text-accent">03</span> — Photography
+              <span className="text-accent">04</span> — Photography
             </p>
             {/* Aperture mark */}
             <svg

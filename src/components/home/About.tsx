@@ -26,14 +26,6 @@ export default function About() {
             scrollTrigger: { trigger: ".about-statement", start: "top 80%", end: "bottom 45%", scrub: true },
           },
         );
-        gsap.from(".about-timeline li", {
-          xPercent: -6,
-          autoAlpha: 0,
-          duration: 1.2,
-          ease: "expo.out",
-          stagger: 0.1,
-          scrollTrigger: { trigger: ".about-timeline", start: "top 85%", once: true },
-        });
         gsap.from(".about-rule", {
           scaleX: 0,
           duration: 1.6,
@@ -75,24 +67,18 @@ export default function About() {
               ))}
             </div>
 
-            <p className="label mb-6 mt-20" data-reveal>
-              Journey
-            </p>
-            <ol className="about-timeline border-t border-ink/15">
-              {about.timeline.map((item) => (
-                <li
-                  key={item.text}
-                  className="group grid grid-cols-[5rem_1fr] gap-4 border-b border-ink/15 py-6 transition-colors hover:bg-highlight/20"
-                >
-                  <span className="font-mono text-xs leading-7 text-accent">{item.year}</span>
-                  <span className="text-lg transition-transform duration-500 group-hover:translate-x-2">{item.text}</span>
-                </li>
+            <dl className="mt-16 grid gap-x-10 border-t border-ink/15 sm:grid-cols-2" data-reveal-stagger>
+              {about.facts.map((f) => (
+                <div key={f.label} className="border-b border-ink/15 py-5">
+                  <dt className="label mb-2">{f.label}</dt>
+                  <dd className="text-lg">{f.value}</dd>
+                </div>
               ))}
-            </ol>
+            </dl>
           </div>
         </div>
 
-        <div className="about-skills mt-28 grid gap-14 sm:mt-40 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="about-skills mt-28 grid gap-14 sm:mt-40 sm:grid-cols-2 lg:grid-cols-5">
           {[...about.skills, { group: "Services", items: about.services }].map((s, i) => (
             <div key={s.group}>
               <div className="about-rule mb-6 h-px origin-left bg-ink" />

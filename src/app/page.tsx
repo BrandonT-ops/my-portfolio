@@ -1,6 +1,7 @@
 import Hero from "@/components/home/Hero";
 import Work from "@/components/home/Work";
 import About from "@/components/home/About";
+import Experience from "@/components/home/Experience";
 import Photography from "@/components/home/Photography";
 import Contact from "@/components/home/Contact";
 import Marquee from "@/components/motion/Marquee";
@@ -24,6 +25,7 @@ export default function Home() {
       />
       <Work />
       <About />
+      <Experience />
       <Photography />
       <Contact />
     </>

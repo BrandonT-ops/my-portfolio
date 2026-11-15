@@ -12,7 +12,7 @@ export default function ButtonLink({
   external?: boolean;
 }) {
   const className =
-    "inline-flex items-center gap-2 border-2 border-ink bg-ink px-5 py-3 font-mono text-xs uppercase tracking-[0.12em] text-paper shadow-hard-accent transition-[transform,box-shadow] duration-150 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[8px_8px_0_0_rgb(var(--accent))] active:translate-x-1 active:translate-y-1 active:shadow-none";
+    "inline-flex items-center gap-2 whitespace-nowrap border-2 border-ink bg-ink px-5 py-3 font-mono text-xs uppercase tracking-[0.12em] text-paper shadow-hard-accent transition-[transform,box-shadow] duration-150 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[8px_8px_0_0_rgb(var(--accent))] active:translate-x-1 active:translate-y-1 active:shadow-none";
 
   if (external) {
     return (

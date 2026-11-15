@@ -21,7 +21,8 @@ Almost everything lives in two data files. You rarely need to touch components.
 | --- | --- |
 | Name, email, tagline, social links, **photography link**, résumé link | `src/data/site.ts` |
 | **Your photo** (About section) and the companion character on/off | `src/data/site.ts` (`portrait`, `showBuddy`) |
-| About text, journey timeline, skills, services | `src/data/site.ts` (`about`) |
+| About text, quick facts, skills, services | `src/data/site.ts` (`about`) |
+| Work experience, education, certifications | `src/data/site.ts` (`about.experience`, `education`, `certifications`) |
 | Projects and case studies | `src/data/projects.ts` |
 | Colours | `src/app/globals.css` (`:root` variables) |
 | Fonts | `src/app/layout.tsx` + `tailwind.config.ts` |
@@ -54,7 +55,10 @@ Add an entry to `projects` in `src/data/projects.ts`:
   summary: "One sentence for lists.",
   role: "Full-stack developer",
   stack: ["Next.js", "PostgreSQL"],
-  featured: true,                  // big card on the home page; false = "Also built" list
+  category: "web",                 // "web" | "mobile" | "embedded": groups the "More things I've built" list
+  client: "Freelance",             // optional: who it was for
+  year: "2025",                    // optional
+  featured: true,                  // big sliding card on the home page; otherwise in the grouped list
   cover: "/work/my-project.jpg",   // optional, put the image in public/work/
   links: [{ label: "Live site", href: "https://..." }],
   context: "The problem, in a sentence or two.",
@@ -88,7 +92,7 @@ The palette is defined once as CSS variables in `src/app/globals.css`:
 src/
 ├── app/
 │   ├── layout.tsx            # fonts, metadata, JSON-LD, nav + footer
-│   ├── page.tsx              # home: Hero → Work → About → Photography → Contact
+│   ├── page.tsx              # home: Hero → Work → About → Experience → Photography → Contact
 │   ├── work/[slug]/page.tsx  # case-study pages (statically generated)
 │   ├── opengraph-image.tsx   # social preview image
 │   ├── sitemap.ts, robots.ts

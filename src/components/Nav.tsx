@@ -4,6 +4,7 @@ import { site } from "@/data/site";
 const links = [
   { href: "/#work", label: "Work" },
   { href: "/#about", label: "About" },
+  { href: "/#experience", label: "Experience" },
   { href: "/#photography", label: "Photography" },
   { href: "/#contact", label: "Contact" },
 ];
@@ -25,7 +26,7 @@ export default function Nav() {
         </Link>
         <ul className="flex items-center gap-4 font-mono text-[11px] uppercase tracking-[0.12em] sm:gap-8 sm:text-xs">
           {links.map((l, i) => (
-            <li key={l.href} className={l.label === "About" ? "hidden sm:block" : undefined}>
+            <li key={l.href} className={l.label === "About" || l.label === "Experience" ? "hidden md:block" : undefined}>
               <Link href={l.href} className="group relative inline-flex overflow-hidden">
                 <span className="mr-1.5 hidden opacity-50 lg:inline">0{i + 1}</span>
                 <span className="relative inline-block">

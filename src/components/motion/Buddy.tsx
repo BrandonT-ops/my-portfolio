@@ -45,6 +45,7 @@ const SAY: Record<"day" | "night", Record<Scene, string>> = {
 const SECTIONS: [string, Scene][] = [
   ["contact", "contact"],
   ["photography", "photo"],
+  ["experience", "about"],
   ["about", "about"],
   ["work", "work"],
 ];

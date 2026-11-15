@@ -4,7 +4,7 @@ import { useRef } from "react";
 import Link from "next/link";
 import Cover from "@/components/ui/Cover";
 import { gsap, useGSAP, DESKTOP } from "@/lib/motion";
-import { featuredProjects, otherProjects } from "@/data/projects";
+import { CATEGORY_LABEL, featuredProjects, otherProjects, projects, type Category } from "@/data/projects";
 
 export default function Work() {
   const root = useRef<HTMLElement>(null);
@@ -114,28 +114,6 @@ export default function Work() {
             </article>
           ))}
 
-          {otherProjects.length > 0 && (
-            <aside className="shrink-0 motion-safe:lg:w-[min(34vw,32rem)]" data-reveal>
-              <p className="label mb-6">Also built</p>
-              <ul className="border-t border-ink/15">
-                {otherProjects.map((p) => (
-                  <li key={p.slug} className="border-b border-ink/15">
-                    <Link href={`/work/${p.slug}`} className="group flex items-baseline justify-between gap-6 py-6">
-                      <span>
-                        <span className="block font-display text-2xl font-medium transition-colors group-hover:text-accent">
-                          {p.title}
-                        </span>
-                        <span className="mt-1 block text-muted">{p.summary}</span>
-                      </span>
-                      <span aria-hidden className="text-xl text-muted transition-transform duration-500 group-hover:translate-x-2 group-hover:text-accent">
-                        →
-                      </span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </aside>
-          )}
         </div>
 
         <div className="pointer-events-none absolute inset-x-0 bottom-10 hidden items-center gap-6 px-10 font-mono text-xs uppercase tracking-[0.14em] text-muted motion-safe:lg:flex">
@@ -148,6 +126,50 @@ export default function Work() {
           <span>Keep scrolling →</span>
         </div>
       </div>
+
+      {otherProjects.length > 0 && (
+        <div className="mx-auto max-w-wide px-5 pb-32 pt-24 sm:px-10 sm:pb-40 sm:pt-32">
+          <div className="mb-14 flex flex-wrap items-end justify-between gap-6">
+            <h3 data-split className="text-[clamp(2rem,4.5vw,3.75rem)] font-medium leading-[1] tracking-[-0.03em]">
+              More things I&apos;ve built.
+            </h3>
+            <p className="label" data-reveal>
+              {projects.length} projects in total
+            </p>
+          </div>
+          <div className="grid gap-14 lg:grid-cols-3 lg:gap-10">
+            {(Object.keys(CATEGORY_LABEL) as Category[]).map((cat) => {
+              const list = otherProjects.filter((p) => p.category === cat);
+              if (!list.length) return null;
+              return (
+                <div key={cat}>
+                  <p className="label mb-5" data-reveal>
+                    {CATEGORY_LABEL[cat]} <span className="text-accent">({list.length})</span>
+                  </p>
+                  <ul className="border-t-2 border-ink" data-reveal-stagger>
+                    {list.map((p) => (
+                      <li key={p.slug} className="border-b border-ink/15">
+                        <Link href={`/work/${p.slug}`} className="group flex items-baseline justify-between gap-4 py-5">
+                          <span>
+                            <span className="block font-display text-xl font-medium transition-colors group-hover:text-accent">
+                              {p.title}
+                            </span>
+                            <span className="mt-1 block text-[15px] leading-snug text-muted">{p.summary}</span>
+                            {p.year && <span className="label mt-2 block">{p.year}</span>}
+                          </span>
+                          <span aria-hidden className="text-lg text-muted transition-transform duration-500 group-hover:translate-x-1.5 group-hover:text-accent">
+                            →
+                          </span>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
     </section>
   );
 }

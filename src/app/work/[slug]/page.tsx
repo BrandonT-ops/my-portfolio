@@ -51,11 +51,26 @@ export default async function CaseStudy({ params }: Params) {
             </p>
           </div>
 
-          <dl className="mt-20 grid gap-8 border-t border-paper/15 pt-8 sm:grid-cols-3" data-reveal-stagger>
+          <dl className="mt-20 grid gap-8 border-t border-paper/15 pt-8 sm:grid-cols-2 lg:grid-cols-4" data-reveal-stagger>
             <div>
               <dt className="label mb-3">Role</dt>
               <dd className="text-lg">{project.role}</dd>
             </div>
+            {project.client && (
+              <div>
+                <dt className="label mb-3">For</dt>
+                <dd className="text-lg">
+                  {project.client}
+                  {project.year && <span className="text-paper/60"> · {project.year}</span>}
+                </dd>
+              </div>
+            )}
+            {!project.client && project.year && (
+              <div>
+                <dt className="label mb-3">Year</dt>
+                <dd className="text-lg">{project.year}</dd>
+              </div>
+            )}
             <div>
               <dt className="label mb-3">Stack</dt>
               <dd className="text-lg">{project.stack.join(", ")}</dd>
@@ -70,11 +85,6 @@ export default async function CaseStudy({ params }: Params) {
                     </a>
                   ))}
                 </dd>
-              </div>
-            ) : project.year ? (
-              <div>
-                <dt className="label mb-3">Year</dt>
-                <dd className="text-lg">{project.year}</dd>
               </div>
             ) : null}
           </dl>

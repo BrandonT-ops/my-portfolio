@@ -1,22 +1,34 @@
 /**
  * Projects. Each one gets a case-study page at /work/<slug>.
  *
- * Content below is a starting draft written from the project briefs —
- * review every line and add real outcomes. `outcome` is optional and the
- * section is hidden until you fill it in, so nothing invented ever shows.
+ * Sources: Brandon's CVs (2025/2026), his GitHub repositories and past work
+ * sessions. Figures in `outcome` come from the CVs; `outcome` is optional and
+ * the section is hidden when it is empty, so nothing invented ever shows.
  *
  * Images: drop files in /public/work/ and set `cover: "/work/<file>.jpg"`.
  * Without a cover, a typographic placeholder is shown.
  */
+export type Category = "web" | "mobile" | "embedded";
+
+export const CATEGORY_LABEL: Record<Category, string> = {
+  web: "Web platforms",
+  mobile: "Mobile & IoT apps",
+  embedded: "Embedded, desktop & academic",
+};
+
 export interface Project {
   slug: string;
   title: string;
   /** One sentence, shown in lists. */
   summary: string;
   role: string;
-  stack: string[];
+  /** Who it was for: an employer, a school, or "Freelance" / "Personal project". */
+  client?: string;
+  /** e.g. "2024 – 2025" or "2025". */
   year?: string;
-  /** Featured projects appear as cards on the home page; others in the index list. */
+  stack: string[];
+  category: Category;
+  /** Featured projects appear as large cards on the home page; others in the grouped list. */
   featured?: boolean;
   cover?: string;
   links?: { label: string; href: string }[];
@@ -27,13 +39,59 @@ export interface Project {
 }
 
 export const projects: Project[] = [
+  /* ---------- Featured ---------- */
+  {
+    slug: "maguida",
+    title: "Maguida.cm",
+    summary: "An AI-integrated product search engine that gives shoppers personalised buying advice.",
+    role: "Frontend developer",
+    client: "Richenel's AI Agency",
+    year: "2024 – 2025",
+    stack: ["Next.js", "AI integration", "REST APIs"],
+    category: "web",
+    featured: true,
+    links: [{ label: "maguida.cm", href: "https://maguida.cm" }],
+    context:
+      "Shoppers in Cameroon had no easy way to search across local products and get advice on what to buy.",
+    approach: [
+      "Built the frontend in Next.js with a responsive interface for searching and browsing 400+ products.",
+      "Integrated AI features that give personalised purchasing advice.",
+      "Worked with the backend team to sync AI-driven recommendations with real-time search results.",
+      "Built a library of reusable components to keep the codebase lean and ready for future updates.",
+    ],
+    outcome:
+      "Serves 200+ monthly users. Customer satisfaction rose by about 10%, data processing time dropped by 20%, and reusable components cut frontend development time by 25%.",
+  },
+  {
+    slug: "restore-forest-cameroon",
+    title: "Restore Forest Cameroon",
+    summary: "A reforestation platform for managing forest resources and tracking progress across Cameroon.",
+    role: "Frontend developer",
+    client: "Freelance",
+    stack: ["Angular", "Spring Boot", "PostgreSQL", "Data visualisation"],
+    category: "web",
+    featured: true,
+    links: [{ label: "restoreforestcameroon.cm", href: "https://restoreforestcameroon.cm" }],
+    context:
+      "Reforestation teams needed one place to record forest resources and see how replanting was going region by region.",
+    approach: [
+      "Built the Angular frontend on top of a Spring Boot and PostgreSQL backend.",
+      "Created interactive forms for entering and managing forest resource records.",
+      "Added data visualisations showing reforestation progress and tree-species distribution across 10 regions.",
+      "Optimised API communication between frontend and backend, using reusable Angular components.",
+    ],
+    outcome:
+      "Manages 100,000+ forest resource entries. Data entry became 30% faster, data fetch times fell by 40%, and reusable components cut development time by 25%.",
+  },
   {
     slug: "memento",
     title: "Memento",
     summary: "A shared photo wall where members post, browse and moderate pictures.",
     role: "Full-stack developer & designer",
-    stack: ["Vite", "Supabase", "PostgreSQL", "Vercel"],
+    client: "Personal project",
     year: "2026",
+    stack: ["Vite", "Supabase", "PostgreSQL", "Vercel"],
+    category: "web",
     featured: true,
     links: [{ label: "memento-gold-mu.vercel.app", href: "https://memento-gold-mu.vercel.app" }],
     context:
@@ -50,8 +108,10 @@ export const projects: Project[] = [
     title: "Tomo",
     summary: "A ride-hailing platform built for Cameroon, with mobile-money payments.",
     role: "Full-stack developer & architect",
-    stack: ["Django", "PostGIS", "Angular", "Ionic / Capacitor", "Redis"],
+    client: "Personal project",
     year: "2025",
+    stack: ["Django", "PostGIS", "Angular", "Ionic / Capacitor", "Redis"],
+    category: "web",
     featured: true,
     context:
       "Getting a safe, fairly priced ride in Cameroon often means negotiating on the street. Riders and drivers needed a local app that works with how people actually pay.",
@@ -64,13 +124,56 @@ export const projects: Project[] = [
     ],
   },
   {
+    slug: "sygenes",
+    title: "SYGENES",
+    summary: "ESIGN's digital grade management system for higher education.",
+    role: "Frontend lead",
+    client: "International Advanced School of Digital Engineering (ESIGN)",
+    year: "2024 – 2025",
+    stack: ["Symfony", "JavaScript", "Tailwind CSS", "HTML / CSS"],
+    category: "web",
+    featured: true,
+    links: [{ label: "sygenes.esign.cm", href: "https://www.sygenes.esign.cm" }],
+    context:
+      "The school managed grades through scattered spreadsheets; staff and students needed one clear, reliable system.",
+    approach: [
+      "Led frontend development of a user-centred grade management system.",
+      "Built responsive interfaces with HTML, CSS, JavaScript and Tailwind CSS.",
+      "Used a component-based architecture that talks to the Symfony backend through service calls.",
+      "Added theme customisation, dynamic notifications and two-step delete confirmation.",
+      "Wrote system documentation and kept improving the product from user feedback.",
+    ],
+  },
+  {
+    slug: "hemowatch",
+    title: "Hemowatch",
+    summary: "A phone and Wear OS watch app that monitors people living with sickle cell disease.",
+    role: "Mobile developer",
+    client: "Freelance",
+    year: "2025",
+    stack: ["Flutter", "Wear OS", "Health sensors"],
+    category: "mobile",
+    featured: true,
+    context:
+      "Early warning signs of a sickle cell crisis are easy to miss day to day, but a watch is always on the wrist.",
+    approach: [
+      "Built a mobile app that collects health data in real time from Wear OS devices.",
+      "Read heart rate, oxygen saturation, respiratory rate and body temperature from the watch's sensors.",
+      "Designed a Flutter interface showing live health metrics.",
+      "Added automatic alerts when readings cross set thresholds.",
+    ],
+  },
+
+  /* ---------- Web platforms ---------- */
+  {
     slug: "global-english-institute",
     title: "Global English Institute",
     summary: "A language-school website with an online placement test and sign-ups.",
     role: "Full-stack developer",
-    stack: ["Angular 18", "Supabase", "Tailwind CSS", "Resend"],
+    client: "Personal project",
     year: "2026",
-    featured: true,
+    stack: ["Angular 18", "Supabase", "Tailwind CSS", "Resend"],
+    category: "web",
     links: [{ label: "GitHub", href: "https://github.com/BrandonT-ops/Easy_learning_platform" }],
     context:
       "The institute handled placement tests and registrations by hand, so prospective students waited and staff re-typed the same details.",
@@ -82,13 +185,85 @@ export const projects: Project[] = [
     ],
   },
   {
+    slug: "laboussole",
+    title: "Laboussole E-Learning",
+    summary: "A responsive e-learning platform with multimedia courses and progress tracking.",
+    role: "Software developer",
+    client: "Richenel's AI Agency",
+    year: "2024 – 2025",
+    stack: ["Web", "Authentication", "Responsive UI"],
+    category: "web",
+    links: [{ label: "learn.laboussole-edu.com", href: "https://learn.laboussole-edu.com" }],
+    context: "Learners needed courses they could follow on any device, with their progress saved.",
+    approach: [
+      "Designed and built core features: multimedia courses, user authentication and progress tracking.",
+      "Worked with a multidisciplinary team on feature planning, testing and iterative improvements.",
+      "Optimised the UI for cross-platform use, engagement and accessibility.",
+    ],
+  },
+  {
+    slug: "comparer",
+    title: "Sondy Comparator",
+    summary: "A product and service comparison platform with search and filtering.",
+    role: "Frontend developer",
+    client: "Freelance",
+    year: "2025",
+    stack: ["Angular 19", "Tailwind CSS", "Django"],
+    category: "web",
+    links: [{ label: "sondy-comparator.vercel.app", href: "https://sondy-comparator.vercel.app" }],
+    context:
+      "People needed one place to compare products and services side by side instead of juggling tabs and spreadsheets.",
+    approach: [
+      "Built the responsive, mobile-first frontend with Angular 19 and Tailwind CSS.",
+      "Designed interactive components for searching, filtering and comparing.",
+      "Integrated with a Django backend to display live product data.",
+    ],
+  },
+  {
+    slug: "autofish",
+    title: "Autofish",
+    summary: "The backend and API for the AutoFish platform, deployed on a VPS.",
+    role: "Backend developer",
+    client: "Autofish",
+    year: "2025",
+    stack: ["Django", "PostgreSQL", "REST APIs", "Hostinger VPS"],
+    category: "web",
+    links: [{ label: "API docs", href: "https://autofish-backend.onrender.com/docs/" }],
+    context: "The AutoFish platform needed a reliable backend and API for its apps to build on.",
+    approach: [
+      "Built the backend in Django, with the core business logic and API endpoints.",
+      "Designed and managed the PostgreSQL schema for data integrity and fast queries.",
+      "Implemented secure user authentication and data handling.",
+      "Deployed to a Hostinger VPS with production settings, and maintained the deployment pipeline.",
+    ],
+  },
+  {
+    slug: "esign-registration",
+    title: "ESIGN Registration Platform",
+    summary: "The online registration platform for ESIGN's competitive entrance exam.",
+    role: "Frontend developer & designer",
+    client: "International Advanced School of Digital Engineering (ESIGN)",
+    stack: ["Figma", "Symfony", "Responsive UI"],
+    category: "web",
+    links: [{ label: "esign.cm", href: "https://esign.cm" }],
+    context: "Entrance-exam registration was a paper process with queues and manual data entry.",
+    approach: [
+      "Designed the interface in Figma and built a responsive frontend for mobile, tablet and desktop.",
+      "Implemented automatic receipt generation for each completed registration.",
+      "Worked with the backend team on data flow and optimised API integration.",
+    ],
+    outcome:
+      "Supported 400+ exam candidates with 99.9% uptime during peak registration, and cut registration time by 15%.",
+  },
+  {
     slug: "medical-school-file-manager",
     title: "Medical School File Manager",
     summary: "A file system for a medical school, with nested folders and role-based access.",
     role: "Full-stack developer",
-    stack: ["Laravel", "PHP", "MySQL", "Google Drive API"],
+    client: "Personal project",
     year: "2025",
-    featured: true,
+    stack: ["Laravel", "PHP", "MySQL", "Google Drive API"],
+    category: "web",
     links: [{ label: "GitHub", href: "https://github.com/BrandonT-ops/Medical-School-File-Manager" }],
     context:
       "Course material was scattered across chats and personal drives, with no way to organise it by academic year or control who could change what.",
@@ -96,73 +271,8 @@ export const projects: Project[] = [
       "Organised files in unlimited nested folders, grouped by academic level (years 1–7).",
       "Defined roles for admins, level moderators, folder owners and standard users.",
       "Made storage swappable between the local server and Google Drive through configuration.",
-      "Added archiving and restore, school branding settings and a statistics dashboard, all in a neo-brutalist interface.",
+      "Added archiving and restore, school branding settings and a statistics dashboard.",
     ],
-  },
-  {
-    slug: "comparer",
-    title: "Comparer",
-    summary: "A comparison web app with an Angular frontend and a containerised Django API.",
-    role: "Full-stack developer",
-    stack: ["Angular", "Django", "PostgreSQL", "Docker"],
-    featured: true,
-    context:
-      "Users needed a single place to compare options side by side instead of juggling tabs and spreadsheets.",
-    approach: [
-      "Designed the comparison flow and component library in Angular.",
-      "Built a Django REST API backed by PostgreSQL.",
-      "Containerised the stack with Docker for consistent local and production environments.",
-    ],
-  },
-  {
-    slug: "maguida",
-    title: "Maguida.cm",
-    summary: "A Next.js search engine with AI-assisted suggestions.",
-    role: "Full-stack developer",
-    stack: ["Next.js", "LLM integration", "PostgreSQL"],
-    featured: true,
-    links: [{ label: "maguida.cm", href: "https://maguida.cm" }],
-    context:
-      "Local search results were hard to discover; people needed help phrasing what they were looking for.",
-    approach: [
-      "Built the search experience in Next.js with server-rendered results for speed and SEO.",
-      "Integrated a language model to suggest and refine queries as people type.",
-    ],
-  },
-  {
-    slug: "sygenes",
-    title: "SYGENES",
-    summary: "UI/UX and frontend for a school management system.",
-    role: "UI/UX designer & frontend developer",
-    stack: ["Figma", "Frontend", "Design system"],
-    context:
-      "School administration ran on fragmented tools; staff needed one clear interface for daily work.",
-    approach: [
-      "Mapped the main administrative workflows with staff and turned them into Figma flows.",
-      "Built a reusable UI component system and implemented the frontend from it.",
-    ],
-  },
-  {
-    slug: "wear-os-sickle-cell",
-    title: "Sickle Cell Monitor",
-    summary: "A Wear OS app for monitoring people living with sickle cell disease.",
-    role: "Mobile developer",
-    stack: ["Wear OS", "Kotlin", "Firebase"],
-    context:
-      "Early warning signs of a crisis are easy to miss day to day; a watch is always on the wrist.",
-    approach: [
-      "Designed a glanceable interface for the small round screen.",
-      "Collected readings on the watch and synced them to Firebase.",
-    ],
-  },
-  {
-    slug: "esign-registration",
-    title: "ESIGN Exam Registration",
-    summary: "An online platform for exam registration.",
-    role: "Full-stack developer",
-    stack: ["Web", "Database"],
-    context: "Exam registration was a paper process with long queues and manual data entry.",
-    approach: ["Built an online registration flow with validation and an admin view of submissions."],
   },
   {
     slug: "eduflex",
@@ -170,8 +280,113 @@ export const projects: Project[] = [
     summary: "A grade management platform for schools.",
     role: "Full-stack developer",
     stack: ["Web", "PostgreSQL"],
+    category: "web",
     context: "Teachers were computing and reporting grades by hand.",
     approach: ["Built grade entry, automatic calculation and report generation."],
+  },
+
+  /* ---------- Mobile & IoT ---------- */
+  {
+    slug: "fauna-pulse",
+    title: "Fauna Pulse",
+    summary: "A Flutter app that helps farmers monitor soil health and crop conditions.",
+    role: "Mobile developer",
+    client: "Freelance",
+    year: "2025",
+    stack: ["Flutter", "Supabase", "LLaMA API", "Sensors"],
+    category: "mobile",
+    context: "Farmers needed to see soil and crop conditions without walking every field.",
+    approach: [
+      "Built a Flutter app that displays sensor readings on soil activity and the growing environment.",
+      "Stored and retrieved sensor data through a Supabase backend.",
+      "Connected to the LLaMA API for AI-powered insights and in-app help.",
+      "Designed dashboards that show real-time soil health at a glance.",
+    ],
+  },
+  {
+    slug: "smart-haven",
+    title: "Smart Haven",
+    summary: "A Flutter app that monitors poultry health and coop conditions in real time.",
+    role: "Mobile developer",
+    client: "Freelance",
+    year: "2024 – 2025",
+    stack: ["Flutter", "Supabase", "LLaMA API", "Sensors"],
+    category: "mobile",
+    context: "Poultry farmers lose birds when temperature, humidity or health problems go unnoticed.",
+    approach: [
+      "Built a Flutter app for real-time monitoring of poultry health and environmental conditions.",
+      "Used Supabase for data storage, live updates and history of sensor readings.",
+      "Added a LLaMA-powered assistant for analysis and questions.",
+      "Showed health metrics, environmental factors and automatic alerts in one interface.",
+    ],
+  },
+
+  /* ---------- Embedded & engineering school ---------- */
+  {
+    slug: "smart-fire-detection",
+    title: "Smart Fire Detection System",
+    summary: "Embedded software for real-time fire detection over a wireless sensor network.",
+    role: "Embedded software developer",
+    client: "KBH Engineering Challenge 2024",
+    year: "2024",
+    stack: ["Embedded software", "Wireless sensor networks", "Wi-Fi / Bluetooth"],
+    category: "embedded",
+    context: "Fires spread fast when nobody is close enough to notice smoke or rising heat.",
+    approach: [
+      "Programmed sensor modules for smoke, temperature and gas, with threshold-based alerts.",
+      "Designed the communication protocol between sensors and the central monitoring unit.",
+      "Integrated Wi-Fi and Bluetooth modules for remote monitoring and timely alerts.",
+      "Tested and debugged for accurate detection and stable connectivity.",
+    ],
+  },
+  {
+    slug: "autogex",
+    title: "Autogex",
+    summary: "A Java regular-expression tool, built by a 15-person team using Scrum.",
+    role: "Scrum lead & developer",
+    client: "International Advanced School of Digital Engineering (ESIGN)",
+    year: "2023",
+    stack: ["Java", "Scrum"],
+    category: "embedded",
+    context: "A school software project run like a real product team, with sprints and user stories.",
+    approach: [
+      "Managed a team of 15 people through the build using Scrum.",
+      "Wrote the specifications and user stories; planned and ran 3 sprints.",
+      "Implemented the module that cleans regular expressions by removing redundancies and mistakes.",
+    ],
+  },
+  {
+    slug: "pras",
+    title: "PRAS: Protect, Automate & Save Energy",
+    summary: "A smart-home hub that controls household devices from sensor data and a machine-learning model.",
+    role: "Software developer",
+    client: "International Advanced School of Digital Engineering (ESIGN)",
+    year: "2021 – 2023",
+    stack: ["Python", "WebSockets", "Machine learning", "Sensors"],
+    category: "embedded",
+    links: [{ label: "GitHub", href: "https://github.com/BrandonT-ops/pras_formatted_code" }],
+    context: "Households waste energy and miss safety issues when nobody is watching their devices.",
+    approach: [
+      "Built the central control software in Python to manage household equipment and sensor data.",
+      "Connected the hub to a web server over HTTP and WebSockets for real-time data.",
+      "Integrated four environmental sensors for monitoring and automatic control.",
+      "Deployed a machine-learning model on the hub to improve automation decisions.",
+    ],
+  },
+  {
+    slug: "smart-point",
+    title: "Smart Point",
+    summary: "An embedded system with five peripheral devices, built by a team of five.",
+    role: "Embedded developer",
+    client: "International Advanced School of Digital Engineering (ESIGN)",
+    year: "2020 – 2021",
+    stack: ["Embedded systems", "Hardware"],
+    category: "embedded",
+    context: "A first-year engineering project covering both the software and the physical build.",
+    approach: [
+      "Designed, implemented and tested the software for the system's 5 peripheral devices.",
+      "Helped fabricate the hardware and wire its electrical connections.",
+    ],
   },
   {
     slug: "digital-signature",
@@ -179,6 +394,7 @@ export const projects: Project[] = [
     summary: "A redesign of a desktop digital-signature tool built with Tkinter.",
     role: "UI redesign",
     stack: ["Python", "Tkinter"],
+    category: "embedded",
     context: "The existing desktop tool worked but was hard to use.",
     approach: ["Redesigned the interface and interaction flow within Tkinter's constraints."],
   },
