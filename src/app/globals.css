@@ -14,8 +14,11 @@
   --muted: 92 96 108;    /* secondary text (AA on white) */
   --accent: 11 104 176;  /* blue: links, buttons, focus */
   --signal: 255 107 74;  /* orange: the wordmark's full stop and small highlights */
-  --ox: 128 0 32;        /* oxblood: error messages */
-  --leaf: 9 129 74;      /* green: success messages, "online" dot */
+  /* The four colours of the numbered steps on project pages */
+  --ox: 128 0 32;        /* oxblood (also error messages) */
+  --sky: 11 132 184;     /* blue */
+  --leaf: 9 129 74;      /* green (also success messages) */
+  --gold: 197 143 16;    /* gold */
 }
 
 @layer base {
@@ -44,8 +47,8 @@
   .link { @apply text-accent underline-offset-4 hover:underline; }
 
   /* Rounded surfaces */
-  .card { @apply rounded-2xl bg-panel p-6 sm:p-8; }
-  .card-outline { @apply rounded-2xl border border-line/10 bg-sheet p-6 sm:p-8; }
+  .card { @apply rounded-3xl bg-panel p-6 sm:p-8; }
+  .card-outline { @apply rounded-3xl border border-line/10 bg-sheet p-6 sm:p-8; }
 
   /* Pills and buttons */
   .chip { @apply inline-flex items-center gap-1.5 rounded-full border border-line/15 bg-sheet px-3.5 py-1.5 text-sm text-line transition-colors hover:bg-panel; }

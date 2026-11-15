@@ -185,10 +185,10 @@ export default async function ProjectPage({ params }: Props) {
                   data-reveal
                   style={{ "--d": `${(i % 2) * 80}ms` } as React.CSSProperties}
                 >
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-line/20 text-sm font-semibold text-line">
+                  <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full font-display text-lg font-semibold text-white ${["bg-ox", "bg-sky", "bg-leaf", "bg-gold"][i % 4]}`}>
                     {i + 1}
                   </span>
-                  <p className="pt-1 text-lg leading-relaxed">{step}</p>
+                  <p className="pt-1.5 text-lg leading-relaxed">{step}</p>
                 </li>
               ))}
             </ol>
