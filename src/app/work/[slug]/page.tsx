@@ -90,6 +90,12 @@ export default async function CaseStudy({ params }: Params) {
                 </dd>
               </div>
             ) : null}
+            {project.status && (
+              <div>
+                <dt className="label mb-3">Status</dt>
+                <dd className="text-lg text-paper/70">{project.status}</dd>
+              </div>
+            )}
           </dl>
         </div>
       </header>

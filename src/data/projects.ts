@@ -32,6 +32,8 @@ export interface Project {
   featured?: boolean;
   cover?: string;
   links?: { label: string; href: string }[];
+  /** A short note when the project is no longer online, shown on the case study. */
+  status?: string;
   /** Case-study body. */
   context: string;
   approach: string[];
@@ -52,6 +54,7 @@ export const projects: Project[] = [
     stack: ["Next.js", "AI integration", "REST APIs"],
     category: "web",
     featured: true,
+    status: "No longer online: the agency ended its hosting.",
     context:
       "Shoppers in Cameroon had no easy way to search across local products and get advice on what to buy.",
     approach: [
@@ -69,7 +72,7 @@ export const projects: Project[] = [
         problem:
           "Every page was assembled from data the backend sent on request. A search engine visiting the site found very little to index, so individual pages could not be found on Google.",
         solution:
-          "We rendered pages on the server with Next.js, so the content is already in the page when a crawler arrives. There were too many pages to do this for all of them, so we server-rendered a selection and left the rest to load in the browser.",
+          "We rendered pages on the server with Next.js, so the content is already in the page when a crawler arrives. There were too many pages to do this for all of them, so we server-rendered the home page, the most popular products and the categories, and left the rest to load in the browser.",
       },
       {
         title: "Keeping the interface in step with a slow backend",
