@@ -100,7 +100,7 @@ export default function SearchBox({
       className="relative w-full"
     >
       <div
-        className={`flex items-center gap-3 border border-line/15 bg-sheet transition-shadow focus-within:border-transparent focus-within:shadow-lift hover:shadow-soft ${
+        className={`flex items-center gap-3 border border-line/15 bg-sheet transition-shadow duration-300 ease-out focus-within:border-transparent focus-within:shadow-lift hover:shadow-soft ${
           show ? "rounded-t-3xl border-b-transparent shadow-lift" : "rounded-full"
         } ${large ? "h-14 px-6" : "h-12 px-5"}`}
       >

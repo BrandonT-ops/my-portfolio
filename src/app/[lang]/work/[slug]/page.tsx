@@ -258,7 +258,7 @@ export default async function ProjectPage({ params }: Props) {
           <nav aria-label={s.next} className="mt-20 sm:mt-28">
             <Link
               href={`/${lang}/work/${next.slug}`}
-              className="group flex flex-wrap items-end justify-between gap-6 rounded-2xl bg-panel p-8 transition hover:shadow-lift sm:p-12"
+              className="group flex flex-wrap items-end justify-between gap-6 rounded-3xl bg-panel p-8 transition-[background-color,box-shadow] duration-300 ease-out hover:bg-sheet hover:shadow-lift sm:p-12"
               data-reveal
             >
               <span>
