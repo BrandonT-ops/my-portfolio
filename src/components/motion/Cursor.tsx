@@ -81,7 +81,7 @@ export default function Cursor() {
     <div
       ref={ring}
       aria-hidden
-      className="pointer-events-none fixed left-0 top-0 z-[90] hidden h-7 w-7 items-center justify-center rounded-full border border-white mix-blend-difference lg:flex"
+      className="pointer-events-none invisible fixed left-0 top-0 z-[90] hidden h-7 w-7 items-center justify-center rounded-full border border-white mix-blend-difference lg:flex"
     >
       <span
         ref={label}

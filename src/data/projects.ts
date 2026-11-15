@@ -36,6 +36,8 @@ export interface Project {
   context: string;
   approach: string[];
   outcome?: string;
+  /** The hard parts, in Brandon's own account: what made it difficult and what the team did. */
+  challenges?: { title: string; problem: string; solution: string }[];
 }
 
 export const projects: Project[] = [
@@ -55,11 +57,28 @@ export const projects: Project[] = [
     approach: [
       "Built the frontend in Next.js with a responsive interface for searching and browsing 400+ products.",
       "Integrated AI features that give personalised purchasing advice.",
-      "Worked with the backend team to sync AI-driven recommendations with real-time search results.",
+      "Server-rendered key pages with Next.js so search engines could index them.",
+      "Worked with the backend team to cache responses and keep search and AI recommendations fast.",
       "Built a library of reusable components to keep the codebase lean and ready for future updates.",
     ],
     outcome:
       "Serves 200+ monthly users. Customer satisfaction rose by about 10%, data processing time dropped by 20%, and reusable components cut frontend development time by 25%.",
+    challenges: [
+      {
+        title: "Getting backend-driven pages onto Google",
+        problem:
+          "Every page was assembled from data the backend sent on request. A search engine visiting the site found very little to index, so individual pages could not be found on Google.",
+        solution:
+          "We rendered pages on the server with Next.js, so the content is already in the page when a crawler arrives. There were too many pages to do this for all of them, so we server-rendered a selection and left the rest to load in the browser.",
+      },
+      {
+        title: "Keeping the interface in step with a slow backend",
+        problem:
+          "Search results and AI advice arrived late, so the interface often waited on the backend and the two fell out of step.",
+        solution:
+          "We worked on it from both sides: the frontend kept some responses for reuse instead of asking again, and we added caching with the backend team.",
+      },
+    ],
   },
   {
     slug: "restore-forest-cameroon",

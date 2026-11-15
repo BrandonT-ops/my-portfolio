@@ -186,6 +186,29 @@ export default async function CaseStudy({ params }: Params) {
             )}
           </section>
         </div>
+
+        {project.challenges?.length ? (
+          <section className="mt-28 sm:mt-40">
+            <h2 className="label mb-10" data-reveal>
+              <span className="text-accent">{project.outcome ? "04" : "03"}</span> — The hard parts
+            </h2>
+            <ol className="border-t-2 border-ink">
+              {project.challenges.map((c, i) => (
+                <li key={c.title} className="grid gap-6 border-b border-ink/15 py-10 md:grid-cols-12 md:gap-x-8 md:py-14" data-reveal>
+                  <span className="font-mono text-sm text-accent md:col-span-1">{String(i + 1).padStart(2, "0")}</span>
+                  <h3 className="text-2xl font-medium leading-tight tracking-tight sm:text-3xl md:col-span-4">{c.title}</h3>
+                  <div className="space-y-5 text-lg leading-relaxed md:col-span-7">
+                    <p className="text-muted">{c.problem}</p>
+                    <p>
+                      <span className="label mr-3 text-accent">What we did</span>
+                      {c.solution}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </section>
+        ) : null}
       </div>
 
       <nav aria-label="Next project" className="scene-dark">
