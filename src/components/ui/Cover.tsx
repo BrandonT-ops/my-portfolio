@@ -26,7 +26,7 @@ export default function Cover({
         fill
         sizes={sizes}
         priority={priority}
-        className="object-cover"
+        className="object-cover object-top"
       />
     );
   }

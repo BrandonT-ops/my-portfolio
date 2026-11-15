@@ -50,7 +50,6 @@ export const projects: Project[] = [
     stack: ["Next.js", "AI integration", "REST APIs"],
     category: "web",
     featured: true,
-    links: [{ label: "maguida.cm", href: "https://maguida.cm" }],
     context:
       "Shoppers in Cameroon had no easy way to search across local products and get advice on what to buy.",
     approach: [
@@ -72,7 +71,6 @@ export const projects: Project[] = [
     stack: ["Angular", "Spring Boot", "PostgreSQL", "Data visualisation"],
     category: "web",
     featured: true,
-    links: [{ label: "restoreforestcameroon.cm", href: "https://restoreforestcameroon.cm" }],
     context:
       "Reforestation teams needed one place to record forest resources and see how replanting was going region by region.",
     approach: [
@@ -94,7 +92,6 @@ export const projects: Project[] = [
     stack: ["Vite", "Supabase", "PostgreSQL", "Vercel"],
     category: "web",
     featured: true,
-    links: [{ label: "memento-gold-mu.vercel.app", href: "https://memento-gold-mu.vercel.app" }],
     context:
       "A community needed one place to collect and share its pictures, with sign-in so members own their posts and a way to keep the public wall clean.",
     approach: [
@@ -132,6 +129,7 @@ export const projects: Project[] = [
     client: "International Advanced School of Digital Engineering (ESIGN)",
     year: "2024 – 2025",
     stack: ["Symfony", "JavaScript", "Tailwind CSS", "HTML / CSS"],
+    cover: "/work/sygenes.jpg",
     category: "web",
     featured: true,
     links: [{ label: "sygenes.esign.cm", href: "https://www.sygenes.esign.cm" }],
@@ -193,6 +191,7 @@ export const projects: Project[] = [
     client: "Richenel's AI Agency",
     year: "2024 – 2025",
     stack: ["Web", "Authentication", "Responsive UI"],
+    cover: "/work/laboussole.jpg",
     category: "web",
     links: [{ label: "learn.laboussole-edu.com", href: "https://learn.laboussole-edu.com" }],
     context: "Learners needed courses they could follow on any device, with their progress saved.",
@@ -210,7 +209,9 @@ export const projects: Project[] = [
     client: "Freelance",
     year: "2025",
     stack: ["Angular 19", "Tailwind CSS", "Django"],
+    cover: "/work/comparer.jpg",
     category: "web",
+    featured: true,
     links: [{ label: "sondy-comparator.vercel.app", href: "https://sondy-comparator.vercel.app" }],
     context:
       "People needed one place to compare products and services side by side instead of juggling tabs and spreadsheets.",
@@ -229,7 +230,6 @@ export const projects: Project[] = [
     year: "2025",
     stack: ["Django", "PostgreSQL", "REST APIs", "Hostinger VPS"],
     category: "web",
-    links: [{ label: "API docs", href: "https://autofish-backend.onrender.com/docs/" }],
     context: "The AutoFish platform needed a reliable backend and API for its apps to build on.",
     approach: [
       "Built the backend in Django, with the core business logic and API endpoints.",
@@ -246,6 +246,7 @@ export const projects: Project[] = [
     client: "International Advanced School of Digital Engineering (ESIGN)",
     year: "2023 – 2025",
     stack: ["Figma", "Symfony", "Responsive UI"],
+    cover: "/work/esign-registration.jpg",
     category: "web",
     links: [{ label: "esign.cm", href: "https://esign.cm" }],
     context: "Entrance-exam registration was a paper process with queues and manual data entry.",
