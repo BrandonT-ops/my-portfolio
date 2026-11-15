@@ -40,6 +40,8 @@ export interface Project {
   outcome?: string;
   /** The hard parts, in Brandon's own account: what made it difficult and what the team did. */
   challenges?: { title: string; problem: string; solution: string }[];
+  /** What Brandon would do differently today, in the first person. */
+  lessons?: string[];
 }
 
 export const projects: Project[] = [
@@ -81,6 +83,11 @@ export const projects: Project[] = [
         solution:
           "We worked on it from both sides: the frontend kept some responses for reuse instead of asking again, and we added caching with the backend team.",
       },
+    ],
+    lessons: [
+      "Render every product page for search engines, not only the popular ones. Next.js can build a page the first time it is visited and keep a saved copy, which removes the “too many pages” limit we hit.",
+      "Show the AI advice as it is being written, word by word, so shoppers are never left waiting on a blank screen.",
+      "I would probably also agree the data format with the backend team before building, so both sides stay in step from day one.",
     ],
   },
   {

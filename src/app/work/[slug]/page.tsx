@@ -215,6 +215,29 @@ export default async function CaseStudy({ params }: Params) {
             </ol>
           </section>
         ) : null}
+
+        {project.lessons?.length ? (
+          <section className="mt-28 grid gap-10 sm:mt-40 md:grid-cols-12 md:gap-x-8">
+            <div className="md:col-span-5">
+              <h2 className="label mb-6" data-reveal>
+                <span className="text-accent">↺</span> — Looking back
+              </h2>
+              <p data-split className="font-display text-3xl font-medium leading-[1.1] tracking-[-0.02em] sm:text-5xl">
+                What I&apos;d do differently today.
+              </p>
+            </div>
+            <ul className="border-t border-ink/15 text-lg leading-relaxed md:col-span-7" data-reveal-stagger>
+              {project.lessons.map((l) => (
+                <li key={l} className="grid grid-cols-[2rem_1fr] border-b border-ink/15 py-6">
+                  <span aria-hidden className="text-accent">
+                    →
+                  </span>
+                  <span>{l}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ) : null}
       </div>
 
       <nav aria-label="Next project" className="scene-dark">
