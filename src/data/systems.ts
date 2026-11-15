@@ -29,5 +29,6 @@ export const systems: Record<string, string[][]> = {
   "digital-signature": [["User"], ["Tkinter UI"], ["Signature tool"]],
 };
 
-export const getSystem = (slug: string, stack: string[]): string[][] =>
-  systems[slug] ?? stack.slice(0, 4).map((s) => [s]);
+/** A project's blueprint, with box labels translated when a translation table is given. */
+export const getSystem = (slug: string, stack: string[], labels: Record<string, string> = {}): string[][] =>
+  (systems[slug] ?? stack.slice(0, 4).map((s) => [s])).map((layer) => layer.map((l) => labels[l] ?? l));

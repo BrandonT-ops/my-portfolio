@@ -1,191 +1,112 @@
 # Brandon Tapiba — Portfolio
 
-Personal portfolio built with **Next.js 16**, **Tailwind CSS** and **TypeScript**.
-Editorial layout with a light neo-brutalist touch: warm paper background, Onyx ink,
-Ruby Red as the single accent, and hard offset shadows on interactive elements.
+A portfolio drawn as an engineer's **drafting sheet**: blueprint-blue paper, white linework,
+one orange accent. Built with **Next.js 16**, **Tailwind CSS** and **TypeScript**, in
+**English and French**.
 
 ## Quick start
 
 ```bash
 npm install
-npm run dev      # http://localhost:3000
+npm run dev      # http://localhost:3000  (redirects to /en or /fr)
 npm run build    # production build
-npm start        # serve the production build
+npm run lint
 ```
+
+## Pages
+
+Every page exists in both languages (`/en/...` and `/fr/...`). `/` redirects to French for
+browsers that prefer French, otherwise to English.
+
+| Sheet | Address | What it is |
+| --- | --- | --- |
+| 01 | `/en` | Home: name, portrait, six flagship projects, key numbers |
+| 02 | `/en/work` | Drawing register: all projects, filterable by type |
+| — | `/en/work/<slug>` | One sheet per project: system blueprint, problem, approach, outcome, hard parts |
+| 03 | `/en/about` | Profile: bio, experience, education, certifications, stack |
+| 04 | `/en/photography` | Photo contact sheet |
 
 ## Where to edit things
 
-Almost everything lives in two data files. You rarely need to touch components.
-
 | What | File |
 | --- | --- |
-| Name, email, tagline, social links, **photography link**, résumé link | `src/data/site.ts` |
-| **Your photo** (About section) and the companion character on/off | `src/data/site.ts` (`portrait`, `showBuddy`) |
-| About text, quick facts, skills, services | `src/data/site.ts` (`about`) |
-| Work experience, education, certifications | `src/data/site.ts` (`about.experience`, `education`, `certifications`) |
-| Projects and case studies | `src/data/projects.ts` |
+| Email, links, portrait, résumé link, photos | `src/data/site.ts` |
+| Project facts (name, client, year, stack, links, screenshot) | `src/data/projects.ts` |
+| Project words, English | `src/content/projects.en.ts` |
+| Project words, French | `src/content/projects.fr.ts` |
+| Everything else you can read on the site (labels, bio, experience) | `src/content/en.ts` and `src/content/fr.ts` |
+| System blueprints | `src/data/systems.ts` |
 | Colours | `src/app/globals.css` (`:root` variables) |
-| Fonts | `src/app/layout.tsx` + `tailwind.config.ts` |
 
-### Photography link
-
-Set `photographyUrl` in `src/data/site.ts` to the page where you post your photos
-(Instagram, Behance, Flickr…). The photography section and the contact links pick it up
-automatically. While it's empty, the section shows "Gallery link coming soon".
-
-### Your photo
-
-Put a portrait photo in `public/` (e.g. `public/brandon.jpg`, ideally a 4:5 crop) and set
-`portrait: "/brandon.jpg"` in `src/data/site.ts`. Until then the About section shows a
-placeholder frame with your initials.
-
-### Résumé
-
-Put your PDF in `public/` (e.g. `public/brandon-tapiba-cv.pdf`) and set
-`resumeUrl: "/brandon-tapiba-cv.pdf"`. A "Résumé" link appears in the hero.
+**Rule of thumb:** whenever you change a sentence in an `en` file, change the same entry in the
+`fr` file. Both dictionaries share one TypeScript type, so the build fails if an entry is missing
+from one of them.
 
 ### Adding a project
 
-Add an entry to `projects` in `src/data/projects.ts`:
+1. Add its facts to `projects` in `src/data/projects.ts`:
 
 ```ts
 {
-  slug: "my-project",              // URL: /work/my-project
+  slug: "my-project",              // address: /en/work/my-project
   title: "My Project",
-  summary: "One sentence for lists.",
-  role: "Full-stack developer",
+  client: "Freelance",             // optional
+  year: "2026",                    // optional
   stack: ["Next.js", "PostgreSQL"],
-  category: "web",                 // "web" | "mobile" | "embedded": groups the "More things I've built" list
-  client: "Freelance",             // optional: who it was for
-  year: "2025",                    // optional
-  featured: true,                  // big sliding card on the home page; otherwise in the grouped list
-  cover: "/work/my-project.jpg",   // optional, put the image in public/work/
+  category: "web",                 // "web" | "mobile" | "embedded"
+  featured: true,                  // optional: show on the home page
+  cover: "/work/my-project.jpg",   // optional screenshot in public/work/
   links: [{ label: "Live site", href: "https://..." }],
-  context: "The problem, in a sentence or two.",
-  approach: ["Step one.", "Step two."],
-  outcome: "Real, measurable result.", // optional, hidden until filled in
 }
 ```
 
-Each project automatically gets a case-study page and a sitemap entry.
-Without a `cover`, a typographic placeholder is shown, so screenshots can be added later.
+2. Add its words under the same slug in `projects.en.ts` and `projects.fr.ts`:
+   `summary`, `role`, `context`, `approach`, and optionally `outcome`, `status`,
+   `challenges` (the hard parts) and `lessons` (what you'd do differently).
+3. Optionally draw its blueprint in `src/data/systems.ts`: a list of layers read left to right.
+   French box labels go in `systemLabels` in `src/content/fr.ts`.
 
-> The project texts are a first draft written from short briefs. Review them and add real
-> outcomes; nothing is shown for `outcome` until you write it.
+Only publish numbers you can stand behind. Sections with no content are simply not shown.
+
+### Photos
+
+Put images in `public/photos/` and list them in `photos` in `src/data/site.ts`. Until then the
+Photos page shows reserved frames.
 
 ### Colours
 
-The palette is defined once as CSS variables in `src/app/globals.css`:
-
 ```css
---paper:     250 247 240;  /* background */
---ink:       18 22 25;     /* Onyx — text, borders, shadows */
---muted:     84 90 96;     /* secondary text */
---accent:    158 0 49;     /* Ruby Red — the single accent */
---highlight: 229 198 135;  /* Soft Fawn — highlights, placeholders */
---positive:  9 129 74;     /* Sea Green — "available" dot */
+--sheet:  13 36 68;     /* blueprint blue, the paper */
+--panel:  19 49 89;     /* lighter wash for panels */
+--line:   233 241 255;  /* linework and text */
+--muted:  163 187 222;  /* annotations */
+--accent: 255 142 66;   /* warm orange, the one highlight */
+--signal: 126 211 255;  /* cyan, data flowing in diagrams */
 ```
 
-## Project structure
+## Design notes
 
-```
-src/
-├── app/
-│   ├── layout.tsx            # fonts, metadata, JSON-LD, nav + footer
-│   ├── page.tsx              # home: Hero → Work → About → Experience → Photography → Contact
-│   ├── work/[slug]/page.tsx  # case-study pages (statically generated)
-│   ├── opengraph-image.tsx   # social preview image
-│   ├── sitemap.ts, robots.ts
-│   └── globals.css           # palette + base styles
-├── components/
-│   ├── Nav.tsx, Footer.tsx
-│   ├── home/                 # home-page sections
-│   ├── motion/               # preloader, cursor, marquee, backdrops, scroll engine
-│   └── ui/                   # ButtonLink, Cover
-└── data/
-    ├── site.ts               # personal details & about content
-    └── projects.ts           # projects & case studies
-```
-
-## Motion
-
-Animations use [GSAP](https://gsap.com) (ScrollTrigger + SplitText) with
-[Lenis](https://lenis.darkroom.engineering) smooth scrolling. Everything lives in
-`src/components/motion/` and `src/lib/motion.ts`.
-
-- **Intro**: counter + name, first visit per tab only (`Preloader.tsx`)
-- **Hero**: letters rise in, then drift apart as you scroll
-- **Selected work**: pinned horizontal scroll on desktop, vertical list on phones
-- **About**: statement fills in word by word with scroll
-- **Photography**: dark panel expands to full screen
-- **Contact**: rising horizon glow, magnetic button
-- **Hero**: dot field that bends around the pointer and ripples on click (`DotField.tsx`),
-  a tilting ID badge with your photo (`home/Badge.tsx`) and a live Yaoundé clock
-- **System blueprints**: every project card and case study draws the project's architecture
-  with data flowing along the wires (`ui/Schematic.tsx`). Edit them in `src/data/systems.ts`:
-  each project is a list of layers, read left to right
-- **By the numbers**: count-up figures (`home/Numbers.tsx`; only real numbers from the CVs)
-- **Stack**: rows that invert on hover; `×n` shows how many projects use each technology,
-  computed from `projects.ts` (`home/Stack.tsx`)
-- **Quick search**: ⌘K / Ctrl+K or `/` opens a command palette for projects and sections
-  (`motion/CommandPalette.tsx`)
-- **Everywhere**: curtain page transitions, cursor ring, scroll progress bar,
-  soft glow backdrops (`Atmosphere.tsx`)
-- **Companion** (`Buddy.tsx` + drawing in `BuddyFigure.tsx`, **currently off**: set
-  `showBuddy: true` in `src/data/site.ts` to bring it back): a cartoon mini-you in the
-  bottom-left corner. It waves on the hero, types and sweats on projects, explains on About,
-  takes photos on Photography and dances on Contact, with a speech bubble for each. It falls
-  asleep when the page is still. Between 22:00 and 06:00 (visitor's time) it wears a nightcap
-  and tells people to go to bed. Edit its lines in the `SAY` object in `Buddy.tsx`.
-
-Any element can opt into a scroll reveal with a data attribute:
-`data-split` (line-by-line heading), `data-reveal`, `data-reveal-stagger`,
-`data-parallax="0.15"`, `data-zoom`. Add `data-magnetic` to pull an element towards
-the pointer and `data-cursor="View"` to label the cursor.
-
-Visitors with **reduced motion** turned on get a static, fully readable page: no intro,
-no smooth scroll, and the work section becomes a grid.
+- **One signature interaction:** a CAD-style crosshair follows the pointer with a live X/Y
+  readout (`components/Crosshair.tsx`). Visitors can switch it off in the title block; it is
+  off on touch devices and with reduced motion.
+- **Live dimension line:** the line under the name on the home page shows its real width in
+  pixels and updates when the window resizes (`components/Dimension.tsx`).
+- **System blueprints:** each project's architecture, with dashes flowing along the wires
+  (`components/Schematic.tsx`).
+- **Title block:** every page ends with one, like a technical drawing (`components/TitleBlock.tsx`).
+- **Quick search:** ⌘K / Ctrl+K or `/` (`components/CommandPalette.tsx`).
+- **Calm motion:** content fades up once as it scrolls into view (`components/Reveal.tsx`).
+  No animation library; everything is CSS plus one small observer.
 
 ## SEO & accessibility
 
-- Per-page titles and descriptions, canonical URLs, Open Graph image
-- `sitemap.xml` and `robots.txt` generated from the project list
-- `Person` structured data (JSON-LD)
-- Fully static output, self-hosted fonts (no external font requests)
-- Skip link, visible focus styles, AA text contrast, respects `prefers-reduced-motion`
+- Per-page titles and descriptions in both languages, canonical URLs and `hreflang` alternates
+- `sitemap.xml` with both languages, `robots.txt`, Open Graph image, `Person` structured data
+- Static pages, self-hosted fonts
+- Skip link, visible focus styles, respects `prefers-reduced-motion`; content is visible without JavaScript
 
 ## Deployment
 
-### Vercel (recommended)
-1. Go to [vercel.com/new](https://vercel.com/new) and import `BrandonT-ops/my-portfolio`.
-2. Keep the detected Next.js defaults and deploy.
-3. Every branch you push gets its own preview URL; `main` becomes the production site.
-
-### Netlify
-Import the repo at [app.netlify.com](https://app.netlify.com). Netlify detects Next.js and
-installs its runtime automatically. Build command `npm run build`.
-
-### Hostinger (Node.js hosting) or any VPS
-```bash
-npm ci
-npm run build
-npm start -- -p 3000      # run behind Nginx/Apache as a reverse proxy, managed by pm2
-```
-
-### Docker
-```dockerfile
-FROM node:20-alpine
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci
-COPY . .
-RUN npm run build
-EXPOSE 3000
-CMD ["npm", "start"]
-```
-```bash
-docker build -t portfolio . && docker run -d -p 3000:3000 portfolio
-```
-
-After deploying on your own domain, update `url` in `src/data/site.ts` so the canonical
-links, sitemap and social previews point to it.
+Import the repository at [vercel.com/new](https://vercel.com/new) and keep the Next.js defaults.
+Every branch gets a preview address; `main` is the live site. After moving to your own domain,
+update `url` in `src/data/site.ts`.

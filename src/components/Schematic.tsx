@@ -97,7 +97,7 @@ export default function Schematic({
             x2={col[0].x + bw / 2}
             y1={top * 0.72}
             y2={height - bottom * 0.6}
-            stroke="rgb(var(--paper) / 0.08)"
+            stroke="rgb(var(--line) / 0.08)"
             strokeDasharray="2 6"
           />
           <text
@@ -106,7 +106,7 @@ export default function Schematic({
             textAnchor="middle"
             fontSize={fontSize * 0.78}
             className="font-mono"
-            fill="rgb(var(--paper) / 0.4)"
+            fill="rgb(var(--line) / 0.4)"
             letterSpacing="0.14em"
           >
             L{i + 1}
@@ -117,11 +117,11 @@ export default function Schematic({
       {/* wires */}
       {edges.map((e) => (
         <g key={e.key} fill="none">
-          <path d={e.d} stroke="rgb(var(--paper) / 0.2)" strokeWidth="1.2" />
+          <path d={e.d} stroke="rgb(var(--line) / 0.2)" strokeWidth="1.2" />
           <path
             d={e.d}
             className="schematic-flow"
-            stroke="rgb(var(--highlight))"
+            stroke="rgb(var(--signal))"
             strokeWidth="1.6"
             strokeLinecap="round"
             strokeDasharray="5 26"
@@ -136,10 +136,10 @@ export default function Schematic({
         const firstY = nd.y + bh / 2 + fontSize * 0.35 - ((nd.lines.length - 1) * lh) / 2;
         return (
           <g key={`${nd.text}-${k}`}>
-            <rect x={nd.x + 4} y={nd.y + 4} width={bw} height={bh} fill="rgb(var(--accent) / 0.6)" />
-            <rect x={nd.x} y={nd.y} width={bw} height={bh} fill="rgb(var(--ink))" stroke="rgb(var(--paper) / 0.8)" strokeWidth="1.5" />
-            <circle cx={nd.x} cy={nd.y + bh / 2} r="3" fill="rgb(var(--paper))" />
-            <circle cx={nd.x + bw} cy={nd.y + bh / 2} r="3" fill="rgb(var(--paper))" />
+            <rect x={nd.x + 4} y={nd.y + 4} width={bw} height={bh} fill="rgb(var(--accent) / 0.85)" />
+            <rect x={nd.x} y={nd.y} width={bw} height={bh} fill="rgb(var(--sheet))" stroke="rgb(var(--line) / 0.8)" strokeWidth="1.5" />
+            <circle cx={nd.x} cy={nd.y + bh / 2} r="3" fill="rgb(var(--line))" />
+            <circle cx={nd.x + bw} cy={nd.y + bh / 2} r="3" fill="rgb(var(--line))" />
             {nd.lines.map((line, li) => {
               const est = line.length * charW;
               return (
@@ -150,7 +150,7 @@ export default function Schematic({
                   textAnchor="middle"
                   fontSize={fontSize}
                   className="font-mono"
-                  fill="rgb(var(--paper))"
+                  fill="rgb(var(--line))"
                   textLength={est > maxText ? maxText : undefined}
                   lengthAdjust={est > maxText ? "spacingAndGlyphs" : undefined}
                 >

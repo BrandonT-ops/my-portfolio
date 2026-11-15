@@ -3,12 +3,12 @@ import { site } from "@/data/site";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: `${site.name} — ${site.role}`,
+    name: `${site.name} — Portfolio`,
     short_name: site.name,
     start_url: "/",
     display: "browser",
-    background_color: "#faf7f0",
-    theme_color: "#faf7f0",
+    background_color: "#0d2444",
+    theme_color: "#0d2444",
     icons: [{ src: "/icon", sizes: "64x64", type: "image/png" }],
   };
 }
