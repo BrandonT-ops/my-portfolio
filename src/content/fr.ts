@@ -167,7 +167,7 @@ export const fr: Dict = {
   },
   photo: {
     label: "Planche-contact",
-    title: "Au-delà de l'ingénierie, je raconte des histoires avec un appareil photo.",
+    title: "Au-delà de l'ingénierie, je raconte des histoires avec un appareil\u00a0photo.",
     lead: "La lumière, les ciels et les lieux entre les deux.",
     body: "Cette planche est en cours de développement. Les cadres ci-dessous sont réservés à une première sélection de portraits, de scènes de rue et d'événements.",
     soon: "En développement",

@@ -160,7 +160,7 @@ export const en: Dict = {
   },
   photo: {
     label: "Contact sheet",
-    title: "Beyond engineering, I tell stories with a camera.",
+    title: "Beyond engineering, I\u00a0tell stories with a\u00a0camera.",
     lead: "Light, skies and the places in between.",
     body: "This sheet is being developed. The frames below are reserved for a first selection of portraits, street scenes and events.",
     soon: "In development",

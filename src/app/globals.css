@@ -30,7 +30,11 @@
 
   body { @apply bg-sheet font-sans text-line antialiased; }
 
-  h1, h2, h3 { @apply font-display font-semibold tracking-[-0.02em] text-line; }
+  h1, h2, h3 {
+    @apply font-display font-semibold tracking-[-0.02em] text-line;
+    /* Even line lengths, so a single short word is never left alone at a line end. */
+    text-wrap: balance;
+  }
 
   ::selection { @apply bg-accent text-white; }
 
