@@ -5,7 +5,7 @@ export const alt = `${site.name} — Digital Systems Engineer`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-/** Social preview card: a corner of the drafting sheet. */
+/** Social preview card: the wordmark over a search box. */
 export default function OpengraphImage() {
   return new ImageResponse(
     (
@@ -14,37 +14,34 @@ export default function OpengraphImage() {
           width: "100%",
           height: "100%",
           display: "flex",
-          padding: 28,
-          background: "#0d2444",
-          backgroundImage:
-            "linear-gradient(rgba(233,241,255,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(233,241,255,0.08) 1px, transparent 1px)",
-          backgroundSize: "60px 60px",
-          color: "#e9f1ff",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          background: "#ffffff",
+          color: "#1b1b1f",
         }}
       >
+        <div style={{ display: "flex", fontSize: 190, fontWeight: 700, letterSpacing: -9, lineHeight: 1 }}>
+          brandon<span style={{ color: "#ff6b4a" }}>.</span>
+        </div>
         <div
           style={{
-            flex: 1,
             display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between",
-            padding: 48,
-            border: "2px solid rgba(233,241,255,0.55)",
+            alignItems: "center",
+            marginTop: 48,
+            width: 820,
+            height: 92,
+            padding: "0 40px",
+            borderRadius: 46,
+            border: "2px solid #dcdbe6",
+            fontSize: 34,
+            color: "#5c606c",
+            boxShadow: "0 18px 40px rgba(86,60,232,0.16)",
           }}
         >
-          <div style={{ display: "flex", justifyContent: "space-between", fontSize: 24, letterSpacing: 4, textTransform: "uppercase" }}>
-            <span style={{ color: "#ff8e42" }}>DWG 001</span>
-            <span>Yaoundé · 3.87°N 11.52°E</span>
-          </div>
-          <div style={{ display: "flex", fontSize: 150, fontWeight: 800, lineHeight: 0.9, textTransform: "uppercase", letterSpacing: -3 }}>
-            {site.name}
-            <span style={{ color: "#ff8e42" }}>.</span>
-          </div>
-          <div style={{ display: "flex", justifyContent: "space-between", fontSize: 30, color: "#a3bbde" }}>
-            <span>Digital Systems Engineer</span>
-            <span>Web · Mobile · Embedded</span>
-          </div>
+          Digital Systems Engineer · Yaoundé
         </div>
+        <div style={{ display: "flex", marginTop: 40, fontSize: 28, color: "#563ce8" }}>Web · Mobile · Embedded</div>
       </div>
     ),
     size,

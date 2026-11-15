@@ -1,15 +1,16 @@
-# Brandon Tapiba — Portfolio
+# Brandon Tapiba — Portfolio (search-engine edition)
 
-A portfolio drawn as an engineer's **drafting sheet**: blueprint-blue paper, white linework,
-one orange accent. Built with **Next.js 16**, **Tailwind CSS** and **TypeScript**, in
-**English and French**.
+A portfolio that works like a **search engine about Brandon**: a clean home page with one
+search box, results pages with tabs and a side panel, and project pages laid out like
+product pages. Built with **Next.js 16**, **Tailwind CSS** and **TypeScript**, in
+**English and French**. It has its own wordmark and colours.
 
 ## Quick start
 
 ```bash
 npm install
 npm run dev      # http://localhost:3000  (redirects to /en or /fr)
-npm run build    # production build
+npm run build
 npm run lint
 ```
 
@@ -18,13 +19,24 @@ npm run lint
 Every page exists in both languages (`/en/...` and `/fr/...`). `/` redirects to French for
 browsers that prefer French, otherwise to English.
 
-| Sheet | Address | What it is |
-| --- | --- | --- |
-| 01 | `/en` | Home: name, portrait, six flagship projects, key numbers |
-| 02 | `/en/work` | Drawing register: all projects, filterable by type |
-| — | `/en/work/<slug>` | One sheet per project: system blueprint, problem, approach, outcome, hard parts |
-| 03 | `/en/about` | Profile: bio, experience, education, certifications, stack |
-| 04 | `/en/photography` | Photo contact sheet |
+| Address | What it is |
+| --- | --- |
+| `/en` | Home: wordmark, search box, "I'm feeling curious" (opens a random project) |
+| `/en/search?q=...&t=...` | Results. Tabs: All, Projects, Images, About. `/en/work` redirects here |
+| `/en/work/<slug>` | One product-style page per project |
+| `/en/about` | Profile: bio, experience, education, certifications, toolbox |
+| `/en/photography` | Photo grid |
+
+## How the search works
+
+- `src/lib/search-index.ts` builds, at deploy time, a list of everything findable: projects,
+  pages, jobs, education and skills, in each language.
+- `src/lib/search.ts` ranks that list in the visitor's browser. Every word of the query must
+  appear in an item; matches in the title count most, then tags, then body text. Accents are
+  ignored, so "experience" finds "Expérience".
+- Nothing is sent to a server, so results are instant, and the time shown under the tabs is
+  the real time the search took.
+- The search box suggests matches as you type. Press `/` anywhere to jump to it.
 
 ## Where to edit things
 
@@ -32,81 +44,38 @@ browsers that prefer French, otherwise to English.
 | --- | --- |
 | Email, links, portrait, résumé link, photos | `src/data/site.ts` |
 | Project facts (name, client, year, stack, links, screenshot) | `src/data/projects.ts` |
-| Project words, English | `src/content/projects.en.ts` |
-| Project words, French | `src/content/projects.fr.ts` |
-| Everything else you can read on the site (labels, bio, experience) | `src/content/en.ts` and `src/content/fr.ts` |
-| System blueprints | `src/data/systems.ts` |
+| Project words | `src/content/projects.en.ts` and `projects.fr.ts` |
+| Everything else you can read on the site | `src/content/en.ts` and `fr.ts` |
+| System diagrams | `src/data/systems.ts` |
 | Colours | `src/app/globals.css` (`:root` variables) |
 
 **Rule of thumb:** whenever you change a sentence in an `en` file, change the same entry in the
-`fr` file. Both dictionaries share one TypeScript type, so the build fails if an entry is missing
-from one of them.
+`fr` file. Both share one TypeScript type, so the build fails if an entry is missing.
 
-### Adding a project
-
-1. Add its facts to `projects` in `src/data/projects.ts`:
-
-```ts
-{
-  slug: "my-project",              // address: /en/work/my-project
-  title: "My Project",
-  client: "Freelance",             // optional
-  year: "2026",                    // optional
-  stack: ["Next.js", "PostgreSQL"],
-  category: "web",                 // "web" | "mobile" | "embedded"
-  featured: true,                  // optional: show on the home page
-  cover: "/work/my-project.jpg",   // optional screenshot in public/work/
-  links: [{ label: "Live site", href: "https://..." }],
-}
-```
-
-2. Add its words under the same slug in `projects.en.ts` and `projects.fr.ts`:
-   `summary`, `role`, `context`, `approach`, and optionally `outcome`, `status`,
-   `challenges` (the hard parts) and `lessons` (what you'd do differently).
-3. Optionally draw its blueprint in `src/data/systems.ts`: a list of layers read left to right.
-   French box labels go in `systemLabels` in `src/content/fr.ts`.
-
-Only publish numbers you can stand behind. Sections with no content are simply not shown.
-
-### Photos
-
-Put images in `public/photos/` and list them in `photos` in `src/data/site.ts`. Until then the
-Photos page shows reserved frames.
+New projects appear in the search automatically. To add one: add its facts to `projects.ts`,
+its words under the same slug in both `projects.*.ts` files, and optionally a diagram in
+`systems.ts`. Only publish numbers you can stand behind; empty sections are not shown.
 
 ### Colours
 
 ```css
---sheet:  13 36 68;     /* blueprint blue, the paper */
---panel:  19 49 89;     /* lighter wash for panels */
---line:   233 241 255;  /* linework and text */
---muted:  163 187 222;  /* annotations */
---accent: 255 142 66;   /* warm orange, the one highlight */
---signal: 126 211 255;  /* cyan, data flowing in diagrams */
+--sheet:  255 255 255;  /* page background */
+--panel:  245 244 251;  /* soft lavender surface for cards */
+--line:   27 27 31;     /* text */
+--muted:  92 96 108;    /* secondary text */
+--accent: 86 60 232;    /* violet: links, buttons, focus */
+--signal: 255 107 74;   /* coral: dots and highlights */
 ```
-
-## Design notes
-
-- **One signature interaction:** a CAD-style crosshair follows the pointer with a live X/Y
-  readout (`components/Crosshair.tsx`). Visitors can switch it off in the title block; it is
-  off on touch devices and with reduced motion.
-- **Live dimension line:** the line under the name on the home page shows its real width in
-  pixels and updates when the window resizes (`components/Dimension.tsx`).
-- **System blueprints:** each project's architecture, with dashes flowing along the wires
-  (`components/Schematic.tsx`).
-- **Title block:** every page ends with one, like a technical drawing (`components/TitleBlock.tsx`).
-- **Quick search:** ⌘K / Ctrl+K or `/` (`components/CommandPalette.tsx`).
-- **Calm motion:** content fades up once as it scrolls into view (`components/Reveal.tsx`).
-  No animation library; everything is CSS plus one small observer.
 
 ## SEO & accessibility
 
 - Per-page titles and descriptions in both languages, canonical URLs and `hreflang` alternates
-- `sitemap.xml` with both languages, `robots.txt`, Open Graph image, `Person` structured data
-- Static pages, self-hosted fonts
-- Skip link, visible focus styles, respects `prefers-reduced-motion`; content is visible without JavaScript
+- `sitemap.xml`, `robots.txt`, Open Graph image, `Person` structured data
+- Static pages, self-hosted fonts, no animation library
+- Skip link, visible focus styles, keyboard-operable search and tabs, respects
+  `prefers-reduced-motion`
 
 ## Deployment
 
 Import the repository at [vercel.com/new](https://vercel.com/new) and keep the Next.js defaults.
-Every branch gets a preview address; `main` is the live site. After moving to your own domain,
-update `url` in `src/data/site.ts`.
+After moving to your own domain, update `url` in `src/data/site.ts`.

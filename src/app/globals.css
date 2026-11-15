@@ -3,121 +3,78 @@
 @tailwind utilities;
 
 /*
- * Drafting sheet. Blueprint blue paper, white linework, one warm accent.
- * Values are space-separated RGB so Tailwind opacity modifiers work.
+ * Search-engine look: white page, near-black text, violet for links and
+ * buttons, coral for small highlights. Space-separated RGB so Tailwind
+ * opacity modifiers work.
  */
 :root {
-  --sheet: 13 36 68;     /* blueprint blue, the paper */
-  --panel: 19 49 89;     /* a lighter wash for panels */
-  --line: 233 241 255;   /* linework and text */
-  --muted: 163 187 222;  /* annotations */
-  --accent: 255 142 66;  /* warm orange: the one highlight */
-  --signal: 126 211 255; /* light cyan: data flowing in diagrams */
+  --sheet: 255 255 255;  /* page background */
+  --panel: 245 244 251;  /* soft lavender surface for cards */
+  --line: 27 27 31;      /* text */
+  --muted: 92 96 108;    /* secondary text (AA on white) */
+  --accent: 86 60 232;   /* violet: links, buttons, focus */
+  --signal: 255 107 74;  /* coral: dots and highlights, not body text */
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 5rem;
+    scroll-padding-top: 6rem;
     -webkit-text-size-adjust: 100%;
-    background: rgb(var(--sheet));
   }
 
-  body {
-    @apply bg-sheet font-sans text-line antialiased;
-    /* Drafting grid: fine squares every 16px, heavier lines every 80px. */
-    background-image:
-      linear-gradient(rgb(var(--line) / 0.07) 1px, transparent 1px),
-      linear-gradient(90deg, rgb(var(--line) / 0.07) 1px, transparent 1px),
-      linear-gradient(rgb(var(--line) / 0.035) 1px, transparent 1px),
-      linear-gradient(90deg, rgb(var(--line) / 0.035) 1px, transparent 1px);
-    background-size: 80px 80px, 80px 80px, 16px 16px, 16px 16px;
-  }
+  body { @apply bg-sheet font-sans text-line antialiased; }
 
-  h1, h2, h3 {
-    @apply font-display font-bold uppercase leading-[0.9] tracking-[0.005em] text-line;
-  }
+  h1, h2, h3 { @apply font-display font-semibold tracking-[-0.02em] text-line; }
 
-  ::selection { @apply bg-accent text-sheet; }
+  ::selection { @apply bg-accent text-white; }
 
   :focus-visible {
-    @apply outline-2 outline-offset-4 outline-accent;
+    @apply outline-2 outline-offset-2 outline-accent;
     outline-style: solid;
   }
 }
 
 @layer components {
-  /* Small annotation text */
-  .label { @apply font-mono text-[11px] uppercase tracking-[0.16em] text-muted; }
+  /* Small caps-style annotation */
+  .label { @apply text-xs font-medium uppercase tracking-[0.12em] text-muted; }
 
-  /* Underlined link with accent hover */
-  .link { @apply underline decoration-line/35 decoration-1 underline-offset-4 transition-colors hover:text-accent hover:decoration-accent; }
+  .link { @apply text-accent underline-offset-4 hover:underline; }
 
-  /* A framed drawing area with tick marks at its corners */
-  .frame { @apply relative border border-line/45; }
-  .frame::before, .frame::after {
-    content: "";
-    position: absolute;
-    width: 14px;
-    height: 14px;
-    pointer-events: none;
-    border-color: rgb(var(--accent));
-  }
-  .frame::before { top: -5px; left: -5px; border-top: 2px solid rgb(var(--accent)); border-left: 2px solid rgb(var(--accent)); }
-  .frame::after { bottom: -5px; right: -5px; border-bottom: 2px solid rgb(var(--accent)); border-right: 2px solid rgb(var(--accent)); }
+  /* Rounded surfaces */
+  .card { @apply rounded-3xl bg-panel p-6 sm:p-8; }
+  .card-outline { @apply rounded-3xl border border-line/10 bg-sheet p-6 sm:p-8; }
 
-  /* Table cells in title blocks and data sheets */
-  .cell { @apply border-line/35 p-4 sm:p-5; }
-
-  /* Buttons: outlined, fill on hover */
-  .btn { @apply inline-flex items-center gap-3 whitespace-nowrap border border-line px-5 py-3 font-mono text-xs uppercase tracking-[0.14em] transition-colors hover:border-accent hover:bg-accent hover:text-sheet; }
-  .btn-solid { @apply border-accent bg-accent text-sheet hover:border-line hover:bg-line; }
-
-  /* Numbered callout balloon */
-  .balloon { @apply inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-accent font-mono text-[11px] text-accent; }
-
-  /* Crosshatch fill for reserved areas */
-  .hatch {
-    background-image: repeating-linear-gradient(45deg, rgb(var(--line) / 0.12) 0 1px, transparent 1px 9px);
-  }
+  /* Pills and buttons */
+  .chip { @apply inline-flex items-center gap-1.5 rounded-full border border-line/15 bg-sheet px-3.5 py-1.5 text-sm text-line transition-colors hover:border-accent hover:text-accent; }
+  .tag { @apply inline-flex items-center rounded-full bg-panel px-3 py-1 text-xs font-medium text-muted; }
+  .btn { @apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full bg-panel px-5 py-2.5 text-sm font-medium text-line transition hover:bg-line/10 hover:shadow-soft; }
+  .btn-primary { @apply bg-accent text-white hover:bg-accent hover:shadow-lift; }
 }
 
 /* ---------- Reveal on scroll (only when JS is on and motion is allowed) ---------- */
 .js [data-reveal] {
   opacity: 0;
-  transform: translateY(18px);
-  transition: opacity 0.8s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transform: translateY(20px);
+  transition: opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
   transition-delay: var(--d, 0ms);
 }
 .js [data-reveal].is-in { opacity: 1; transform: none; }
 
-/* Lines that draw themselves from the left */
-.js [data-draw] { transform: scaleX(0); transform-origin: left; transition: transform 1.1s cubic-bezier(0.7, 0, 0.2, 1); transition-delay: var(--d, 0ms); }
-.js [data-draw].is-in { transform: scaleX(1); }
-
-/* ---------- System blueprints ---------- */
+/* ---------- System diagrams ---------- */
 .schematic-flow { animation: schematic-flow 1.4s linear infinite; }
 @keyframes schematic-flow { from { stroke-dashoffset: 31; } to { stroke-dashoffset: 0; } }
 
-/* Quick search panel */
-.palette-in { animation: palette-in 0.3s cubic-bezier(0.2, 1.1, 0.3, 1) both; }
-@keyframes palette-in { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+/* Suggestions dropdown */
+.pop-in { animation: pop-in 0.18s ease-out both; }
+@keyframes pop-in { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+
+/* The blinking caret after the wordmark on the home page */
+.caret { animation: caret 1.1s steps(1) infinite; }
+@keyframes caret { 50% { opacity: 0; } }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .js [data-reveal], .js [data-draw] { opacity: 1; transform: none; transition: none; }
-  .schematic-flow, .palette-in { animation: none; }
-}
-
-/* End marks of a dimension line: an upright with a 45° tick */
-.dim-end { position: relative; width: 1px; height: 16px; background: rgb(var(--accent)); flex: none; }
-.dim-end::after {
-  content: "";
-  position: absolute;
-  left: -6px;
-  top: 7px;
-  width: 13px;
-  height: 1px;
-  background: rgb(var(--accent));
-  transform: rotate(-45deg);
+  .js [data-reveal] { opacity: 1; transform: none; transition: none; }
+  .schematic-flow, .pop-in, .caret { animation: none; }
 }

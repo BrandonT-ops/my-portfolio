@@ -121,7 +121,7 @@ export default function Schematic({
           <path
             d={e.d}
             className="schematic-flow"
-            stroke="rgb(var(--signal))"
+            stroke="rgb(var(--accent))"
             strokeWidth="1.6"
             strokeLinecap="round"
             strokeDasharray="5 26"
@@ -136,8 +136,8 @@ export default function Schematic({
         const firstY = nd.y + bh / 2 + fontSize * 0.35 - ((nd.lines.length - 1) * lh) / 2;
         return (
           <g key={`${nd.text}-${k}`}>
-            <rect x={nd.x + 4} y={nd.y + 4} width={bw} height={bh} fill="rgb(var(--accent) / 0.85)" />
-            <rect x={nd.x} y={nd.y} width={bw} height={bh} fill="rgb(var(--sheet))" stroke="rgb(var(--line) / 0.8)" strokeWidth="1.5" />
+            <rect x={nd.x + 4} y={nd.y + 4} width={bw} height={bh} rx="9" fill="rgb(var(--accent) / 0.22)" />
+            <rect x={nd.x} y={nd.y} width={bw} height={bh} rx="9" fill="rgb(var(--sheet))" stroke="rgb(var(--line) / 0.85)" strokeWidth="1.4" />
             <circle cx={nd.x} cy={nd.y + bh / 2} r="3" fill="rgb(var(--line))" />
             <circle cx={nd.x + bw} cy={nd.y + bh / 2} r="3" fill="rgb(var(--line))" />
             {nd.lines.map((line, li) => {

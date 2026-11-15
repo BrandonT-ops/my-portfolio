@@ -1,14 +1,11 @@
 import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
-import "@fontsource-variable/big-shoulders-display";
+import "@fontsource-variable/outfit";
 import "@fontsource-variable/inter";
 import "@fontsource-variable/jetbrains-mono";
 import "../globals.css";
-import Nav from "@/components/Nav";
-import SheetFrame from "@/components/SheetFrame";
-import Crosshair from "@/components/Crosshair";
+import Footer from "@/components/Footer";
 import Reveal, { jsFlag } from "@/components/Reveal";
-import CommandPalette from "@/components/CommandPalette";
 import { getDict, isLang, LANGS } from "@/content";
 import { alternates } from "@/lib/seo";
 import { site } from "@/data/site";
@@ -42,7 +39,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export const viewport: Viewport = { themeColor: "#0d2444" };
+export const viewport: Viewport = { themeColor: "#ffffff" };
 
 export default async function RootLayout({ children, params }: Props) {
   const { lang } = await params;
@@ -72,18 +69,13 @@ export default async function RootLayout({ children, params }: Props) {
       <body className="flex min-h-screen flex-col overflow-x-clip">
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-6 focus:top-4 focus:z-[70] focus:bg-accent focus:px-4 focus:py-2 focus:text-sheet"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-6 focus:top-4 focus:z-[70] focus:rounded-full focus:bg-accent focus:px-4 focus:py-2 focus:text-white"
         >
           {d.nav.skip}
         </a>
-        <SheetFrame />
-        <Nav lang={lang} labels={d.nav} searchLabel={d.palette.open} />
-        <main id="main" className="flex-1">
-          {children}
-        </main>
-        <Crosshair />
+        {children}
+        <Footer lang={lang} d={d} />
         <Reveal />
-        <CommandPalette lang={lang} nav={d.nav} t={d.palette} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }} />
       </body>
     </html>

@@ -133,6 +133,35 @@ export interface Dict {
     hint: string;
     results: string;
   };
+  search: {
+    /** Short line under the wordmark on the home page. */
+    strap: string;
+    placeholder: string;
+    button: string;
+    curious: string;
+    tryLabel: string;
+    tries: string[];
+    offered: string;
+    otherLanguage: string;
+    tabs: { all: string; projects: string; images: string; about: string };
+    /** Uses {n} for the count and {s} for the time in seconds. */
+    stats: string;
+    none: string;
+    noneHint: string;
+    types: { project: string; page: string; experience: string; skill: string; education: string };
+    /** Uses {n} for the number of projects. */
+    usedIn: string;
+    related: string;
+    panelMore: string;
+    email: string;
+    openImage: string;
+    clear: string;
+    suggestions: string;
+    footer: string;
+    projectsCrumb: string;
+    atAGlance: string;
+    visit: string;
+  };
   /** Translations for client names that are not proper nouns. */
   clients: Record<string, string>;
   /** Translations for blueprint box labels (French only; English uses the labels as written). */

@@ -14,13 +14,13 @@ export default function Icon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "#0d2444",
-          color: "#e9f1ff",
+          background: "#563ce8", borderRadius: "22%",
+          color: "#ffffff",
           fontSize: 44,
           fontWeight: 700,
         }}
       >
-        B<span style={{ color: "#ff8e42" }}>.</span>
+        b<span style={{ color: "#ff6b4a" }}>.</span>
       </div>
     ),
     size,
