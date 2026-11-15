@@ -21,9 +21,20 @@ export const site = {
   photographyUrl: "",
 
   /**
-   * Photos for the Photos page, pulled from Brandon's Memento wall.
-   * To add one: put the file in /public/photos and add a line here with its
-   * caption, place and pixel size. Captions are shown as written.
+   * Where the Photos page reads from: Brandon's Memento wall. Every public
+   * picture he posts there appears on the portfolio automatically.
+   * `publicKey` is Memento's publishable key (the same one its own web page
+   * uses); it only allows reading what is already public.
+   */
+  memento: {
+    url: "https://fgvjghetclremhsweddc.supabase.co",
+    publicKey: "sb_publishable_dqmPuSN-eJufXza4wsFjBw_GgfZiaU3",
+    memberId: "8aa73cf7-1295-4a23-ae6c-b23cd7795a6c",
+    bucket: "moments",
+  },
+
+  /**
+   * Snapshot of the Memento pictures, shown only if Memento cannot be reached.
    */
   photos: [
     { src: "/photos/sun-bloom-douala.jpg", caption: "The sun seemed to bloom", place: "Bonanjo, Douala, Cameroon", width: 1205, height: 1600 },

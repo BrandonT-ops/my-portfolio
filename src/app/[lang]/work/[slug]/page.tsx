@@ -105,7 +105,7 @@ export default async function ProjectPage({ params }: Props) {
               </div>
             ) : null}
             {t.status && (
-              <p className="mx-auto mt-8 inline-flex items-center gap-2 rounded-full bg-signal/10 px-4 py-2 text-sm text-line">
+              <p className="mx-auto mt-8 inline-flex items-center gap-2 rounded-full bg-panel px-4 py-2 text-sm text-line">
                 <span className="h-2 w-2 rounded-full bg-signal" aria-hidden />
                 {t.status}
               </p>
@@ -117,9 +117,9 @@ export default async function ProjectPage({ params }: Props) {
             {project.cover ? (
               <figure className="overflow-hidden rounded-3xl border border-line/10 bg-panel shadow-soft">
                 <div className="flex items-center gap-2 px-5 py-3.5" aria-hidden>
-                  <span className="h-3 w-3 rounded-full bg-signal" />
-                  <span className="h-3 w-3 rounded-full bg-line/15" />
-                  <span className="h-3 w-3 rounded-full bg-line/15" />
+                  <span className="h-3 w-3 rounded-full bg-ox" />
+                  <span className="h-3 w-3 rounded-full bg-gold" />
+                  <span className="h-3 w-3 rounded-full bg-leaf" />
                   <span className="ml-3 flex-1 truncate rounded-full bg-sheet px-4 py-1 text-xs text-muted">
                     {project.links?.[0]?.href.replace(/^https?:\/\/(www\.)?/, "") ?? project.title}
                   </span>
@@ -185,7 +185,7 @@ export default async function ProjectPage({ params }: Props) {
                   data-reveal
                   style={{ "--d": `${(i % 2) * 80}ms` } as React.CSSProperties}
                 >
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent font-display text-lg font-semibold text-white">
+                  <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full font-display text-lg font-semibold text-white ${["bg-ox", "bg-sky", "bg-leaf", "bg-gold"][i % 4]}`}>
                     {i + 1}
                   </span>
                   <p className="pt-1.5 text-lg leading-relaxed">{step}</p>
@@ -196,8 +196,8 @@ export default async function ProjectPage({ params }: Props) {
 
           {/* Outcome */}
           {t.outcome && (
-            <section className="mt-6 rounded-3xl bg-accent p-8 text-white sm:p-12" data-reveal>
-              <h2 className="label !text-white/75">{s.outcome}</h2>
+            <section className="mt-6 rounded-3xl border-l-[6px] border-ox bg-panel p-8 sm:p-12" data-reveal>
+              <h2 className="label !text-ox">{s.outcome}</h2>
               <p className="mt-4 font-display text-[clamp(1.5rem,3vw,2.25rem)] font-medium leading-snug">{t.outcome}</p>
             </section>
           )}
@@ -261,15 +261,15 @@ export default async function ProjectPage({ params }: Props) {
           <nav aria-label={s.next} className="mt-20 sm:mt-28">
             <Link
               href={`/${lang}/work/${next.slug}`}
-              className="group flex flex-wrap items-end justify-between gap-6 rounded-3xl bg-line p-8 text-sheet transition hover:shadow-lift sm:p-12"
+              className="group flex flex-wrap items-end justify-between gap-6 rounded-3xl bg-panel p-8 transition hover:shadow-lift sm:p-12"
               data-reveal
             >
               <span>
-                <span className="text-sm text-sheet/60">{s.next}</span>
+                <span className="text-sm text-muted">{s.next}</span>
                 <span className="mt-2 block font-display text-[clamp(2.25rem,6vw,4.5rem)] font-semibold leading-none tracking-[-0.02em]">{next.title}</span>
-                <span className="mt-3 block max-w-xl text-sheet/70">{nextText.summary}</span>
+                <span className="mt-3 block max-w-xl text-muted">{nextText.summary}</span>
               </span>
-              <span aria-hidden className="flex h-14 w-14 items-center justify-center rounded-full bg-sheet text-2xl text-line transition-transform duration-500 group-hover:translate-x-2">
+              <span aria-hidden className="flex h-14 w-14 items-center justify-center rounded-full bg-line text-2xl text-sheet transition-transform duration-500 group-hover:translate-x-2">
                 →
               </span>
             </Link>

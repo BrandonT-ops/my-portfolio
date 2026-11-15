@@ -39,9 +39,9 @@ export default async function About({ params }: Props) {
             </h1>
             <p className="mt-6 max-w-2xl text-xl leading-relaxed text-muted">{a.paragraphs[0]}</p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <a href={`mailto:${site.email}`} className="btn btn-primary">
+              <Link href={`/${lang}/contact`} className="btn btn-primary">
                 {d.block.ctaButton}
-              </a>
+              </Link>
               <Link href={`/${lang}/search?t=projects`} className="btn">
                 {d.search.tabs.projects} →
               </Link>
@@ -53,7 +53,7 @@ export default async function About({ params }: Props) {
             </div>
           </div>
           <div className="lg:col-span-5" data-reveal>
-            <div className="relative mx-auto aspect-[4/5] max-w-sm overflow-hidden rounded-[2.5rem] bg-panel shadow-lift lg:max-w-none">
+            <div className="relative mx-auto aspect-[4/5] max-w-sm overflow-hidden rounded-[2.5rem] bg-panel shadow-soft lg:max-w-none">
               <Image src={site.portrait} alt={site.name} fill priority sizes="(min-width: 1024px) 36vw, 24rem" className="object-cover object-[50%_28%]" />
             </div>
           </div>
@@ -95,7 +95,7 @@ export default async function About({ params }: Props) {
                 <ul className="space-y-3 leading-relaxed text-muted lg:col-span-7">
                   {job.points.map((pt) => (
                     <li key={pt} className="flex gap-3">
-                      <span aria-hidden className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-signal" />
+                      <span aria-hidden className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-gold" />
                       <span>{pt}</span>
                     </li>
                   ))}
@@ -164,21 +164,21 @@ export default async function About({ params }: Props) {
         </section>
 
         {/* Services */}
-        <section className="mt-6 rounded-3xl bg-accent p-8 text-white sm:p-12" data-reveal>
-          <h2 className="text-3xl text-white sm:text-4xl">{a.servicesTitle}</h2>
+        <section className="mt-6 rounded-3xl border-l-[6px] border-leaf bg-panel p-8 sm:p-12" data-reveal>
+          <h2 className="text-3xl sm:text-4xl">{a.servicesTitle}</h2>
           <ul className="mt-8 grid gap-x-10 gap-y-4 text-lg sm:grid-cols-2 lg:grid-cols-3">
             {a.services.map((sv) => (
               <li key={sv} className="flex items-center gap-3">
-                <span aria-hidden className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-white/20 text-sm">
+                <span aria-hidden className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-leaf text-sm text-white">
                   ✓
                 </span>
                 {sv}
               </li>
             ))}
           </ul>
-          <a href={`mailto:${site.email}`} className="btn mt-10 !bg-white !text-accent">
+          <Link href={`/${lang}/contact`} className="btn btn-primary mt-10">
             {d.block.ctaButton} →
-          </a>
+          </Link>
         </section>
       </main>
     </>

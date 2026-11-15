@@ -155,9 +155,6 @@ export interface Dict {
     examples: string[];
     /** Uses {n} for the number of projects. */
     browseAll: string;
-    tiles: { projects: string; projectsHint: string; about: string; aboutHint: string; photos: string; photosHint: string; contact: string; contactHint: string };
-    startHere: string;
-    startHereSub: string;
     popular: string;
     /** Shown on the results page when nothing has been typed yet. */
     browseHint: string;
@@ -174,6 +171,24 @@ export interface Dict {
     projectsCrumb: string;
     atAGlance: string;
     visit: string;
+  };
+  contact: {
+    title: string;
+    lead: string;
+    emailLabel: string;
+    copy: string;
+    copied: string;
+    mailApp: string;
+    elsewhere: string;
+    basedIn: string;
+    formTitle: string;
+    name: string;
+    email: string;
+    message: string;
+    send: string;
+    sending: string;
+    sent: string;
+    error: string;
   };
   /** Translations for client names that are not proper nouns. */
   clients: Record<string, string>;

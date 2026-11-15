@@ -6,6 +6,7 @@ import ResultsView from "@/components/ResultsView";
 import { getDict, isLang } from "@/content";
 import { site } from "@/data/site";
 import { alternates } from "@/lib/seo";
+import { getPhotos } from "@/lib/memento";
 import { buildIndex, buildSuggestions } from "@/lib/search-index";
 
 type Props = { params: Promise<{ lang: string }> };
@@ -26,7 +27,7 @@ export default async function SearchPage({ params }: Props) {
     <Suspense fallback={<div className="flex-1" />}>
       <ResultsView
         lang={lang}
-        items={buildIndex(lang)}
+        items={buildIndex(lang, await getPhotos())}
         suggestions={buildSuggestions(lang)}
         nav={d.nav}
         t={d.search}

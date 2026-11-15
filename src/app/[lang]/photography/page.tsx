@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import Header from "@/components/Header";
 import { getDict, isLang } from "@/content";
 import { site } from "@/data/site";
+import { getPhotos } from "@/lib/memento";
 import { alternates } from "@/lib/seo";
 import { buildSuggestions } from "@/lib/search-index";
 
@@ -24,7 +25,7 @@ export default async function Photography({ params }: Props) {
   if (!isLang(lang)) notFound();
   const d = getDict(lang);
   const ph = d.photo;
-  const photos = site.photos;
+  const photos = await getPhotos();
 
   return (
     <>
@@ -55,14 +56,14 @@ export default async function Photography({ params }: Props) {
         <ul className="mt-10 columns-2 gap-4 md:columns-3 lg:columns-4 [&>li]:mb-4 [&>li]:break-inside-avoid">
           {photos.length > 0
             ? photos.map((p, i) => (
-                <li key={p.src} id={`photo-${i + 1}`} className="scroll-mt-28" data-reveal style={{ "--d": `${(i % 4) * 60}ms` } as React.CSSProperties}>
+                <li key={p.id} id={`photo-${i + 1}`} className="scroll-mt-28" data-reveal style={{ "--d": `${(i % 4) * 60}ms` } as React.CSSProperties}>
                   <figure className="group overflow-hidden rounded-2xl bg-panel">
                     <div className="overflow-hidden">
                       <Image
                         src={p.src}
                         alt={[p.caption, p.place].filter(Boolean).join(" — ") || `${d.search.types.photo} ${i + 1}`}
-                        width={p.width}
-                        height={p.height}
+                        width={p.width ?? 1200}
+                        height={p.height ?? 1500}
                         sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
                         priority={i < 4}
                         className="h-auto w-full transition-transform duration-700 ease-out group-hover:scale-[1.04]"

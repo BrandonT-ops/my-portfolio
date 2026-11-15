@@ -21,11 +21,26 @@ browsers that prefer French, otherwise to English.
 
 | Address | What it is |
 | --- | --- |
-| `/en` | Home: wordmark, search box with example searches, four shortcut tiles, six starter projects |
+| `/en` | Home: wordmark, one search box with example searches, two buttons, four plain links |
 | `/en/search?q=...&t=...` | Results. Tabs: All, Projects, Images, About. `/en/work` redirects here |
 | `/en/work/<slug>` | One product-style page per project |
 | `/en/about` | Profile: bio, experience, education, certifications, toolbox |
-| `/en/photography` | Photo grid (pictures from Brandon's Memento wall, also searchable) |
+| `/en/photography` | Photo grid, read live from Brandon's Memento wall (also searchable) |
+| `/en/contact` | Email with copy button, links, optional message form |
+
+## Contact page
+
+`/en/contact` shows the email address with a copy button, plus LinkedIn and GitHub. It can
+also show a message form that emails Brandon:
+
+1. Create an API key at [resend.com](https://resend.com) (API Keys).
+2. In Vercel: Project → Settings → Environment Variables, add `RESEND_API_KEY` with that key.
+3. Redeploy. The form appears on the Contact page.
+
+Without the key the form stays hidden, so nothing on the site is ever broken. Messages are
+sent by `src/app/api/contact/route.ts`. With Resend's default test sender, messages can only
+be delivered to the Resend account owner's own address, so the Resend account should be
+registered with the email in `src/data/site.ts`. Never commit the key to the repository.
 
 ## How the search works
 
@@ -56,15 +71,25 @@ New projects appear in the search automatically. To add one: add its facts to `p
 its words under the same slug in both `projects.*.ts` files, and optionally a diagram in
 `systems.ts`. Only publish numbers you can stand behind; empty sections are not shown.
 
+### Photos come from Memento
+
+`src/lib/memento.ts` reads Brandon's public pictures from his Memento wall. A new public
+picture there appears on the portfolio within about 30 minutes, with no redeploy. Only
+pictures he posted himself and made public are included. If Memento cannot be reached, the
+snapshot in `public/photos/` (listed in `src/data/site.ts`) is shown instead.
+
 ### Colours
 
 ```css
 --sheet:  255 255 255;  /* page background */
---panel:  245 244 251;  /* soft lavender surface for cards */
+--panel:  245 246 248;  /* soft grey surface for cards */
 --line:   27 27 31;     /* text */
 --muted:  92 96 108;    /* secondary text */
---accent: 86 60 232;    /* violet: links, buttons, focus */
---signal: 255 107 74;   /* coral: dots and highlights */
+--accent: 11 104 176;   /* blue: links, buttons, focus */
+--ox:     128 0 32;     /* oxblood  ┐                              */
+--sky:    11 132 184;   /* blue     │ the four wordmark colours,   */
+--leaf:   9 129 74;     /* green    │ also used for small accents  */
+--gold:   197 143 16;   /* gold     ┘                              */
 ```
 
 ## SEO & accessibility

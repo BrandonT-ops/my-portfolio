@@ -18,9 +18,6 @@ export interface SearchItem {
   /** Projects only: screenshot path, or the blueprint to draw when there is none. */
   cover?: string;
   system?: string[][];
-  /** Photos only: pixel size, for the image grid. */
-  width?: number;
-  height?: number;
   category?: Category;
 }
 

@@ -1,6 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  images: {
+    // Brandon's public Memento pictures.
+    remotePatterns: [{ protocol: "https", hostname: "fgvjghetclremhsweddc.supabase.co", pathname: "/storage/v1/object/public/moments/**" }],
+  },
   async redirects() {
     return [
       // Visitors whose browser prefers French start on the French site.

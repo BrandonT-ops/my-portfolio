@@ -1,13 +1,13 @@
 import { clientName, getDict, getProjectText } from "@/content";
 import type { Lang } from "@/content/types";
 import { projects } from "@/data/projects";
-import { site } from "@/data/site";
 import { getSystem } from "@/data/systems";
+import type { Photo } from "@/lib/memento";
 import type { SearchItem } from "@/lib/search";
 import { usage } from "@/lib/usage";
 
 /** Everything the search engine knows about Brandon, in one language. */
-export function buildIndex(lang: Lang): SearchItem[] {
+export function buildIndex(lang: Lang, photos: Photo[] = []): SearchItem[] {
   const d = getDict(lang);
   const a = d.about;
   const items: SearchItem[] = [];
@@ -52,6 +52,17 @@ export function buildIndex(lang: Lang): SearchItem[] {
     snippet: d.photo.lead,
     text: `${d.nav.photo} photo photos photography photographie ${d.photo.label}`,
     chips: d.photo.subjects.slice(0, 4),
+  });
+
+  items.push({
+    id: "page-contact",
+    type: "page",
+    title: d.contact.title,
+    href: `/${lang}/contact`,
+    crumbs: "contact",
+    snippet: d.contact.lead,
+    text: `${d.nav.contact} contact email e-mail mail message hire embaucher`,
+    chips: ["LinkedIn", "GitHub"],
   });
 
   a.experience.forEach((job, i) =>
@@ -99,9 +110,9 @@ export function buildIndex(lang: Lang): SearchItem[] {
     }
   }
 
-  site.photos.forEach((ph, i) =>
+  photos.forEach((ph, i) =>
     items.push({
-      id: `photo-${i}`,
+      id: `photo-${ph.id}`,
       type: "photo",
       title: ph.caption || ph.place || d.search.untitled,
       href: `/${lang}/photography#photo-${i + 1}`,
@@ -110,8 +121,6 @@ export function buildIndex(lang: Lang): SearchItem[] {
       text: `${d.nav.photo} photo photos photography photographie image`,
       chips: ph.place ? [ph.place.split(", ").slice(-1)[0]] : [],
       cover: ph.src,
-      width: ph.width,
-      height: ph.height,
     }),
   );
 

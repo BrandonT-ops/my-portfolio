@@ -5,6 +5,7 @@ import type { Config } from "tailwindcss";
  * whole site can be re-themed in one place.
  *   sheet = page background · panel = soft surface · line = text ("ink")
  *   muted = secondary text · accent = links and buttons · signal = small highlights
+ *   ox / sky / leaf / gold = the four wordmark colours
  */
 const v = (name: string) => `rgb(var(--${name}) / <alpha-value>)`;
 
@@ -19,6 +20,10 @@ export default {
         muted: v("muted"),
         accent: v("accent"),
         signal: v("signal"),
+        ox: v("ox"),
+        sky: v("sky"),
+        leaf: v("leaf"),
+        gold: v("gold"),
       },
       fontFamily: {
         display: ['"Outfit Variable"', "system-ui", "sans-serif"],
@@ -27,8 +32,9 @@ export default {
       },
       maxWidth: { page: "76rem" },
       boxShadow: {
-        soft: "0 1px 2px rgb(27 27 31 / 0.06), 0 8px 24px rgb(27 27 31 / 0.08)",
-        lift: "0 2px 6px rgb(27 27 31 / 0.08), 0 18px 40px rgb(86 60 232 / 0.16)",
+        soft: "0 1px 6px rgb(32 33 36 / 0.18)",
+        lift: "0 2px 10px rgb(32 33 36 / 0.24)",
+        press: "0 1px 1px rgb(0 0 0 / 0.1)",
       },
     },
   },

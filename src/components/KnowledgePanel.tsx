@@ -29,9 +29,9 @@ export default function KnowledgePanel({ lang, d }: { lang: Lang; d: Dict }) {
           <Link href={`/${lang}/about`} className="btn btn-primary">
             {d.search.panelMore}
           </Link>
-          <a href={`mailto:${site.email}`} className="btn">
-            {d.search.email}
-          </a>
+          <Link href={`/${lang}/contact`} className="btn">
+            {d.nav.contact}
+          </Link>
           {site.socials.map((s) => (
             <a key={s.href} href={s.href} target="_blank" rel="noopener noreferrer" className="btn">
               {s.label} ↗

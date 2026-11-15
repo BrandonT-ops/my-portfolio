@@ -9,12 +9,12 @@ export default function Footer({ lang, d }: { lang: Lang; d: Dict }) {
     <footer id="contact" className="mt-24 bg-panel text-sm text-muted">
       <div className="mx-auto flex max-w-page flex-wrap items-center justify-between gap-3 border-b border-line/10 px-4 py-4 sm:px-6">
         <p className="flex flex-wrap items-center gap-x-3">
-          <span className="h-2 w-2 rounded-full bg-signal" aria-hidden />
+          <span className="h-2 w-2 rounded-full bg-leaf" aria-hidden />
           {d.meta.location} · <LocalTime />
         </p>
-        <a href={`mailto:${site.email}`} className="font-medium text-accent hover:underline">
-          {site.email}
-        </a>
+        <Link href={`/${lang}/contact`} className="font-medium text-accent hover:underline">
+          {d.nav.contact} →
+        </Link>
       </div>
       <div className="mx-auto flex max-w-page flex-wrap items-center justify-between gap-x-8 gap-y-3 px-4 py-4 sm:px-6">
         <p>

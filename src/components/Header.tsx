@@ -16,6 +16,9 @@ export function CornerNav({ lang, nav }: { lang: Lang; nav: Dict["nav"] }) {
       <Link href={`/${lang}/photography`} className="hidden text-line hover:text-accent sm:block">
         {nav.photo}
       </Link>
+      <Link href={`/${lang}/contact`} className="hidden text-line hover:text-accent sm:block">
+        {nav.contact}
+      </Link>
       <LangSwitch lang={lang} />
       <Link href={`/${lang}/about`} aria-label={nav.about} className="relative h-9 w-9 shrink-0 overflow-hidden rounded-full ring-2 ring-transparent transition hover:ring-accent">
         <Image src={site.portrait} alt="" fill sizes="36px" className="object-cover object-[50%_25%]" />
@@ -59,9 +62,9 @@ export default function Header({
         <Link href={`/${lang}/photography`} className="whitespace-nowrap text-muted hover:text-accent">
           {nav.photo}
         </Link>
-        <a href="#contact" className="whitespace-nowrap text-muted hover:text-accent">
+        <Link href={`/${lang}/contact`} className="whitespace-nowrap text-muted hover:text-accent">
           {nav.contact}
-        </a>
+        </Link>
       </nav>
     </header>
   );
