@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { site } from "@/data/site";
+import { PaletteButton } from "@/components/motion/CommandPalette";
 
 const links = [
   { href: "/#work", label: "Work" },
@@ -43,6 +44,9 @@ export default function Nav() {
               </Link>
             </li>
           ))}
+          <li>
+            <PaletteButton />
+          </li>
         </ul>
       </nav>
     </header>

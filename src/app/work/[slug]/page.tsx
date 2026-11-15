@@ -6,6 +6,8 @@ import ButtonLink from "@/components/ui/ButtonLink";
 import Atmosphere from "@/components/motion/Atmosphere";
 import { getProject, projects } from "@/data/projects";
 import { site } from "@/data/site";
+import Schematic from "@/components/ui/Schematic";
+import { getSystem } from "@/data/systems";
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -28,17 +30,18 @@ export default async function CaseStudy({ params }: Params) {
   if (!project) notFound();
 
   const index = projects.indexOf(project);
+  const system = getSystem(project.slug, project.stack);
   const next = projects[(index + 1) % projects.length];
 
   return (
     <article>
       <header className="scene-dark">
         <Atmosphere />
-        <div className="mx-auto max-w-wide px-5 pb-24 pt-36 sm:px-10 sm:pb-32 sm:pt-48">
+        <div className="mx-auto max-w-wide px-5 pb-20 pt-36 sm:px-10 sm:pb-24 sm:pt-48">
           <Link href="/#work" className="label link" data-reveal>
             ← All work
           </Link>
-          <div className="mt-14 grid gap-12 md:grid-cols-12 md:items-end">
+          <div className="mt-14 grid gap-12 md:grid-cols-12 md:gap-x-8 md:items-end">
             <h1
               data-split
               className="text-[clamp(3.25rem,10vw,10rem)] font-medium leading-[0.88] tracking-[-0.04em] md:col-span-8"
@@ -91,6 +94,8 @@ export default async function CaseStudy({ params }: Params) {
         </div>
       </header>
 
+      {project.cover && (
+        <>
       <div className="bg-ink px-5 pb-0 sm:px-10">
         <div
           className="relative mx-auto aspect-[16/9] max-w-wide translate-y-24 overflow-hidden border-2 border-ink shadow-hard-accent"
@@ -101,9 +106,54 @@ export default async function CaseStudy({ params }: Params) {
           </div>
         </div>
       </div>
+        </>
+      )}
 
-      <div className="mx-auto max-w-wide px-5 pb-32 pt-48 sm:px-10 sm:pb-48 sm:pt-64">
-        <div className="grid gap-20 md:grid-cols-12">
+      <section aria-labelledby="system-label" className={`scene-dark border-t border-paper/10 ${project.cover ? "mt-24" : ""}`}>
+        <div className="grid-lines" aria-hidden />
+        <div className="mx-auto max-w-wide px-5 pb-24 pt-32 sm:px-10 sm:pb-32 sm:pt-40">
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <h2 id="system-label" className="label" data-reveal>
+              <span className="text-accent">00</span> — How it fits together
+            </h2>
+            <p className="label" data-reveal>
+              {system.flat().length} parts · {system.length} layers
+            </p>
+          </div>
+
+          <div className="mt-12 hidden aspect-[1200/460] md:block" data-reveal>
+            <Schematic
+              layers={system}
+              width={1200}
+              height={460}
+              fontSize={16}
+              label={`System diagram for ${project.title}: ${system.map((l) => l.join(" and ")).join(", then ")}.`}
+            />
+          </div>
+
+          <ol className="mt-10 space-y-3 md:hidden" data-reveal-stagger>
+            {system.map((layer, i) => (
+              <li key={i}>
+                <div className="flex flex-wrap gap-2">
+                  {layer.map((n) => (
+                    <span key={n} className="border border-paper/60 bg-ink px-3 py-2 font-mono text-xs shadow-[3px_3px_0_0_rgb(var(--accent)/0.6)]">
+                      {n}
+                    </span>
+                  ))}
+                </div>
+                {i < system.length - 1 && (
+                  <span aria-hidden className="ml-4 mt-3 block font-mono text-highlight">
+                    ↓
+                  </span>
+                )}
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      <div className="mx-auto max-w-wide px-5 pb-32 pt-28 sm:px-10 sm:pb-48 sm:pt-40">
+        <div className="grid gap-20 md:grid-cols-12 md:gap-x-8 lg:gap-x-12">
           <section className="md:col-span-5">
             <h2 className="label mb-6" data-reveal>
               <span className="text-accent">01</span> — The problem

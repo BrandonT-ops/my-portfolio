@@ -2,7 +2,11 @@
 
 import { useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import Atmosphere from "@/components/motion/Atmosphere";
+import DotField from "@/components/motion/DotField";
+import Badge from "@/components/home/Badge";
+import LocalTime from "@/components/ui/LocalTime";
 import { gsap, useGSAP, onIntroDone, MOTION_OK } from "@/lib/motion";
 import { site } from "@/data/site";
 
@@ -42,6 +46,7 @@ export default function Hero() {
           .to(".hero-line-2", { xPercent: 12, ease: "none" }, 0)
           .to(".hero-name", { yPercent: 35, scale: 0.92, autoAlpha: 0.15, ease: "none" }, 0)
           .to(".hero-meta", { yPercent: -60, autoAlpha: 0, ease: "none" }, 0)
+          .to(".badge-card", { yPercent: -25, ease: "none" }, 0)
           .to(".aurora", { yPercent: 25, ease: "none" }, 0);
 
         return () => {
@@ -54,10 +59,19 @@ export default function Hero() {
 
   return (
     <section ref={root} className="scene-dark flex min-h-[100svh] flex-col pt-16">
-      <Atmosphere />
+      <Atmosphere grid={false} />
+      <DotField />
+      <Badge />
+      {site.portrait && (
+        <div data-hero-hide className="hero-fade absolute right-5 top-[10.5rem] z-10 w-20 rotate-3 border-2 border-paper bg-ink shadow-[5px_5px_0_0_rgb(var(--accent))] sm:right-10 sm:w-28 lg:hidden">
+          <div className="relative aspect-[4/5]">
+            <Image src={site.portrait} alt={`Portrait of ${site.name}`} fill sizes="112px" className="object-cover object-[50%_28%] grayscale" />
+          </div>
+        </div>
+      )}
 
-      <div className={`mx-auto flex w-full max-w-wide flex-1 flex-col justify-between px-5 pt-10 sm:px-10 sm:pt-16 ${site.showBuddy ? "pb-28 sm:pb-32" : "pb-10 sm:pb-14"}`}>
-        <div className="hero-meta flex flex-wrap items-center justify-between gap-4 font-mono text-xs uppercase tracking-[0.14em] text-paper/60">
+      <div className={`relative mx-auto flex w-full max-w-wide flex-1 flex-col justify-between px-5 pt-10 sm:px-10 sm:pt-16 ${site.showBuddy ? "pb-28 sm:pb-32" : "pb-10 sm:pb-14"}`}>
+        <div className="hero-meta flex flex-wrap items-center justify-between gap-4 font-mono text-xs uppercase tracking-[0.14em] text-paper/60 lg:pr-[27vw]">
           <span data-hero-hide className="hero-fade inline-flex items-center gap-2 text-paper">
             {site.available && (
               <>
@@ -69,16 +83,17 @@ export default function Hero() {
               </>
             )}
           </span>
-          <span data-hero-hide className="hero-fade">
-            {site.role} — {site.location}
+          <span data-hero-hide className="hero-fade flex flex-wrap gap-x-6 gap-y-1">
+            <span>{site.location}</span>
+            <LocalTime className="text-paper" />
           </span>
         </div>
 
-        <h1 className="hero-name my-12 origin-bottom text-[clamp(4rem,17vw,17rem)] font-medium leading-[0.82] tracking-[-0.04em]">
+        <h1 className="hero-name my-12 origin-bottom text-[clamp(4rem,17vw,17rem)] font-medium leading-[0.82] tracking-[-0.04em] lg:text-[min(15vw,16rem)]">
           <span data-hero-hide className="hero-line-1 block overflow-hidden pb-[0.04em]">
             <Chars text={first} />
           </span>
-          <span data-hero-hide className="hero-line-2 block overflow-hidden pb-[0.04em] text-right sm:pr-[4vw]">
+          <span data-hero-hide className="hero-line-2 block overflow-hidden pb-[0.04em] text-right sm:pr-[4vw] lg:pr-0 lg:text-left">
             <Chars text={last} />
             <span className="hero-char inline-block text-accent">.</span>
           </span>
@@ -86,7 +101,7 @@ export default function Hero() {
 
         <div className="hero-meta">
           <div data-hero-hide className="hero-rule mb-8 h-px origin-left bg-paper/20" />
-          <div className="grid gap-10 md:grid-cols-12 md:items-end">
+          <div className="grid gap-10 md:grid-cols-12 md:gap-x-8 md:items-end">
             <p data-hero-hide className="hero-fade max-w-xl text-lg leading-relaxed text-paper/70 sm:text-xl md:col-span-6">
               <span className="text-paper">{site.role} & creative builder.</span> {site.tagline}
             </p>

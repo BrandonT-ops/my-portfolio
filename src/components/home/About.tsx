@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { gsap, useGSAP, MOTION_OK } from "@/lib/motion";
 import Portrait from "@/components/ui/Portrait";
+import Stack from "@/components/home/Stack";
 import { about } from "@/data/site";
 
 const STATEMENT =
@@ -26,13 +27,6 @@ export default function About() {
             scrollTrigger: { trigger: ".about-statement", start: "top 80%", end: "bottom 45%", scrub: true },
           },
         );
-        gsap.from(".about-rule", {
-          scaleX: 0,
-          duration: 1.6,
-          ease: "expo.inOut",
-          stagger: 0.1,
-          scrollTrigger: { trigger: ".about-skills", start: "top 90%", once: true },
-        });
       });
     },
     { scope: root },
@@ -53,7 +47,7 @@ export default function About() {
           ))}
         </p>
 
-        <div className="mt-28 grid gap-16 sm:mt-40 md:grid-cols-12 md:gap-20">
+        <div className="mt-28 grid gap-16 sm:mt-40 md:grid-cols-12 md:gap-x-8 lg:gap-x-12">
           <div className="md:col-span-5">
             <div className="md:sticky md:top-28">
               <Portrait />
@@ -78,21 +72,7 @@ export default function About() {
           </div>
         </div>
 
-        <div className="about-skills mt-28 grid gap-14 sm:mt-40 sm:grid-cols-2 lg:grid-cols-5">
-          {[...about.skills, { group: "Services", items: about.services }].map((s, i) => (
-            <div key={s.group}>
-              <div className="about-rule mb-6 h-px origin-left bg-ink" />
-              <p className="label mb-6">
-                <span className="text-accent">0{i + 1}</span> {s.group}
-              </p>
-              <ul className="space-y-3 text-lg" data-reveal-stagger>
-                {s.items.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
+        <Stack />
       </div>
     </section>
   );

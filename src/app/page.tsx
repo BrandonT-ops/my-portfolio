@@ -1,5 +1,6 @@
 import Hero from "@/components/home/Hero";
 import Work from "@/components/home/Work";
+import Numbers from "@/components/home/Numbers";
 import About from "@/components/home/About";
 import Experience from "@/components/home/Experience";
 import Photography from "@/components/home/Photography";
@@ -19,11 +20,14 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <Marquee
-        items={DOING}
-        className="relative z-10 -rotate-1 scale-[1.02] border-y-2 border-ink bg-paper py-5 font-display text-[clamp(1.75rem,4vw,3.5rem)] font-medium tracking-[-0.02em] text-ink"
-      />
+      <div className="relative z-10 overflow-x-clip">
+        <Marquee
+          items={DOING}
+          className="-rotate-1 scale-[1.02] border-y-2 border-ink bg-paper py-5 font-display text-[clamp(1.75rem,4vw,3.5rem)] font-medium tracking-[-0.02em] text-ink"
+        />
+      </div>
       <Work />
+      <Numbers />
       <About />
       <Experience />
       <Photography />

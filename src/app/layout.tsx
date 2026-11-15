@@ -9,6 +9,7 @@ import MotionProvider from "@/components/motion/MotionProvider";
 import Preloader, { introScript } from "@/components/motion/Preloader";
 import Cursor from "@/components/motion/Cursor";
 import Buddy from "@/components/motion/Buddy";
+import CommandPalette from "@/components/motion/CommandPalette";
 import { site } from "@/data/site";
 
 const description = `${site.name} — ${site.role} in Yaoundé building web, mobile and embedded products with Angular, Next.js, Django and Flutter.`;
@@ -71,6 +72,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         {site.showBuddy && <Buddy />}
         <Cursor />
         <MotionProvider />
+        <CommandPalette />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}

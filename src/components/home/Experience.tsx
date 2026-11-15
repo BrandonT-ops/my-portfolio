@@ -21,7 +21,7 @@ export default function Experience() {
           {about.experience.map((job) => (
             <li
               key={`${job.org}-${job.period}`}
-              className="group grid gap-6 border-b border-ink/15 py-10 transition-colors hover:bg-highlight/15 md:grid-cols-12 md:gap-10 md:py-14"
+              className="group grid gap-6 border-b border-ink/15 py-10 transition-colors hover:bg-highlight/15 md:grid-cols-12 md:gap-8 md:py-14"
               data-reveal
             >
               <p className="font-mono text-sm text-accent md:col-span-2">{job.period}</p>

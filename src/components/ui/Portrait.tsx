@@ -13,7 +13,7 @@ export default function Portrait() {
     .join("");
 
   return (
-    <figure className="relative" data-reveal>
+    <figure className="group relative" data-reveal>
       <div className="relative aspect-[4/5] overflow-hidden border-2 border-ink bg-ink shadow-hard">
         <div className="absolute inset-0" data-zoom>
           {src ? (
@@ -22,7 +22,7 @@ export default function Portrait() {
               alt={`Portrait of ${site.name}`}
               fill
               sizes="(min-width: 768px) 40vw, 100vw"
-              className="object-cover"
+              className="object-cover object-[50%_30%] grayscale contrast-[1.05] transition-[filter] duration-700 group-hover:grayscale-0"
             />
           ) : (
             <div aria-hidden className="absolute inset-0 isolate flex items-end justify-between bg-ink p-6 text-paper">

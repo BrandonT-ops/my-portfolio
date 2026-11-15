@@ -321,3 +321,13 @@
   .buddy[data-pose="dance"] .b-notes text:first-child { opacity: 1; }
   .buddy[data-pose="camera"] .b-flash { display: none; }
 }
+
+/* ---------- System blueprints (components/ui/Schematic.tsx) ---------- */
+.schematic-flow { animation: schematic-flow 1.4s linear infinite; }
+@keyframes schematic-flow { from { stroke-dashoffset: 31; } to { stroke-dashoffset: 0; } }
+@media (prefers-reduced-motion: reduce) { .schematic-flow { animation: none; } }
+
+/* Quick search panel entrance */
+.palette-in { animation: palette-in 0.35s cubic-bezier(0.2, 1.2, 0.3, 1) both; }
+@keyframes palette-in { from { opacity: 0; transform: translateY(14px) scale(0.97); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .palette-in { animation: none; } }

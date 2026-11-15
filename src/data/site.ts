@@ -26,7 +26,7 @@ export const site = {
    * (e.g. public/brandon.jpg) and set "/brandon.jpg". A portrait (4:5) crop works best.
    * Leave "" to show a placeholder frame.
    */
-  portrait: "",
+  portrait: "/brandon.jpg",
 
   /** The little companion character in the corner (components/motion/Buddy.tsx). Off for now. */
   showBuddy: false,

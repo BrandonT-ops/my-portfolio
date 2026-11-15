@@ -1,17 +1,11 @@
 import Image from "next/image";
+import Schematic from "@/components/ui/Schematic";
 import type { Project } from "@/data/projects";
-
-/* Quiet placeholders: one soft glow per card, alternating Ruby and warm Fawn. */
-const GLOWS = [
-  { color: "var(--accent)", at: "20% 85%" },
-  { color: "var(--highlight)", at: "85% 15%" },
-  { color: "var(--accent)", at: "80% 85%" },
-  { color: "var(--highlight)", at: "15% 20%" },
-];
+import { getSystem } from "@/data/systems";
 
 /**
- * Project cover. Shows the real image when `cover` is set; otherwise a dark,
- * glowing typographic placeholder so the layout never looks unfinished.
+ * Project cover. Shows the real image when `cover` is set; otherwise the
+ * project's system blueprint on a dark drafting sheet.
  */
 export default function Cover({
   project,
@@ -37,35 +31,33 @@ export default function Cover({
     );
   }
 
-  const glow = GLOWS[index % GLOWS.length];
+  const glowAt = ["18% 88%", "86% 14%", "82% 86%", "14% 18%"][index % 4];
 
   return (
     <div aria-hidden className="absolute inset-0 isolate overflow-hidden bg-ink text-paper">
       <div
-        className="absolute inset-0"
-        style={{
-          background: `radial-gradient(55% 65% at ${glow.at}, rgb(${glow.color} / 0.32), transparent 70%)`,
-          filter: "blur(12px)",
-        }}
+        className="absolute inset-0 -z-10"
+        style={{ background: `radial-gradient(55% 65% at ${glowAt}, rgb(var(--accent) / 0.28), transparent 70%)` }}
       />
       <div
-        className="absolute inset-0"
+        className="absolute inset-0 -z-10"
         style={{
           backgroundImage:
-            "linear-gradient(rgb(var(--paper) / 0.08) 1px, transparent 1px), linear-gradient(90deg, rgb(var(--paper) / 0.08) 1px, transparent 1px)",
-          backgroundSize: "48px 48px",
-          maskImage: "radial-gradient(ellipse at center, #000 20%, transparent 80%)",
+            "linear-gradient(rgb(var(--paper) / 0.05) 1px, transparent 1px), linear-gradient(90deg, rgb(var(--paper) / 0.05) 1px, transparent 1px)",
+          backgroundSize: "32px 32px",
         }}
       />
       <div className="grain" />
-      <div className="absolute inset-0 flex flex-col justify-between px-[12%] py-[8%]">
-        <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-paper/60">
-          {project.stack.slice(0, 2).join(" / ")}
+
+      <div className="absolute inset-x-[7%] top-[6%] flex items-center justify-between gap-4 whitespace-nowrap font-mono text-[10px] uppercase tracking-[0.16em] text-paper/55 sm:text-[11px]">
+        <span className="truncate">
+          <span className="text-highlight">●</span> System / {project.title}
         </span>
-        <span className="font-display text-[clamp(2rem,4.5vw,4.5rem)] font-medium leading-[0.9] tracking-[-0.03em]">
-          {project.title}
-          <span className="text-highlight">.</span>
-        </span>
+        <span>{project.year ?? project.category}</span>
+      </div>
+
+      <div className="absolute inset-x-[4%] bottom-[2%] top-[10%]">
+        <Schematic layers={getSystem(project.slug, project.stack)} fontSize={17} gapRatio={0.05} />
       </div>
     </div>
   );

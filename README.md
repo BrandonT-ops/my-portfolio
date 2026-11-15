@@ -119,6 +119,16 @@ Animations use [GSAP](https://gsap.com) (ScrollTrigger + SplitText) with
 - **About**: statement fills in word by word with scroll
 - **Photography**: dark panel expands to full screen
 - **Contact**: rising horizon glow, magnetic button
+- **Hero**: dot field that bends around the pointer and ripples on click (`DotField.tsx`),
+  a tilting ID badge with your photo (`home/Badge.tsx`) and a live Yaoundé clock
+- **System blueprints**: every project card and case study draws the project's architecture
+  with data flowing along the wires (`ui/Schematic.tsx`). Edit them in `src/data/systems.ts`:
+  each project is a list of layers, read left to right
+- **By the numbers**: count-up figures (`home/Numbers.tsx`; only real numbers from the CVs)
+- **Stack**: rows that invert on hover; `×n` shows how many projects use each technology,
+  computed from `projects.ts` (`home/Stack.tsx`)
+- **Quick search**: ⌘K / Ctrl+K or `/` opens a command palette for projects and sections
+  (`motion/CommandPalette.tsx`)
 - **Everywhere**: curtain page transitions, cursor ring, scroll progress bar,
   soft glow backdrops (`Atmosphere.tsx`)
 - **Companion** (`Buddy.tsx` + drawing in `BuddyFigure.tsx`, **currently off**: set

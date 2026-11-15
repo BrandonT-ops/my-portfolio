@@ -28,6 +28,15 @@ export default function MotionProvider() {
   const navigating = useRef(false);
   const firstPath = useRef(true);
 
+  // A hello for anyone who opens the console
+  useEffect(() => {
+    console.log(
+      "%cBrandon Tapiba.%c\nCurious how this was built? Next.js, GSAP and a lot of care.\nPress ⌘K / Ctrl+K to jump anywhere · brandontapiba@gmail.com",
+      "font: 600 28px system-ui; color: #9e0031",
+      "font: 13px ui-monospace, monospace; color: inherit",
+    );
+  }, []);
+
   // Smooth scroll + progress bar (once)
   useEffect(() => {
     if (prefersReducedMotion()) return;

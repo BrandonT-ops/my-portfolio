@@ -61,7 +61,7 @@ export default function Contact() {
           </h2>
         </div>
 
-        <div className="grid gap-12 md:grid-cols-12 md:items-end">
+        <div className="grid gap-12 md:grid-cols-12 md:gap-x-8 md:items-end">
           <a
             href={`mailto:${site.email}`}
             className="group font-display text-2xl font-medium sm:text-4xl md:col-span-7"
